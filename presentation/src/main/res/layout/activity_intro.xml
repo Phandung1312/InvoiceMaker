@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="introActivity"
+            type="com.bravo.invoice.ui.intro.IntroActivity" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.intro.IntroActivity">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent" >
+
+        </androidx.viewpager2.widget.ViewPager2>
+        <LinearLayout
+            android:id="@+id/layout_dots"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/_40sdp"
+            app:layout_constraintTop_toBottomOf="@id/viewpager"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp">
+        </LinearLayout>
+
+        <include
+            android:id="@+id/button_try"
+            layout="@layout/button_blue_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginStart="@dimen/page"
+            android:layout_marginEnd="@dimen/page"
+            android:onClick="@{() -> introActivity.onTry()}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_dots"
+            app:textButton="@{`Try it free`}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

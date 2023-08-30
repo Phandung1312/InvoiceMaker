@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="primaryTextSize">@dimen/_14ssp</dimen>
+    <dimen name="largeTextSize">@dimen/_16ssp</dimen>
+    <dimen name="secondTextSize">@dimen/_12sdp</dimen>
+
+    <dimen name="page">@dimen/_20sdp</dimen>
+</resources>
