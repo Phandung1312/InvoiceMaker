@@ -24,7 +24,7 @@
             android:layout_width="@dimen/_250sdp"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            style="@style/normal_text"
+            style="@style/primary_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_intro"

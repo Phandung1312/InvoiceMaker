@@ -1,36 +1,37 @@
 package com.bravo.basic.view
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.adapter.FragmentViewHolder
 
-class BasePageAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
+class BasePageAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
     private val fragments = arrayListOf<Fragment>()
     private val titles = arrayListOf<String>()
 
-    override fun getItem(position: Int): Fragment {
-        return this.fragments[position]
+    override fun getItemCount(): Int {
+        return fragments.size
     }
 
-    override fun getCount(): Int {
-        return this.fragments.size
+    override fun createFragment(position: Int): Fragment {
+        return fragments[position]
     }
 
     fun addFragment(fragment: Fragment, title: String? = null) {
-        this.fragments.add(fragment)
-        title?.let { this.titles.add(it) }
+        fragments.add(fragment)
+        title?.let { titles.add(it) }
     }
 
-    fun addFragment(vararg fragments: Fragment){
+    fun addFragments(vararg fragments: Fragment) {
         this.fragments.addAll(fragments)
     }
 
-    override fun getPageTitle(position: Int): CharSequence {
-        if (this.titles.isEmpty()){
-            return ""
-        }
-        return this.titles[position]
+    override fun onBindViewHolder(
+        holder: FragmentViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        super.onBindViewHolder(holder, position, payloads)
     }
-
 }

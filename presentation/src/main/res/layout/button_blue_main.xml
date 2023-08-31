@@ -18,7 +18,7 @@
             android:layout_height="match_parent">
             <TextView
                 android:id="@+id/tv_text_button"
-                android:padding="@dimen/_15sdp"
+                android:padding="@dimen/_13sdp"
                 tools:text = "Button"
                 android:text="@{textButton}"
                 android:textColor="@color/white"

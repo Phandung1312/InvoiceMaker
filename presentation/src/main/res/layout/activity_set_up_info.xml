@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="setUpInfoActitvity"
+            type="com.bravo.invoice.ui.setupinfo.SetUpInfoActivity" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:paddingStart="@dimen/page"
+        android:paddingEnd="@dimen/page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_set_up_account"
+            android:layout_marginTop="@dimen/_45sdp"
+            style="@style/primary_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set up your account"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:id="@+id/layout_step_progressbar"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/tv_set_up_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_step_1"
+                app:cardCornerRadius="@dimen/_15sdp"
+                tools:cardBackgroundColor="@color/blue_button"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_4sdp"/>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_step_2"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                app:cardCornerRadius="@dimen/_15sdp"
+                tools:cardBackgroundColor="@color/blue_button"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_4sdp"/>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_step_3"
+                app:cardCornerRadius="@dimen/_15sdp"
+                tools:cardBackgroundColor="@color/blue_button"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_4sdp"/>
+        </LinearLayout>
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewpager"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/layout_bottom"
+            app:layout_constraintTop_toBottomOf="@id/layout_step_progressbar"
+            tools:layout_editor_absoluteX="26dp" />
+
+        <RelativeLayout
+            android:id="@+id/layout_bottom"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="26dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_back"
+                android:onClick="@{() -> setUpInfoActitvity.onBack()}"
+                app:cardElevation="0dp"
+                android:layout_width="@dimen/_125sdp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                app:cardCornerRadius="@dimen/_25sdp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="@drawable/button_negative_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fontFamily="@font/inter_tight_medium"
+                        android:gravity="center"
+                        android:padding="@dimen/_13sdp"
+                        android:text="Back"
+                        android:textColor="@color/blue_button"
+                        android:textSize="@dimen/primaryTextSize" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/btn_next"
+                android:onClick="@{() -> setUpInfoActitvity.onNext()}"
+                android:layout_width="@dimen/_125sdp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:cardBackgroundColor="@color/blue_button"
+                app:cardCornerRadius="@dimen/_25sdp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/inter_tight_medium"
+                    android:gravity="center"
+                    android:padding="@dimen/_13sdp"
+                    android:text="Next"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/primaryTextSize" />
+            </com.google.android.material.card.MaterialCardView>
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

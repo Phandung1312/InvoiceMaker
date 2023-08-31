@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data class="SetUp2Class">
+        <variable
+            name="setUp2Fragment"
+            type="com.bravo.invoice.ui.setupinfo.SetUp2Fragment" />
+    </data>
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/primary_title_set_up_screen"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_50sdp"
+                android:text="Add your customer-facing business details"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_desc"
+                style="@style/medium_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="This info will appear on invoices, estimates and other places in the app."
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            <TextView
+                android:id="@+id/tv_trading"
+                style="@style/primary_text"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Trading name*"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_trading"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:strokeColor="@color/stroke_text_box"
+                app:strokeWidth="1dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_trading"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp">
+                <EditText
+                    android:textSize="@dimen/secondTextSize"
+                    android:backgroundTint="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tv_more_info_trading"
+                android:layout_marginTop="@dimen/_5sdp"
+                style="@style/more_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="If you don't have a 'doing business as' name, enter the legal business name."
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_trading" />
+            <TextView
+                android:id="@+id/tv_address"
+                style="@style/primary_text"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Business address"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_more_info_trading" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_address"
+                android:onClick="@{() -> setUp2Fragment.onEnterAddress()}"
+                android:elevation="1dp"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:strokeColor="@color/stroke_text_box"
+                app:strokeWidth="1dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_address"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp">
+                <EditText
+                    android:elevation="0dp"
+                    android:textSize="@dimen/secondTextSize"
+                    android:onClick="@{() -> setUp2Fragment.onEnterAddress()}"
+                    android:backgroundTint="@android:color/transparent"
+                    android:focusable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/tv_more_info_address"
+                android:layout_marginTop="@dimen/_5sdp"
+                style="@style/more_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="If you haven't registered the business, enter your home address."
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_address" />
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/primary_text"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_more_info_address" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_phone"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:strokeColor="@color/stroke_text_box"
+                app:strokeWidth="1dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_phone"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp">
+                <EditText
+                    android:textSize="@dimen/secondTextSize"
+                    android:backgroundTint="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/tv_more_info_phone"
+                android:layout_marginTop="@dimen/_5sdp"
+                style="@style/more_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="So customers can contact you."
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_phone" />
+            <TextView
+                android:id="@+id/tv_url"
+                style="@style/primary_text"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="URL"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_more_info_phone" />
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_url"
+                android:layout_marginTop="@dimen/_5sdp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                app:strokeColor="@color/stroke_text_box"
+                app:strokeWidth="1dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_url"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp">
+                <EditText
+                    android:textSize="@dimen/secondTextSize"
+                    android:backgroundTint="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/tv_more_info_url"
+                android:layout_marginTop="@dimen/_5sdp"
+                style="@style/more_info_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your website or social media page."
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_url" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

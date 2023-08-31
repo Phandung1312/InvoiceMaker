@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item >
+        <shape android:shape="rectangle" >
+            <gradient
+                android:angle="-60"
+                android:startColor="@color/stroke_negative_button"
+                android:centerColor="@color/backgroundPrimary"
+                android:endColor="@color/backgroundPrimary"
+                android:type="linear" />
+            <corners android:radius="@dimen/_25sdp"/>
+        </shape>
+    </item>
+    <item
+        android:top="@dimen/_1sdp"
+        android:bottom="@dimen/_1sdp"
+        android:left="@dimen/_1sdp"
+        android:right="@dimen/_1sdp">
+        <shape android:shape="rectangle" >
+            <solid android:color="@color/backgroundPrimary" />
+            <corners android:radius="@dimen/_25sdp"/>
+        </shape>
+    </item>
+</layer-list>
