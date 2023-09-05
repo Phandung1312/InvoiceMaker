@@ -13,9 +13,10 @@
     <color name="dot_active">#1066FF</color>
     <color name="gray_line">#DCDDE0</color>
     <color name="stroke_text_box">#B9BEC7</color>
-    <color name="stroke_negative_button">#B9BEC7</color>
+    <color name="stroke_negative_button">#E4E9F1</color>
 
     <color name="more_info">#6E7786</color>
+    <color name="error_text">#FF1100</color>
     <color name="grayD2">#D2D4DD</color>
     <color name="track">#787880</color>
     <color name="background_step_bar">#E5E6EB</color>

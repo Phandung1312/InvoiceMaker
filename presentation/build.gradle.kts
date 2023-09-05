@@ -5,6 +5,7 @@ plugins {
     id("kotlin-kapt")
     id("kotlin-parcelize")
     alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.com.google.gms.google.services)
 }
 
 android {
@@ -36,8 +37,9 @@ dependencies {
     implementation(libs.bundles.rxLibs)
     implementation(libs.bundles.coroutinesLibs)
     implementation (libs.timber)
-
+    implementation(libs.lottie)
     implementation(libs.bundles.dimen)
+    implementation(libs.bundles.mapsLibs)
     implementation(project(mapOf("path" to ":basic")))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

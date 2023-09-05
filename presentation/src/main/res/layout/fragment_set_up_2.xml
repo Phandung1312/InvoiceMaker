@@ -36,7 +36,7 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Trading name*"
+                android:text="Trading name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_desc" />
             <com.google.android.material.card.MaterialCardView
@@ -49,7 +49,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp">
                 <EditText
-                    android:textSize="@dimen/secondTextSize"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    style="@style/primary_text"
                     android:backgroundTint="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -84,14 +86,16 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_address"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp">
-                <EditText
+                <TextView
+                    android:id="@+id/tv_business_address"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
                     android:elevation="0dp"
-                    android:textSize="@dimen/secondTextSize"
+                    style="@style/primary_text"
                     android:onClick="@{() -> setUp2Fragment.onEnterAddress()}"
                     android:backgroundTint="@android:color/transparent"
-                    android:focusable="false"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="match_parent"/>
             </com.google.android.material.card.MaterialCardView>
             <TextView
                 android:id="@+id/tv_more_info_address"
@@ -121,7 +125,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp">
                 <EditText
-                    android:textSize="@dimen/secondTextSize"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    style="@style/primary_text"
                     android:backgroundTint="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
@@ -154,7 +160,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp">
                 <EditText
-                    android:textSize="@dimen/secondTextSize"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    style="@style/primary_text"
                     android:backgroundTint="@android:color/transparent"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>

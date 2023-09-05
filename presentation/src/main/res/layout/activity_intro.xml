@@ -38,8 +38,8 @@
             android:layout_marginStart="@dimen/page"
             android:layout_marginEnd="@dimen/page"
             android:onClick="@{() -> introActivity.onTry()}"
+            android:layout_marginBottom="@dimen/_30sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_dots"
             app:textButton="@{`Try it free`}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

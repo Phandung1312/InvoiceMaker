@@ -4,6 +4,7 @@ import android.content.Intent
 import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.databinding.ActivityWelcomeBinding
 import com.bravo.invoice.ui.setupinfo.SetUpInfoActivity
+import com.bravo.invoice.ui.subscribe.SubscribeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,7 +15,7 @@ class WelcomeActivity : BaseActivity<ActivityWelcomeBinding>(ActivityWelcomeBind
     }
 
     fun getStart(){
-        val intent = Intent(this, SetUpInfoActivity::class.java)
+        val intent = Intent(this, SubscribeActivity::class.java)
         startActivity(intent)
     }
 }

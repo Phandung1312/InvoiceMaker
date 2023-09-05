@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">InvoiceMaker</string>
+    <string name="_1_month_free">1 month <b>free</b>\n then <b>$9.99/month</b></string>
+    <string name="Companyname_will_soon_be_ready_to"><b>Companyname</b> will soon be ready to:</string>
 </resources>

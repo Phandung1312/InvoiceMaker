@@ -146,6 +146,6 @@
             app:textButton = "@{`Get Started`}"
             layout="@layout/button_blue_main"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_bottom" />
+            android:layout_marginBottom="@dimen/_30sdp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

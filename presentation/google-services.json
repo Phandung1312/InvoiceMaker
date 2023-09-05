@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "316358769731",
+    "project_id": "invoicemaker-e5d1d",
+    "storage_bucket": "invoicemaker-e5d1d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316358769731:android:ff8055fbe940bf2cbbe8f6",
+        "android_client_info": {
+          "package_name": "com.bravo.invoice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316358769731-m6i7vvteteef2rf945ech9spg4cdg0pc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bravo.invoice",
+            "certificate_hash": "b291c5a4c91d8d3b682e874a08f54af7994becbf"
+          }
+        },
+        {
+          "client_id": "316358769731-vd0kgugkas6oa99dp2p8psg8dg7lvm41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_ngjDL4TMS3k9rEKDS6Su8yWxlNy22j8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316358769731-vd0kgugkas6oa99dp2p8psg8dg7lvm41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

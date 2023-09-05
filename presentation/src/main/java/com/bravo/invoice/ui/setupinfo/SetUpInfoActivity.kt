@@ -1,12 +1,15 @@
 package com.bravo.invoice.ui.setupinfo
 
+import android.content.Intent
 import androidx.viewpager2.widget.ViewPager2
 import com.bravo.basic.view.BaseActivity
 import com.bravo.basic.view.BasePageAdapter
 import com.bravo.invoice.R
 import com.bravo.invoice.databinding.ActivitySetUpInfoBinding
 import com.google.android.material.card.MaterialCardView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SetUpInfoActivity : BaseActivity<ActivitySetUpInfoBinding>(ActivitySetUpInfoBinding::inflate) {
     private val fragments by lazy { listOf(SetUp1Fragment(), SetUp2Fragment(), SetUp3Fragment()) }
     private lateinit var stepBarList : ArrayList<MaterialCardView>
@@ -29,7 +32,13 @@ class SetUpInfoActivity : BaseActivity<ActivitySetUpInfoBinding>(ActivitySetUpIn
 
     }
     fun onNext(){
-        binding.viewpager.currentItem += 1
+        if(binding.viewpager.currentItem == 2){
+            val intent = Intent(this ,FinalizeActivity::class.java)
+            startActivity(intent)
+        }
+        else{
+            binding.viewpager.currentItem += 1
+        }
     }
     fun onBack(){
         binding.viewpager.currentItem -= 1

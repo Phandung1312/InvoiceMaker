@@ -3,19 +3,17 @@
     <item >
         <shape android:shape="rectangle" >
             <gradient
-                android:angle="-60"
+                android:angle="-48"
                 android:startColor="@color/stroke_negative_button"
-                android:centerColor="@color/backgroundPrimary"
-                android:endColor="@color/backgroundPrimary"
+                android:centerColor="@color/stroke_negative_button"
+                android:endColor="@color/stroke_negative_button"
                 android:type="linear" />
             <corners android:radius="@dimen/_25sdp"/>
         </shape>
     </item>
     <item
-        android:top="@dimen/_1sdp"
-        android:bottom="@dimen/_1sdp"
-        android:left="@dimen/_1sdp"
-        android:right="@dimen/_1sdp">
+        android:top="@dimen/_2sdp"
+        android:left="@dimen/_2sdp">
         <shape android:shape="rectangle" >
             <solid android:color="@color/backgroundPrimary" />
             <corners android:radius="@dimen/_25sdp"/>

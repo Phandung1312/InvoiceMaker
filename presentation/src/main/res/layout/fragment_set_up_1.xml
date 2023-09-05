@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data class="SetUp1Class">
-
+        <variable
+            name="fragment"
+            type="com.bravo.invoice.ui.setupinfo.SetUp1Fragment" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -46,11 +49,25 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp">
             <EditText
-                android:textSize="@dimen/secondTextSize"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                style="@style/primary_text"
                 android:backgroundTint="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_er_name"
+            style="@style/error_text"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Legal business name can't be empty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_legal" />
 
         <TextView
             android:id="@+id/tv_more_info_legal"
@@ -60,7 +77,7 @@
             android:layout_height="wrap_content"
             android:text="If you're a sole proprietor and haven't registered a name, enter your own full name."
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_legal" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_er_name" />
         <TextView
             android:id="@+id/tv_address"
             style="@style/primary_text"
@@ -72,6 +89,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_more_info_legal" />
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_address"
+            android:onClick="@{() -> fragment.onEnterAddress()}"
             android:layout_marginTop="@dimen/_5sdp"
             app:cardCornerRadius="@dimen/_5sdp"
             app:strokeColor="@color/stroke_text_box"
@@ -79,28 +97,45 @@
             app:layout_constraintTop_toBottomOf="@id/tv_address"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp">
-            <EditText
-                android:textSize="@dimen/secondTextSize"
+            <TextView
+                android:id="@+id/tv_business_address"
+                android:onClick="@{() -> fragment.onEnterAddress()}"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                style="@style/primary_text"
                 android:backgroundTint="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
         </com.google.android.material.card.MaterialCardView>
         <TextView
-            android:id="@+id/tv_more_info_address"
+            android:id="@+id/tv_er_address"
+            app:layout_goneMarginTop="@dimen/_5sdp"
+            style="@style/error_text"
+            android:visibility="gone"
+            tools:visibility="visible"
             android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Legal business name can't be empty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card_address" />
+
+        <TextView
+            android:id="@+id/tv_more_info_address"
             style="@style/more_info_text"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="If you haven't registered the business, enter your home address."
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_address" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_er_address" />
         <TextView
             android:id="@+id/tv_phone"
             style="@style/primary_text"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Business phone*"
+            android:text="Business phone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_more_info_address" />
         <com.google.android.material.card.MaterialCardView
@@ -113,7 +148,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp">
             <EditText
-                android:textSize="@dimen/secondTextSize"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                style="@style/primary_text"
                 android:backgroundTint="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

@@ -9,7 +9,9 @@ class SetUp2Fragment : BaseFragment<SetUp2Class>(SetUp2Class::inflate) {
         binding.setUp2Fragment = this
     }
     fun onEnterAddress(){
-        val bottomSheet = EnterAddressBottomSheet()
+        val bottomSheet = EnterAddressBottomSheet{ address ->
+            binding.tvBusinessAddress.text = address
+        }
         bottomSheet.show(parentFragmentManager, bottomSheet.tag)
     }
 }
