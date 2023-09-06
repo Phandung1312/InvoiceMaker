@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/page"
             android:layout_marginEnd="@dimen/page"
-            android:layout_marginTop="@dimen/_90sdp"
+            android:layout_marginTop="@dimen/_70sdp"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="26dp">
 

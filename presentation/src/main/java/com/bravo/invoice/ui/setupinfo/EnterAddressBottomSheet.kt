@@ -16,6 +16,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
 import com.bravo.basic.extensions.clicks
+import com.bravo.basic.extensions.hideKeyboard
+import com.bravo.basic.extensions.showKeyboard
 import com.bravo.invoice.databinding.BottomSheetEnterAddressBinding
 import com.bravo.invoice.models.NearbyAddress
 import com.bravo.invoice.ui.intro.NearbyAddressAdapter
@@ -28,7 +30,8 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class EnterAddressBottomSheet(
-    private val result : (String) -> Unit
+    private val currentAddress: String,
+    private val result: (String) -> Unit
 ) : BottomSheetDialogFragment() {
     private lateinit var binding : BottomSheetEnterAddressBinding
     @Inject lateinit var nearbyAddressAdapter: NearbyAddressAdapter
@@ -48,6 +51,12 @@ class EnterAddressBottomSheet(
 
     private fun initView() {
         binding.rvNearbyAddress.adapter = nearbyAddressAdapter
+        binding.edAddress.apply {
+            setText(currentAddress)
+            setSelection(currentAddress.length)
+            requestFocus()
+            showKeyboard()
+        }
     }
 
     private fun initListeners() {
@@ -66,6 +75,7 @@ class EnterAddressBottomSheet(
         }
         binding.tvDone.clicks {
             result.invoke(binding.edAddress.text.toString())
+            requireActivity().hideKeyboard()
             dismiss()
         }
     }

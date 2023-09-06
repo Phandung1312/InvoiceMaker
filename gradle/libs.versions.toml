@@ -92,7 +92,7 @@ firebase-storage = {module = "com.google.firebase:firebase-storage-ktx"}
 firebase-message = {module = "com.google.firebase:firebase-messaging-ktx"}
 
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }

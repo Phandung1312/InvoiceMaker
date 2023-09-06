@@ -12,7 +12,7 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingInflater: (LayoutInflat
     val binding: VB by lazy { bindingInflater(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        transparent(isLightStatusBar = true, isLightNavigationBar = true)
+//        transparent(isLightStatusBar = true, isLightNavigationBar = true)
         setContentView(binding.root)
         initView()
         initListener()

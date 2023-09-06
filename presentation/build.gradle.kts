@@ -27,6 +27,8 @@ android {
 
 dependencies {
     implementation(project(":basic"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -40,6 +42,7 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.bundles.dimen)
     implementation(libs.bundles.mapsLibs)
+    implementation(libs.moshi)
     implementation(project(mapOf("path" to ":basic")))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

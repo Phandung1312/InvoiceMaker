@@ -7,7 +7,13 @@ import timber.log.Timber
 
 @HiltAndroidApp
 class InvoiceMakerApplication : Application() {
+    companion object {
+        lateinit var app: InvoiceMakerApplication
+    }
 
+    init {
+        app = this
+    }
     override fun onCreate() {
         super.onCreate()
 
