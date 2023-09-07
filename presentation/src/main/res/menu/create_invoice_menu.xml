@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/template"
+        android:icon="@drawable/ic_template"
+        android:title="Template"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/logo"
+        android:icon="@drawable/ic_logo"
+        android:title="Logo"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/color"
+        android:icon="@drawable/ic_color"
+        android:title="Color"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/banner"
+        android:icon="@drawable/ic_banner"
+        android:title="Banner"
+        app:showAsAction="withText" />
+    <item
+        android:id="@+id/watermark"
+        android:icon="@drawable/ic_watermark"
+        android:title="Watermark"
+        app:showAsAction="withText" />
+</menu>

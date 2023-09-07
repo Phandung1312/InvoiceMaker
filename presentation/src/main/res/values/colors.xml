@@ -20,4 +20,6 @@
     <color name="grayD2">#D2D4DD</color>
     <color name="track">#787880</color>
     <color name="background_step_bar">#E5E6EB</color>
+    <color name="main_menu_text">#6C6E7C</color>
+    <color name="invoice_menu_text">#A9ABB9</color>
 </resources>

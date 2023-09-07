@@ -23,6 +23,13 @@ android {
         viewBinding = true
         dataBinding = true
     }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -44,6 +51,8 @@ dependencies {
     implementation(libs.bundles.mapsLibs)
     implementation(libs.moshi)
     implementation(project(mapOf("path" to ":basic")))
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

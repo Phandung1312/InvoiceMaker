@@ -131,3 +131,8 @@ fun EditText.hideKeyboard() {
 fun ImageView.setTint(color: Int) {
     imageTintList = ColorStateList.valueOf(color)
 }
+
+fun ImageView.setDrawableString(imgString : String){
+    val imageResourceId = context.resources.getIdentifier(imgString,"drawable",context.packageName)
+    setImageResource(imageResourceId)
+}

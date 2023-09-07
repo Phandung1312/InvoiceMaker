@@ -51,6 +51,8 @@ lifecycle = "2.6.1"
 firebaseBom = "32.2.3"
 
 dimen = "1.1.0"
+navigation-fragment-ktx = "2.5.3"
+navigation-ui-ktx = "2.5.3"
 [libraries]
 
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -110,6 +112,8 @@ ssp = {module = "com.intuit.ssp:ssp-android", version.ref = "dimen"}
 
 location = {module = "com.google.android.gms:play-services-location", version.ref = "googlePlayService"}
 maps = {module = "com.google.android.gms:play-services-maps", version.ref = "googlePlayService"}
+navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
+navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation-ui-ktx" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
