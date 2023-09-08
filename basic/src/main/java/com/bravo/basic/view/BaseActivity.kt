@@ -12,10 +12,10 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingInflater: (LayoutInflat
     val binding: VB by lazy { bindingInflater(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        transparent(isLightStatusBar = true, isLightNavigationBar = true)
         setContentView(binding.root)
         initView()
         initListener()
+        initObservable()
         initData()
     }
 
@@ -28,6 +28,9 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingInflater: (LayoutInflat
     }
 
     open fun initData() {
+
+    }
+    open fun initObservable(){
 
     }
 }
