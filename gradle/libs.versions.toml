@@ -54,6 +54,10 @@ dimen = "1.1.0"
 
 
 cropper = "4.5.0"
+
+pdf = "20.1.3"
+
+itext = "5.5.13"
 [libraries]
 androidx-exifinterface = { module = "androidx.exifinterface:exifinterface", version = "1.3.6" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -118,6 +122,13 @@ maps = {module = "com.google.android.gms:play-services-maps", version.ref = "goo
 
 cropper = {module = "com.vanniktech:android-image-cropper", version.ref="cropper"}
 
+vision = {module = "com.google.android.gms:play-services-vision", version.ref = "pdf"}
+common = {module = "com.google.android.gms:play-services-vision-common", version.ref = "pdf"}
+image-labeling = {module = "com.google.android.gms:play-services-vision-image-labeling", version.ref = "pdf"}
+text-recognition = {module = "com.google.android.gms:play-services-vision-text-recognition", version.ref = "pdf"}
+
+itext = {module = "com.itextpdf:itextpdf", version.ref = "itext"}
+
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }
@@ -127,6 +138,7 @@ firebase-carshlytics = {id ="com.google.firebase.crashlytics" , version.ref = "f
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 [bundles]
+pdfLibs = ["vision", "common", "image-labeling", "text-recognition"]
 hiltLibs = ["hilt-compiler", "hilt-android"]
 autodisposeLibs = ["autodispose-android-archcomponents", "autodispose-autodispose", "autodispose-lifycycle"]
 firebaseLibs = ["firebase-analytics", "firebase-config", "firebase-crashlytics", "firebase-database", "firebase-storage", "firebase-message"]

@@ -42,4 +42,6 @@ abstract class BaseFragment<VB : ViewDataBinding>   (private val inflate: Inflat
         super.onDestroyView()
         _binding = null
     }
+
+
 }

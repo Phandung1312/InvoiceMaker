@@ -22,4 +22,6 @@
     <color name="background_step_bar">#E5E6EB</color>
     <color name="main_menu_text">#6C6E7C</color>
     <color name="invoice_menu_text">#A9ABB9</color>
+    <color name="background_dialog">#000000</color>
+    <color name="white_30_alpha">#30FFFFFF</color>
 </resources>

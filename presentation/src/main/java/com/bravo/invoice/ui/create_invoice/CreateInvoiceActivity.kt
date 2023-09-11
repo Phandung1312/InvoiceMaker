@@ -15,17 +15,23 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
 
             binding.bottomNavigation.setOnItemSelectedListener { item ->
                 val selectedFragment = when (item.itemId) {
-                    R.id.template -> 1
-                    R.id.logo -> 2
-                    R.id.color -> 3
-                    R.id.banner -> 4
-                    R.id.watermark -> 5
+                    R.id.template -> TemplateFragment()
+//                    R.id.logo -> 2
+//                    R.id.color -> 3
+//                    R.id.banner -> 4
+//                    R.id.watermark -> 5
                     else -> null
+                }
+                if (selectedFragment != null) {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container_view, selectedFragment)
+                        .commit()
                 }
                 true
             }
         }catch(e : Exception){
 
         }
+        binding.bottomNavigation.selectedItemId = R.id.template
     }
 }

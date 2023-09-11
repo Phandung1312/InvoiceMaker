@@ -50,9 +50,10 @@ dependencies {
     implementation(libs.lottie)
     implementation(libs.bundles.dimen)
     implementation(libs.bundles.mapsLibs)
+    implementation(libs.itext)
     implementation(project(mapOf("path" to ":basic")))
     implementation(libs.moshi)
-//    implementation(libs.cropper)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
