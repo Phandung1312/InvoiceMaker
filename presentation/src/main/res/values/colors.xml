@@ -20,4 +20,9 @@
     <color name="grayD2">#D2D4DD</color>
     <color name="track">#787880</color>
     <color name="background_step_bar">#E5E6EB</color>
+
+    <color name="background_addClient">#F6F7FA</color>
+    <color name="color_textGray">#6D7081</color>
+    <color name= "color_hint_edt">#D9D9D9</color>
+
 </resources>

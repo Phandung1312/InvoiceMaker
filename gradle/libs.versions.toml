@@ -128,5 +128,5 @@ coroutinesLibs = ["coroutines-android", "coroutines-core"]
 dimen = ["sdp", "ssp"]
 viewKtx = ["fragment-ktx", "activity-ktx"]
 mapsLibs = ["location", "maps"]
-
+roomLibs = ["room-compiler","room-runtime","room-ktx"]
 

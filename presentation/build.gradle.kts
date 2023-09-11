@@ -43,6 +43,7 @@ dependencies {
     implementation(libs.bundles.dimen)
     implementation(libs.bundles.mapsLibs)
     implementation(libs.moshi)
+    implementation(libs.bundles.roomLibs)
     implementation(project(mapOf("path" to ":basic")))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
