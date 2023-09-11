@@ -13,9 +13,11 @@
     </item>
     <item
         android:top="@dimen/_2sdp"
-        android:left="@dimen/_2sdp">
+        android:left="@dimen/_2sdp"
+        android:bottom="@dimen/_2sdp"
+        android:right="@dimen/_2sdp">
         <shape android:shape="rectangle" >
-            <solid android:color="@color/backgroundPrimary" />
+            <solid android:color="@color/background_negative" />
             <corners android:radius="@dimen/_25sdp"/>
         </shape>
     </item>

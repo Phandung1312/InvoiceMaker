@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="textButton"
+            type="String" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/transparent"
+        app:strokeWidth="@dimen/_1sdp"
+        app:strokeColor="@color/stroke_negative_button"
+        app:cardElevation="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@color/background_negative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_text_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_13sdp"
+                android:fontFamily="@font/inter_tight_medium"
+                android:gravity="center"
+                android:text="@{textButton}"
+                android:textColor="@color/textColorSecondary"
+                android:textSize="@dimen/primaryTextSize"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Button" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

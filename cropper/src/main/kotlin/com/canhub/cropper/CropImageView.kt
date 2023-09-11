@@ -17,6 +17,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.AttributeSet
+import android.util.Log
 import android.util.Pair
 import android.util.Size
 import android.view.LayoutInflater
@@ -646,7 +647,6 @@ class CropImageView @JvmOverloads constructor(
           flipVertically = mFlipVertically,
         ).bitmap
       }
-
       return BitmapUtils.resizeBitmap(
         bitmap = croppedBitmap,
         reqWidth = newReqWidth,
@@ -1876,7 +1876,7 @@ class CropImageView @JvmOverloads constructor(
     val inflater = LayoutInflater.from(context)
     val v = inflater.inflate(R.layout.crop_image_view, this, true)
     imageView = v.findViewById(R.id.ImageView_image)
-    imageView.scaleType = ImageView.ScaleType.MATRIX
+    imageView.scaleType = ImageView.ScaleType.FIT_CENTER
     mCropOverlayView = v.findViewById(R.id.CropOverlayView)
     mCropOverlayView.setCropWindowChangeListener(this)
     mCropOverlayView.setInitialAttributeValues(options)

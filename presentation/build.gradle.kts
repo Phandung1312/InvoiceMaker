@@ -53,7 +53,6 @@ dependencies {
     implementation(libs.itext)
     implementation(project(mapOf("path" to ":basic")))
     implementation(libs.moshi)
-
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

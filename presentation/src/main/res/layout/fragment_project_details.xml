@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/viewHeaderProjectDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_2sdp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/viewHeaderEditContact"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_70sdp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/backTextView"
+                style="@style/medium_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/page"
+                android:layout_marginTop="@dimen/page"
+                android:layout_marginEnd="@dimen/page"
+                android:layout_marginBottom="@dimen/page"
+                android:text="@string/back"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/detailsProjectTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:fontFamily="@font/inter_tight_bold"
+                android:text="@string/projectDetails"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp" />
+
+
+            <TextView
+                android:id="@+id/saveTextView"
+                style="@style/medium_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/page"
+                android:layout_marginTop="@dimen/page"
+                android:layout_marginEnd="@dimen/page"
+                android:layout_marginBottom="@dimen/page"
+                android:text="@string/save" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@+id/viewHeaderProjectDetails"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.cardview.widget.CardView
+            android:background="@color/white"
+            android:elevation="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/page"
+                    android:layout_marginTop="@dimen/page"
+                    android:layout_marginEnd="@dimen/page"
+                    android:layout_marginBottom="@dimen/page"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/titleHeaderMoreH1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/project_name" />
+
+                    <TextView
+                        style="@style/titleHeaderMoreH2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Mango" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

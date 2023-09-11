@@ -35,7 +35,7 @@ import kotlin.math.sin
  * Utility class that deals with operations with an ImageView.
  */
 internal object BitmapUtils {
-
+  var testBitmap : Bitmap? = null
   val EMPTY_RECT = Rect()
   val EMPTY_RECT_F = RectF()
   private const val IMAGE_MAX_BITMAP_DIMENSION = 2048

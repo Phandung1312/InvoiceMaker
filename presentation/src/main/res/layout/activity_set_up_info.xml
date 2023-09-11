@@ -80,22 +80,29 @@
                 android:layout_alignParentStart="true"
                 android:onClick="@{() -> setUpInfoActitvity.onBack()}"
                 app:cardCornerRadius="@dimen/_25sdp"
+                app:cardBackgroundColor="@color/transparent"
+                app:strokeWidth="@dimen/_1sdp"
+                app:strokeColor="@color/stroke_negative_button"
                 app:cardElevation="0dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/button_negative_background">
+                    android:background="@color/background_negative">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_13sdp"
                         android:fontFamily="@font/inter_tight_medium"
                         android:gravity="center"
-                        android:padding="@dimen/_13sdp"
                         android:text="Back"
                         android:textColor="@color/blue_button"
-                        android:textSize="@dimen/primaryTextSize" />
+                        android:textSize="@dimen/primaryTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 

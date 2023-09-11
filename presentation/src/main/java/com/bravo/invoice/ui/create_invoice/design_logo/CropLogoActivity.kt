@@ -8,13 +8,16 @@ import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import com.bravo.basic.extensions.makeToast
 import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.R
 import com.bravo.invoice.databinding.ActivityCropLogoBinding
+import com.canhub.cropper.CropImageView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CropLogoActivity : BaseActivity<ActivityCropLogoBinding>(ActivityCropLogoBinding::inflate) {
+    var oldBitmap : Bitmap? = null
     companion object {
         const val LOGO_STRING_EXTRA ="LOGO_STRING_EXTRA"
     }
@@ -32,6 +35,18 @@ class CropLogoActivity : BaseActivity<ActivityCropLogoBinding>(ActivityCropLogoB
     }
     fun onTurn(){
         binding.cropImageView.rotateImage(90)
+    }
+    fun onCrop(){
+        val newBitmap = binding.cropImageView.getCroppedImage(reqHeight = 300, reqWidth = 300,
+            options = CropImageView.RequestSizeOptions.RESIZE_FIT
+        )
+        if(oldBitmap != newBitmap){
+            oldBitmap = newBitmap
+        }
+        else{
+            makeToast("Same")
+        }
+        binding.ivResult.setImageBitmap(oldBitmap)
     }
     fun drawableToBitmap(drawable: Drawable): Bitmap {
         if (drawable is BitmapDrawable) {
