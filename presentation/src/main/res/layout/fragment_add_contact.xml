@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/viewHeaderAddContact"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp">
+
+            <TextView
+                android:id="@+id/backTextView"
+                style="@style/primary_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/page"
+                android:layout_marginTop="@dimen/page"
+                android:layout_marginEnd="@dimen/page"
+                android:layout_marginBottom="@dimen/page"
+                android:text="@string/back" />
+
+            <TextView
+                android:id="@+id/addClientTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_contact"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:fontFamily="@font/inter_tight_bold"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:textSize="@dimen/_16ssp" />
+
+
+            <TextView
+                android:id="@+id/saveTextView"
+                style="@style/medium_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/page"
+                android:layout_marginTop="@dimen/page"
+                android:layout_marginEnd="@dimen/page"
+                android:layout_marginBottom="@dimen/page"
+                android:text="@string/save"
+                android:textColor="@color/color_textGray" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/viewChooseContacts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@+id/viewHeaderAddContact"
+        android:elevation="@dimen/_6sdp">
+
+        <RelativeLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp">
+
+            <TextView
+                android:text="@string/choose_from_contacts"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/inter_tight_bold"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/textColorSecondary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        app:layout_constraintTop_toBottomOf="@+id/viewChooseContacts"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/viewInput2"
+            app:layout_constraintTop_toBottomOf="@+id/viewInput1"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:weightSum="4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/contactTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/given_name_s"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    style="@style/primary_text" />
+
+                <EditText
+                    android:layout_below="@+id/contactTextView"
+                    android:id="@+id/activeEdt"
+                    android:inputType="text"
+                    android:hint="@string/jane_smith"
+                    android:background="@null"
+                    android:textColorHint="@color/color_hint_edt"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_below="@+id/activeEdt"
+                    android:background="@color/gray_line" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/phoneTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/surname"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    style="@style/primary_text" />
+
+                <EditText
+                    android:layout_below="@+id/phoneTextView"
+                    android:id="@+id/surNameEdt"
+                    android:inputType="phone"
+                    android:hint="333-333-5555"
+                    android:background="@null"
+                    android:textColorHint="@color/color_hint_edt"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_below="@+id/surNameEdt"
+                    android:background="@color/gray_line" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/mobileTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mobile"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    style="@style/primary_text" />
+
+                <EditText
+                    android:layout_below="@+id/mobileTextView"
+                    android:id="@+id/numberEdt"
+                    android:inputType="text"
+                    android:hint="Number"
+                    android:background="@null"
+                    android:textColorHint="@color/color_hint_edt"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_below="@+id/numberEdt"
+                    android:background="@color/gray_line" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/emailTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    style="@style/primary_text" />
+
+                <EditText
+                    android:layout_below="@+id/emailTextView"
+                    android:id="@+id/emailEdt"
+                    android:inputType="text"
+                    android:hint="henry@gmail.com"
+                    android:background="@null"
+                    android:textColorHint="@color/color_hint_edt"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_below="@+id/emailEdt"
+                    android:background="@color/gray_line" />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp">
+
+                <TextView
+                    android:id="@+id/paymentText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:text="@string/role"
+                    style="@style/primary_text" />
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageView
+                        android:src="@drawable/ic_right"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

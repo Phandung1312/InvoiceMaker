@@ -2,6 +2,7 @@
 plugins {
     id("invoicemaker-android-application")
     id("invoicemaker-hilt")
+    id("kotlin-kapt")
     id("kotlin-parcelize")
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.gms.google.services)
@@ -21,13 +22,6 @@ android {
     buildFeatures {
         viewBinding = true
         dataBinding = true
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 }
 
@@ -50,8 +44,9 @@ dependencies {
     implementation(libs.bundles.dimen)
     implementation(libs.bundles.mapsLibs)
     implementation(libs.itext)
-    implementation(project(mapOf("path" to ":basic")))
     implementation(libs.moshi)
+    implementation(libs.bundles.roomLibs)
+    annotationProcessor(libs.roomCompiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -1,6 +1,9 @@
 package com.bravo.invoice.di
 
 import android.content.Context
+import androidx.room.Room
+import com.bravo.data.Database
+import com.bravo.data.database.dao.ClientDao
 import com.bravo.invoice.InvoiceMakerApplication
 import com.bravo.invoice.common.Preferences
 import com.f2prateek.rx.preferences2.RxSharedPreferences
@@ -24,4 +27,21 @@ class AppModule {
         val rxSharedPreferences = RxSharedPreferences.create(sharedPreferences)
         return Preferences(rxSharedPreferences)
     }
+    @Provides
+    @Singleton
+    fun provideDatabase(context: Context): Database = Room.databaseBuilder(
+        context,
+        Database::class.java,
+        Database.DB_NAME
+    )
+        .fallbackToDestructiveMigration()
+        .allowMainThreadQueries()
+        .build()
+
+    @Provides
+    @Singleton
+    fun provideStyleDao(database: Database): ClientDao = database.clientsDao()
+
+
+
 }

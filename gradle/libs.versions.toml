@@ -102,7 +102,7 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+roomCompiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
@@ -117,7 +117,6 @@ ssp = {module = "com.intuit.ssp:ssp-android", version.ref = "dimen"}
 
 location = {module = "com.google.android.gms:play-services-location", version.ref = "googlePlayService"}
 maps = {module = "com.google.android.gms:play-services-maps", version.ref = "googlePlayService"}
-
 
 
 cropper = {module = "com.vanniktech:android-image-cropper", version.ref="cropper"}
@@ -147,5 +146,5 @@ coroutinesLibs = ["coroutines-android", "coroutines-core"]
 dimen = ["sdp", "ssp"]
 viewKtx = ["fragment-ktx", "activity-ktx"]
 mapsLibs = ["location", "maps"]
-
+roomLibs = ["room-runtime","room-ktx"]
 

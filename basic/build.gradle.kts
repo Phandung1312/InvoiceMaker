@@ -1,7 +1,6 @@
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     id("invoicemaker-android-library")
-    id("invoicemaker-hilt")
     id("kotlin-kapt")
     id("kotlin-parcelize")
 }
