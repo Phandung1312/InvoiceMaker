@@ -4,6 +4,7 @@
     <dimen name="largeTextSize">@dimen/_16ssp</dimen>
     <dimen name="secondTextSize">@dimen/_12ssp</dimen>
     <dimen name="tertiaryTextSize">@dimen/_10ssp</dimen>
+    <dimen name="headerBlueTextSize">@dimen/_20ssp</dimen>
 
     <dimen name="page">@dimen/_20sdp</dimen>
     <dimen name="fab_margin">16dp</dimen>

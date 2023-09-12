@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/viewHeaderProjectContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardElevation="@dimen/_2sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/viewHeaderEditContact"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_70sdp"
+                android:background="@color/white"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/cancelTextView"
+                    style="@style/medium_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/page"
+                    android:text="@string/back"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/addClientTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:fontFamily="@font/inter_tight_bold"
+                    android:text="@string/project_contact"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
+
+
+                <TextView
+                    android:id="@+id/saveTextView"
+                    style="@style/medium_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="@dimen/page"
+                    android:text="@string/edit" />
+
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/companyNameTextview"
+            style="@style/primary_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="@string/company_name"
+            android:textSize="@dimen/_25sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewHeaderProjectContact" />
+
+        <LinearLayout
+            android:id="@+id/viewGroupChoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/page"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/page"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/companyNameTextview">
+
+            <LinearLayout
+                android:id="@+id/viewEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_gmail" />
+
+                <TextView
+                    style="@style/primary_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/add_email" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewAddNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:background="@color/grayD2" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/ic_phone" />
+
+                    <TextView
+                        style="@style/primary_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/add_number" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_weight="1"
+                    android:background="@color/grayD2" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/viewCreate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_create" />
+
+                <TextView
+                    style="@style/primary_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/create" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/page"
+            app:cardCornerRadius="@dimen/_20sdp"
+            app:cardElevation="@dimen/_2sdp"
+            app:layout_constraintTop_toBottomOf="@+id/viewGroupChoice">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_1sdp"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="@dimen/_20sdp"
+                    app:cardElevation="@dimen/_8sdp">
+
+                    <RelativeLayout
+                        android:id="@+id/viewActivity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="@font/inter_tight_medium"
+                            android:text="@string/activity"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14sdp" />
+
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/_1sdp"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    app:cardCornerRadius="@dimen/_20sdp"
+                    app:cardElevation="@dimen/_8sdp">
+                    <RelativeLayout
+                        android:id="@+id/viewInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="@font/inter_tight_medium"
+                            android:text="@string/info"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14sdp" />
+                    </RelativeLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/viewActivityYet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTab"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/img_bgContact"
+                android:layout_width="@dimen/_150sdp"
+                android:layout_height="@dimen/_150sdp"
+                android:layout_marginTop="@dimen/_60sdp"
+                android:src="@drawable/ic_bg_contact"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"  />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_45sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_bgContact">
+
+                <TextView
+                    android:id="@+id/textNoActivity"
+                    style="@style/medium_text_header_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/no_activity_yet" />
+
+                <TextView
+                    style="@style/primary_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textNoActivity"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
+                    android:text="@string/create_an_invoice_or_an_estimate_for_enter_text" />
+
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <LinearLayout
+            android:id="@+id/viewInfoContact"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTab"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/page"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mobile"
+                    android:textSize="@dimen/_14sdp"
+                    style="@style/primary_text"/>
+                <TextView
+                    android:id="@+id/mobileText"
+                    android:text="333-333-333"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_alignParentEnd="true"
+                    style="@style/medium_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email"
+                    android:textSize="@dimen/_14sdp"
+                    style="@style/primary_text"/>
+                <TextView
+                    android:id="@+id/emailText"
+                    android:text="333-333-333"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_alignParentEnd="true"
+                    style="@style/medium_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contact"
+                    android:textSize="@dimen/_14sdp"
+                    style="@style/primary_text"/>
+                <TextView
+                    android:id="@+id/nameContactText"
+                    android:text="333-333-333"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_alignParentEnd="true"
+                    android:textColor="@color/color_textGray"
+                    style="@style/medium_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/website"
+                    android:textSize="@dimen/_14sdp"
+                    style="@style/primary_text"/>
+                <TextView
+                    android:id="@+id/nameWebText"
+                    android:text="333-333-333"
+                    android:textSize="@dimen/_14sdp"
+                    android:layout_alignParentEnd="true"
+                    style="@style/medium_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+
+
+
+        <include
+            android:id="@+id/button_create"
+            layout="@layout/button_blue_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/page"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/page"
+            android:layout_marginBottom="@dimen/_30sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:textButton="@{`Create`}" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

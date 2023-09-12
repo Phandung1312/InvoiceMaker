@@ -24,4 +24,9 @@
     <color name="invoice_menu_text">#A9ABB9</color>
     <color name="background_dialog">#000000</color>
     <color name="white_30_alpha">#30FFFFFF</color>
+
+    <color name="background_addClient">#F6F7FA</color>
+    <color name="color_textGray">#6D7081</color>
+    <color name= "color_hint_edt">#D9D9D9</color>
+
 </resources>

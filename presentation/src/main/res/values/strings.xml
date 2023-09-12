@@ -2,47 +2,67 @@
     <string name="app_name">InvoiceMaker</string>
     <string name="_1_month_free">1 month <b>free</b>\n then <b>$9.99/month</b></string>
     <string name="Companyname_will_soon_be_ready_to"><b>Companyname</b> will soon be ready to:</string>
-    <string name="title_activity_design_logo">DesignLogoActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="lorem_ipsum">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
-        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
-        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
-        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
-        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
-        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
-        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
-        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
-        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
-        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
-        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
-        bibendum, vel congue leo egestas.\n\n
-        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
-        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
-        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
-        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
-        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
-        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
-        est.\n\n
-        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
-        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
-        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
-        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
-        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
-        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
-        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
-        convallis.\n\n
-        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
-        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
-        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
-        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
-        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
-        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
-        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
-    </string>
+    <string name="clients">Clients</string>
+    <string name="add_a_client">Add a client</string>
+    <string name="add_customer_details">Add customer details</string>
+    <string name="save_your_customer_s_contact_details_for_faster_invoicing">Save your customer\'s contact details for \n faster invoicing.</string>
+    <string name="win_more_jobs">Win more jobs</string>
+    <string name="send_estimates_to_show_clients_what_a_job_will_n_cost_and_win_new_work">Send estimates to show clients what a job will \n cost, and win new work.</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="add_client">Add Client</string>
+    <string name="choose_from_contacts">Choose from contacts</string>
+    <string name="billing_name">Billing name</string>
+    <string name="name">Name</string>
+    <string name="youremail_gmail_com">yourEmail@gmail.com</string>
+    <string name="_0923456789">0923456789</string>
+    <string name="mobile">Mobile</string>
+    <string name="email">Email</string>
+    <string name="add_another_email">Add another email</string>
+    <string name="billing_address">Billing address</string>
+    <string name="jane_smith">Jane Smith</string>
+    <string name="contact">Contact</string>
+    <string name="tax_number">Tax number</string>
+    <string name="client_s_tax_number">Client\'s tax number</string>
+    <string name="website">Website</string>
+    <string name="phone">Phone</string>
+    <string name="payment_terms">Payment terms</string>
+    <string name="none">None</string>
+    <string name="add_notes_about_client_they_can_t_see_these">Add notes about client. They can\'t see these</string>
+    <string name="create_a_new_project_n_for_this_client">Create a new project \n for this client?</string>
+    <string name="keep_your_documents_photos_and_contacts_for_a_project_all_together_in_one_place">Keep your documents, photos and contacts \n for a project all together in one place.</string>
+    <string name="don_t_as_me_again">Don\'t as me again</string>
+    <string name="new_project">New Project</string>
+    <string name="who_is_this_project_for">WHO IS THIS PROJECT FOR?</string>
+    <string name="enter">Enter</string>
+    <string name="project_details">PROJECT DETAILS</string>
+    <string name="location">Location</string>
+    <string name="united">United</string>
+    <string name="project_contact">Project contact</string>
+    <string name="back">Back</string>
+    <string name="client">Client</string>
+    <string name="company_name">Company name</string>
+    <string name="edit">Edit</string>
+    <string name="add_email">Add email</string>
+    <string name="add_number">Add number</string>
+    <string name="create">Create</string>
+    <string name="activity">Activity</string>
+    <string name="info">Info</string>
+    <string name="no_activity_yet">No activity yet</string>
+    <string name="create_an_invoice_or_an_estimate_for_enter_text">Create an invoice or an estimate for Enter text</string>
+    <string name="more">More</string>
+    <string name="workflow">WORKFLOW</string>
+    <string name="projects">Projects</string>
+    <string name="cashflow">CASHFLOW</string>
+    <string name="client_payment_options">Client payment options</string>
+    <string name="purchase_orders">Purchase orders</string>
+    <string name="credit_memos">Credit memos</string>
+    <string name="other_documents">OTHER DOCUMENTS</string>
+    <string name="items_expenses_amp_time">ITEMS, EXPENSE  &amp; TIME</string>
+    <string name="items">Items</string>
+    <string name="expenses">Expenses</string>
+    <string name="appointments">Appointments</string>
+    <string name="time_tracking">Time Tracking</string>
+    <string name="projectDetails">Project details</string>
+    <string name="project_name">Project Name</string>
 </resources>
