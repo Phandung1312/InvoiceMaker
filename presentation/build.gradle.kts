@@ -2,7 +2,6 @@
 plugins {
     id("invoicemaker-android-application")
     id("invoicemaker-hilt")
-    id("kotlin-kapt")
     id("kotlin-parcelize")
     alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.gms.google.services)

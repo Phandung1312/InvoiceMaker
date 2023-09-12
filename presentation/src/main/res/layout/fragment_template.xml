@@ -8,14 +8,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         xmlns:tools="http://schemas.android.com/tools">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_template"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:src="@drawable/invoice_template"
+        <androidx.constraintlayout.widget.ConstraintLayout
             app:layout_constraintBottom_toTopOf="@+id/rv_template"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@color/background_addClient"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_marginStart="@dimen/page"
+                android:layout_marginEnd="@dimen/page"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+                app:cardElevation="@dimen/_2sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_template"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/invoice_template" />
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_template"

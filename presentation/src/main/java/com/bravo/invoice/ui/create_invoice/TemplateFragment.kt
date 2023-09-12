@@ -1,15 +1,15 @@
 package com.bravo.invoice.ui.create_invoice
 
 
-import android.graphics.Paint
-import android.graphics.pdf.PdfDocument
+
 import android.os.Bundle
-import android.os.Environment
 import android.view.View
+import androidx.lifecycle.lifecycleScope
 import com.bravo.basic.view.BaseFragment
 import com.bravo.invoice.databinding.TemplateClass
-import java.io.File
-import java.io.FileOutputStream
+import com.bravo.invoice.pdf.PdfManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class TemplateFragment : BaseFragment<TemplateClass>(TemplateClass::inflate) {
@@ -21,16 +21,12 @@ class TemplateFragment : BaseFragment<TemplateClass>(TemplateClass::inflate) {
         createInvoicePdf()
     }
     private fun createInvoicePdf() {
-        val document = PdfDocument()
-        val pageInfo = PdfDocument.PageInfo.Builder(400, 600, 1).create()
-        val myPaint = Paint()
-        val myPage1 = document.startPage(pageInfo)
-        val canvas = myPage1.canvas
-        canvas.drawText("HHIHIHIHI", 40F, 50F, myPaint)
-        document.finishPage(myPage1)
-
-        val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "/FirstPDF.pdf")
-        document.writeTo(FileOutputStream(file))
-        document.close()
+        lifecycleScope.launch(Dispatchers.Main) {
+            val pdfManager = PdfManager(requireContext())
+            val bitmap = pdfManager.getImpactPdf()
+            bitmap?.let{
+                binding.ivTemplate.setImageBitmap(it)
+            }
+        }
     }
 }

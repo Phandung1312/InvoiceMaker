@@ -103,6 +103,7 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         app:menu="@menu/create_invoice_menu"
+        android:background="@color/background_addClient"
         app:labelVisibilityMode="labeled"
         app:itemTextAppearanceInactive="@style/BottomNavigationTextInactive"
         app:itemTextAppearanceActive="@style/BottomNavigationTextActive"

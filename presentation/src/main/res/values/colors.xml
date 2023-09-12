@@ -32,4 +32,5 @@
     <color name="color_textGray">#6D7081</color>
     <color name= "color_hint_edt">#D9D9D9</color>
 
+    <color name= "invoice_green">#00C01F</color>
 </resources>
