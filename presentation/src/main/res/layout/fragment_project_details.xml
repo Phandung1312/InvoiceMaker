@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#F6F7FA">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/viewHeaderProjectDetails"
@@ -61,52 +62,322 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-
-    <LinearLayout
-        app:layout_constraintTop_toBottomOf="@+id/viewHeaderProjectDetails"
-        android:orientation="vertical"
-        android:layout_marginTop="@dimen/page"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/viewHeaderProjectDetails">
 
-        <androidx.cardview.widget.CardView
-            android:background="@color/white"
-            android:elevation="@dimen/_8sdp"
+        <LinearLayout
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="vertical">
 
-            <RelativeLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_50sdp">
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:elevation="@dimen/_8sdp">
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="@dimen/page"
-                    android:layout_marginTop="@dimen/page"
-                    android:layout_marginEnd="@dimen/page"
-                    android:layout_marginBottom="@dimen/page"
-                    android:orientation="vertical">
+                    android:layout_height="@dimen/_60sdp">
 
-                    <TextView
-                        style="@style/titleHeaderMoreH1"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/project_name" />
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/page"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/titleHeaderMoreH1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/project_name" />
+
+                        <TextView
+                            style="@style/titleHeaderMoreH2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mango" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/viewStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp">
 
                     <TextView
                         style="@style/titleHeaderMoreH2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Mango" />
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/page"
+                        android:text="@string/status" />
+
+                    <TextView
+                        style="@style/medium_blue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/page"
+                        android:text="@string/active" />
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:elevation="@dimen/_8sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp">
+
+                    <TextView
+                        android:id="@+id/desTextView"
+                        style="@style/titleHeaderMoreH2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/page"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:text="asldjaksjdkasldjaskld" />
+
+                    <TextView
+                        style="@style/titleHeaderMoreH1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginEnd="@dimen/page"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:fontFamily="@font/inter_tight_semi_bold"
+                        android:text="91839283" />
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:elevation="@dimen/_8sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_100sdp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/viewLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            style="@style/titleHeaderMoreH2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/page"
+                            android:text="@string/location" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/page"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                style="@style/titleHeaderMoreH1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_tight_semi_bold"
+                                android:text="987 Green" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                android:src="@drawable/ic_right" />
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="@dimen/page"
+                            android:background="@color/gray_line" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:id="@+id/imgCirclePlus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/page"
+                            android:src="@drawable/ic_pluscircle" />
+
+                        <TextView
+                            style="@style/titleHeaderMoreH2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:layout_toEndOf="@+id/imgCirclePlus"
+                            android:text="@string/add_another_location" />
+                    </RelativeLayout>
+
                 </LinearLayout>
-            </RelativeLayout>
+            </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_marginTop="@dimen/_30sdp"
+                android:elevation="@dimen/_8sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp">
+
+                        <TextView
+                            style="@style/titleHeaderMoreH2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/page"
+                            android:text="@string/start_date" />
+
+                        <TextView
+                            style="@style/medium_blue"
+                            android:id="@+id/dateTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/page"/>
+                    </RelativeLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/page"
+                        android:background="@color/gray_line" />
+
+                    <RelativeLayout
+                        android:id="@+id/detailDayStart"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="October 20"
+                            android:id="@+id/detailsDateStart"
+                            style="@style/titleHeaderMoreH2"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/page"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <ImageView
+                            android:src="@drawable/ic_right"
+                            android:layout_toEndOf="@+id/detailsDateStart"
+                            android:layout_centerVertical="true"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            app:tint="@color/blue_button" />
+                    </RelativeLayout>
+                   <CalendarView
+                       android:layout_width="match_parent"
+                       android:layout_margin="@dimen/_10sdp"
+                       android:layout_height="match_parent"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/page"
+                        android:background="@color/gray_line" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_50sdp">
+
+                        <TextView
+                            style="@style/titleHeaderMoreH2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/page"
+                            android:text="@string/end_date" />
+
+                        <TextView
+                            style="@style/medium_blue"
+                            android:id="@+id/endDateTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="@dimen/page"/>
+                    </RelativeLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="@dimen/page"
+                        android:background="@color/gray_line" />
+                    <RelativeLayout
+                        android:id="@+id/detailEndDayStart"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:text="October 20"
+                            android:id="@+id/detailsEndDateStart"
+                            style="@style/titleHeaderMoreH2"
+                            android:layout_centerVertical="true"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginStart="@dimen/page"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <ImageView
+                            android:src="@drawable/ic_right"
+                            android:layout_toEndOf="@+id/detailsEndDateStart"
+                            android:layout_centerVertical="true"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_height="@dimen/_30sdp"
+                            app:tint="@color/blue_button" />
+                    </RelativeLayout>
+                    <CalendarView
+                        android:layout_width="match_parent"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_height="match_parent"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
