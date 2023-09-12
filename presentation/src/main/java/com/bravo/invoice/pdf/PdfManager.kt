@@ -8,14 +8,13 @@ import android.graphics.Paint
 import android.graphics.Typeface
 import android.graphics.pdf.PdfDocument
 import android.graphics.pdf.PdfRenderer
-import android.os.Environment
 import android.os.ParcelFileDescriptor
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
 import androidx.core.content.res.ResourcesCompat
 import com.bravo.invoice.R
-import com.bravo.invoice.models.InvoiceItem
+import com.bravo.domain.model.InvoiceItem
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
