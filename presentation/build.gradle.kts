@@ -44,7 +44,6 @@ dependencies {
     implementation(libs.bundles.dimen)
     implementation(libs.bundles.mapsLibs)
     implementation(libs.itext)
-    implementation(project(mapOf("path" to ":basic")))
     implementation(libs.moshi)
     implementation(libs.bundles.roomLibs)
     annotationProcessor(libs.roomCompiler)

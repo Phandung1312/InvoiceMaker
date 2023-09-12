@@ -119,7 +119,6 @@ location = {module = "com.google.android.gms:play-services-location", version.re
 maps = {module = "com.google.android.gms:play-services-maps", version.ref = "googlePlayService"}
 
 
-
 cropper = {module = "com.vanniktech:android-image-cropper", version.ref="cropper"}
 
 vision = {module = "com.google.android.gms:play-services-vision", version.ref = "pdf"}
