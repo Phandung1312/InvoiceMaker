@@ -15,7 +15,7 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":domain"))
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -23,6 +23,7 @@ dependencies {
     implementation(libs.bundles.rxLibs)
     implementation(libs.bundles.coroutinesLibs)
     implementation (libs.timber)
+    implementation(libs.bundles.roomLibs)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }

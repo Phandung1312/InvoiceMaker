@@ -65,4 +65,13 @@
     <string name="time_tracking">Time Tracking</string>
     <string name="projectDetails">Project details</string>
     <string name="project_name">Project Name</string>
+    <string name="status">Status</string>
+    <string name="active">Active</string>
+    <string name="add_another_location">Add another location</string>
+    <string name="start_date">Start date</string>
+    <string name="end_date">End date</string>
+    <string name="add_contact">Add contact</string>
+    <string name="given_name_s">Given name(s)</string>
+    <string name="surname">Surname</string>
+    <string name="role">Role</string>
 </resources>
