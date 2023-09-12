@@ -2,15 +2,12 @@
 plugins {
     id("invoicemaker-android-application")
     id("invoicemaker-hilt")
-    id("kotlin-kapt")
     id("kotlin-parcelize")
-    alias(libs.plugins.org.jetbrains.kotlin.android)
     alias(libs.plugins.com.google.gms.google.services)
 }
 
 android {
     namespace = "com.bravo.invoice"
-
     defaultConfig {
         applicationId = "com.bravo.invoice"
         targetSdk = 33
@@ -44,8 +41,12 @@ dependencies {
     implementation(libs.bundles.mapsLibs)
     implementation(libs.moshi)
     implementation(libs.bundles.roomLibs)
-    implementation(project(mapOf("path" to ":basic")))
+    annotationProcessor(libs.roomCompiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+
+
+
 }

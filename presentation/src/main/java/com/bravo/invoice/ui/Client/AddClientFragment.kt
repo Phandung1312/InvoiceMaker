@@ -4,6 +4,7 @@ package com.bravo.invoice.ui.Client
 import android.text.TextUtils
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.fragment.app.viewModels
 import com.bravo.basic.extensions.clicks
 import com.bravo.basic.view.BaseFragment
 import com.bravo.domain.model.Client
@@ -13,9 +14,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) {
-    @Inject
-    lateinit var clientViewModel: ClientViewModel
+    private val viewModel by viewModels<ClientViewModel>()
     override fun initData() {
+
     }
 
     override fun initListeners() {
@@ -50,7 +51,7 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
                 billingAddressData,
                 noteData
             )
-            clientViewModel.insert(clientDataInsert)
+//            viewModel.insert(clientDataInsert)
             Toast.makeText(activity, "Add data successfully!", LENGTH_SHORT).show()
         }
     }

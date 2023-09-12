@@ -2,7 +2,6 @@
 plugins {
     id("invoicemaker-android-library")
     id("invoicemaker-hilt")
-    id("kotlin-kapt")
 }
 
 android {
@@ -25,6 +24,8 @@ dependencies {
     implementation(libs.bundles.coroutinesLibs)
     implementation (libs.timber)
     implementation(libs.bundles.roomLibs)
+    annotationProcessor(libs.roomCompiler)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
 }

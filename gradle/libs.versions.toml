@@ -95,7 +95,7 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
 
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+roomCompiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
@@ -120,7 +120,6 @@ firebase-carshlytics = {id ="com.google.firebase.crashlytics" , version.ref = "f
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 [bundles]
-hiltLibs = ["hilt-compiler", "hilt-android"]
 autodisposeLibs = ["autodispose-android-archcomponents", "autodispose-autodispose", "autodispose-lifycycle"]
 firebaseLibs = ["firebase-analytics", "firebase-config", "firebase-crashlytics", "firebase-database", "firebase-storage", "firebase-message"]
 rxLibs = ["rxjava2-rxandroid", "rxjava2-rxkotlin", "rxpref"]
@@ -128,5 +127,5 @@ coroutinesLibs = ["coroutines-android", "coroutines-core"]
 dimen = ["sdp", "ssp"]
 viewKtx = ["fragment-ktx", "activity-ktx"]
 mapsLibs = ["location", "maps"]
-roomLibs = ["room-compiler","room-runtime","room-ktx"]
+roomLibs = ["room-runtime","room-ktx"]
 
