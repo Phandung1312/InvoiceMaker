@@ -35,5 +35,6 @@
     <color name= "invoice_green">#00C01F</color>
     <color name= "black_30_alpha">#30000000</color>
     <color name= "blue_black">#1F2336</color>
+    <color name= "invoice_vertical_line">#979797</color>
 
 </resources>

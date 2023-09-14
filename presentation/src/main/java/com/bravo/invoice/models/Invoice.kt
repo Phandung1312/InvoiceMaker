@@ -19,6 +19,7 @@ data class Invoice(
 data class ClientInInvoiceUI(
     val id : Int = 0,
     val nameContact : String = "",
+    val emailContact : String = "",
     val billingAddress : String = "",
     val phoneContact : String = ""
 )
