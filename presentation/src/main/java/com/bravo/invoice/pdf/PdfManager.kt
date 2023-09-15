@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.Typeface
@@ -29,21 +30,21 @@ class PdfManager(
     private val mColor: Int = R.color.invoice_green,
 ) {
     private var document: PdfDocument = PdfDocument()
-    private var pageInfo1: PageInfo = PageInfo.Builder(420, 650, 1).create()
+    private var pageInfo1: PageInfo = PageInfo.Builder(420, 700, 1).create()
     private var paint: Paint = Paint()
     private var myPage1: Page = document.startPage(pageInfo1)
     private var canvas: Canvas = myPage1.canvas
 
     private var currentHeight = 0f
     companion object {
-        const val IMPACT = 1
-        const val CLASSIC = 2
-        const val MODERN = 3
-        const val MINIMAL = 4
-        const val SHOWCASE = 5
-        const val TYPEWRITER = 6
-        const val HIP = 7
-        const val CREATIVE = 8
+        const val IMPACT = 0
+        const val CLASSIC = 1
+        const val MODERN = 2
+        const val MINIMAL = 3
+        const val SHOWCASE = 4
+        const val TYPEWRITER = 5
+        const val HIP = 6
+        const val CREATIVE = 7
 
         const val PAGE_LEFT_DISTANCE = 30f
         const val PAGE_RIGHT_DISTANCE = 390f
@@ -70,15 +71,28 @@ class PdfManager(
                 ParcelFileDescriptor.open(pdfFile, ParcelFileDescriptor.MODE_READ_ONLY)
             val pdfRenderer = PdfRenderer(pdfParcelFileDescriptor)
             val page = pdfRenderer.openPage(0)
-            val bitmap = Bitmap.createBitmap(page.width, page.height, Bitmap.Config.ARGB_8888)
+
+            val scaleFactor = 2
+            val bitmap = Bitmap.createBitmap(
+                (page.width * scaleFactor),
+                (page.height * scaleFactor),
+                Bitmap.Config.ARGB_8888
+            )
+
             val canvas = Canvas(bitmap)
             canvas.drawColor(0xFFFFFFFF.toInt())
+
+
+            val matrix = Matrix()
+            matrix.setScale(scaleFactor.toFloat(), scaleFactor.toFloat())
+
+
+            canvas.drawBitmap(bitmap, matrix, null)
+
             page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
             page.close()
             pdfRenderer.close()
             return bitmap
-
-
         } catch (e: IOException) {
             return null
         }
@@ -162,6 +176,7 @@ class PdfManager(
 
             TYPEWRITER -> {
                 paint.textAlign = Paint.Align.CENTER
+                paint.color = context.getColor(mColor)
                 currentX = (pageInfo1.pageWidth /2).toFloat()
                 currentY = 137f
             }
@@ -177,7 +192,7 @@ class PdfManager(
         canvas.drawText(invoice.businessInfo.tradingName, currentX, currentY, paint)
 
         //Invoice text
-
+        paint.color = Color.BLACK
         paint.textSize = 14f
         paint.textAlign = Paint.Align.RIGHT
         currentX = PAGE_RIGHT_DISTANCE
@@ -188,7 +203,7 @@ class PdfManager(
             }
 
             MODERN -> {
-                currentY = 165f
+                currentY = 150f
             }
 
             MINIMAL, SHOWCASE -> {
@@ -425,11 +440,11 @@ class PdfManager(
             MODERN, MINIMAL -> {
                 paint.color = if(template == MODERN) Color.BLACK else context.getColor(mColor)
                 canvas.drawLine(0f, currentHeight, pageInfo1.pageWidth.toFloat(), currentHeight, paint)
-                canvas.drawLine(0f, currentHeight, pageInfo1.pageWidth.toFloat(), currentHeight + 24f, paint)
+                canvas.drawLine(0f, currentHeight + 24f, pageInfo1.pageWidth.toFloat(), currentHeight + 24f, paint)
             }
             TYPEWRITER ->{
                 paint.color = context.getColor(mColor)
-                canvas.drawLine(PAGE_LEFT_DISTANCE, currentHeight, pageInfo1.pageWidth.toFloat(), currentHeight + 2f, paint)
+                canvas.drawLine(PAGE_LEFT_DISTANCE, currentHeight + 25f, pageInfo1.pageWidth.toFloat(), currentHeight + 25f, paint)
             }
         }
 
@@ -457,6 +472,7 @@ class PdfManager(
         currentHeight += 10
     }
     private fun createTableContent(){
+        paint.reset()
         currentHeight -= 10f
         paint.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
         invoice.invoiceItems.forEach { item ->
@@ -568,6 +584,7 @@ class PdfManager(
             IMPACT, MODERN, SHOWCASE, HIP ->{
 
                 paint.color = if(template == SHOWCASE || template == HIP) context.getColor(mColor) else Color.BLACK
+                if(template == HIP) paint.alpha = 51
                 canvas.drawRect(
                     (pageInfo1.pageWidth - 215).toFloat(),
                     currentHeight,
@@ -579,19 +596,19 @@ class PdfManager(
             CLASSIC, MINIMAL ->{
                 paint.color = Color.BLACK
                 canvas.drawLine((pageInfo1.pageWidth - 215).toFloat(),currentHeight, pageInfo1.pageWidth.toFloat(), currentHeight, paint)
-                canvas.drawLine((pageInfo1.pageWidth - 215).toFloat(),currentHeight, pageInfo1.pageWidth.toFloat() + 26f, currentHeight, paint)
+                canvas.drawLine((pageInfo1.pageWidth - 215).toFloat(),currentHeight + 26f, pageInfo1.pageWidth.toFloat() + 26f, currentHeight + 26f, paint)
             }
             CREATIVE ->{
                 paint.color = context.getColor(mColor)
+                paint.alpha = 51
                 canvas.drawPath(getCornerRect(), paint)
             }
         }
 
-        currentHeight += 19f
+        currentHeight += 17f
 
 
-
-        paint.color = context.getColor(com.bravo.basic.R.color.textColorTertiary)
+        paint.reset()
         paint.textSize = 13f
         paint.typeface = Typeface.create(
             ResourcesCompat.getFont(
@@ -599,6 +616,17 @@ class PdfManager(
                 com.bravo.basic.R.font.inter_tight_semi_bold
             ), Typeface.NORMAL
         )
+        when(template){
+            IMPACT, MODERN, SHOWCASE ->{
+                paint.color = Color.WHITE
+            }
+            CLASSIC ->{
+                paint.color = context.getColor(mColor)
+            }
+            else -> {
+                paint.color = Color.BLACK
+            }
+        }
         canvas.drawText("Balance Due", (pageInfo1.pageWidth - 122).toFloat(), currentHeight, paint)
         canvas.drawText("đ15.850", (pageInfo1.pageWidth - 29).toFloat(), currentHeight, paint)
 
@@ -607,7 +635,7 @@ class PdfManager(
         val path = Path()
         val rectWidth = 215f
         val rectHeight = 26f
-        val cornerRadius = 10f
+        val cornerRadius = 15f
 
         val startX = (pageInfo1.pageWidth - 215).toFloat()
         val startY = currentHeight

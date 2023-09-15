@@ -19,18 +19,15 @@ object Utils {
             client = ClientInInvoiceUI(
                 nameContact = "Nam Quang",
                 emailContact = "quangdev@gmail.com",
-                billingAddress = "An Thuong 21, Ngu Hanh Son, Da Nang, dusudbf bb b bew uewb bwe fbfebfu befu .",
+                billingAddress = "An Thuong 21, Ngu Hanh Son, Da Nang.",
                 phoneContact = "0932883283"
             ),
             date = "14/09/2023",
             dueDate = "14/09/2023",
             terms = "No",
             invoiceItems = listOf(
-                InvoiceItem("Milk Tee", "Milk is made by tea idhfis hfi hde'f d" +
-                        "f dff dhf idhf idf sf" +
-                        " dfh bdhf dki hflskhf oklseghfkjds gf" +
-                        "df dhf kdhf kisdhfk,sghdf kdfib gewfhdjf", 25000f, 2, 5),
-                InvoiceItem("Chicken", "Muahaha", 25000f, 1, 10),
+                InvoiceItem("Milk Tee", "Milk is made by Gordon James Ramsay", 25000f, 2, 5),
+                InvoiceItem("Chicken", "Chicken from America", 25000f, 1, 10),
             )
         )
     }

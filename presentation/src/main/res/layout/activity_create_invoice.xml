@@ -1,116 +1,285 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.create_invoice.CreateInvoiceActivity">
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_margin="@dimen/page"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/page"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="26dp">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="activity"
+            type="com.bravo.invoice.ui.create_invoice.CreateInvoiceActivity" />
+        <variable
+            name="isVisible"
+            type="Boolean" />
+    </data>
 
-        <TextView
-            style="@style/top_center_title_text"
-            android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.create_invoice.CreateInvoiceActivity">
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_margin="@dimen/page"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Commence Invoicing" />
+            android:layout_marginTop="@dimen/page"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="26dp">
 
-        <TextView
-            style="@style/medium_black"
-            android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/top_center_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Commence Invoicing" />
+
+            <TextView
+                android:id="@+id/tv_back"
+                visibleView="@{!isVisible}"
+                android:visibility="gone"
+                android:onClick="@{() -> activity.showBottomLayout()}"
+                style="@style/medium_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="Back" />
+            <TextView
+                android:id="@+id/tv_close"
+                visibleView="@{isVisible}"
+                android:onClick="@{() -> activity.onClose()}"
+                style="@style/medium_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="Back" />
+            <TextView
+                style="@style/medium_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="Next" />
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_marginStart="@dimen/page"
+            android:layout_marginEnd="@dimen/page"
+            android:id="@+id/linearLayoutCompat4"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:text="Back" />
-        <TextView
-            style="@style/medium_blue"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/relativeLayout"
+            tools:layout_editor_absoluteX="26dp">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_4sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/blue_button"
+                app:cardCornerRadius="@dimen/_15sdp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/background_step_bar"
+                app:cardCornerRadius="@dimen/_15sdp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/background_step_bar"
+                app:cardCornerRadius="@dimen/_15sdp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/background_step_bar"
+                app:cardCornerRadius="@dimen/_15sdp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/background_step_bar"
+                app:cardCornerRadius="@dimen/_15sdp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/background_addClient"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat4">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/page"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/page"
+                android:layout_marginBottom="@dimen/_30sdp"
+                app:cardElevation="@dimen/_2sdp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_template"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/invoice_template" />
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_preview"
+            visibleView="@{isVisible}"
+            android:onClick="@{() -> activity.onPreview()}"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/ic_search"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottom_layout"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/bottom_layout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:text="Next" />
-    </RelativeLayout>
+            android:background="@color/backgroundPrimary"
+            app:layout_constraintBottom_toBottomOf="parent" >
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_container_view"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+                />
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                app:menu="@menu/create_invoice_menu"
+                app:labelVisibilityMode="labeled"
+                android:background="@color/background_addClient"
+                app:itemTextAppearanceInactive="@style/BottomNavigationTextInactive"
+                app:itemTextAppearanceActive="@style/BottomNavigationTextActive"
+                app:itemIconSize="@dimen/_25sdp"
+                app:itemIconTint="@color/nav_icon"
+                app:itemTextColor="@color/nav_icon"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                app:layout_constraintBottom_toBottomOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/remind_view"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/negative_page"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_layout">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_marginStart="@dimen/page"
-        android:layout_marginEnd="@dimen/page"
-        android:id="@+id/linearLayoutCompat4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/relativeLayout"
-        tools:layout_editor_absoluteX="26dp">
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0.8"
+                app:cardBackgroundColor="@color/background_dialog"
+                app:cardCornerRadius="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_4sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/blue_button"
-            app:cardCornerRadius="@dimen/_15sdp" />
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_4sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/background_step_bar"
-            app:cardCornerRadius="@dimen/_15sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:fontFamily="@font/inter_tight_semi_bold"
+                        android:text="Time to get creative"
+                        android:textColor="@color/textColorTertiary"
+                        android:textSize="@dimen/tertiaryTextSize" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_4sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/background_step_bar"
-            app:cardCornerRadius="@dimen/_15sdp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="#40F6F7FA" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_4sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_5sdp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/background_step_bar"
-            app:cardCornerRadius="@dimen/_15sdp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:text="Try a template, add your logo, splash in some color, and more."
+                        android:textColor="@color/textColorTertiary"
+                        android:textSize="@dimen/tertiaryTextSize" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_4sdp"
-            android:layout_marginStart="@dimen/_5sdp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="@color/background_step_bar"
-            app:cardCornerRadius="@dimen/_15sdp" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_15sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:text="Want to change it later? Go to Invoice design in Settings."
+                        android:textColor="@color/textColorTertiary"
+                        android:textSize="@dimen/tertiaryTextSize" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container_view"
-        android:layout_marginTop="@dimen/_10sdp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat4" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:onClick="@{() -> activity.onGotIt()}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="@dimen/_15sdp"
+                        android:layout_marginBottom="@dimen/_15sdp"
+                        app:cardBackgroundColor="@color/background_dialog"
+                        app:cardCornerRadius="@dimen/_25sdp"
+                        app:strokeColor="@color/white_30_alpha"
+                        app:strokeWidth="1dp">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        app:menu="@menu/create_invoice_menu"
-        android:background="@color/background_addClient"
-        app:labelVisibilityMode="labeled"
-        app:itemTextAppearanceInactive="@style/BottomNavigationTextInactive"
-        app:itemTextAppearanceActive="@style/BottomNavigationTextActive"
-        app:itemIconSize="@dimen/_25sdp"
-        app:itemIconTint="@color/nav_icon"
-        app:itemTextColor="@color/nav_icon"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
-        app:layout_constraintBottom_toBottomOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_15sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_15sdp"
+                            android:layout_marginBottom="@dimen/_5sdp"
+                            android:fontFamily="@font/inter_tight_semi_bold"
+                            android:text="Go it"
+                            android:textColor="@color/textColorTertiary"
+                            android:textSize="@dimen/tertiaryTextSize" />
+                    </com.google.android.material.card.MaterialCardView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.8"
+                android:src="@drawable/ic_bottom_invoice_dialog"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

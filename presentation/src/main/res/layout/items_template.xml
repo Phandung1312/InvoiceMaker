@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_view"
+        app:cardElevation="@dimen/_2sdp"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_80sdp"
+        app:strokeColor="@color/blue_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_template"
+            tools:src ="@drawable/classic_template"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tv_template"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textSize="@dimen/tertiaryTextSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card_view"
+        tools:text="Impact" />
+</androidx.constraintlayout.widget.ConstraintLayout>

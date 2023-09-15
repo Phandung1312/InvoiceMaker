@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/transparent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView2"
+        android:alpha="0.5"
+        app:cardBackgroundColor="@color/background_dialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/background_dialog"
         app:cardCornerRadius="@dimen/_10sdp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -81,9 +84,9 @@
     </com.google.android.material.card.MaterialCardView>
 
     <androidx.appcompat.widget.AppCompatImageView
+        android:alpha="0.5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:tint="@color/background_dialog"
         android:src="@drawable/ic_bottom_invoice_dialog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
