@@ -49,6 +49,7 @@
         <activity
             android:name=".ui.subscribe.SubscribeActivity"
             android:exported="false" />
+
         <activity
             android:name=".ui.setupinfo.FinalizeActivity"
             android:exported="false" />

@@ -9,6 +9,9 @@
         <variable
             name="isVisible"
             type="Boolean" />
+        <variable
+            name="animateUtils"
+            type="com.bravo.basic.utils.AnimateUtils" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,6 +29,8 @@
 
             <TextView
                 android:id="@+id/tv_title"
+                animateVisible="@{isVisible}"
+                option="@{animateUtils.SLIDE_UP_DOWN}"
                 style="@style/top_center_title_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -159,6 +164,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/bottom_layout"
+            animateVisible="@{isVisible}"
+            option="@{animateUtils.SCROLL_UP_DOWN}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/backgroundPrimary"

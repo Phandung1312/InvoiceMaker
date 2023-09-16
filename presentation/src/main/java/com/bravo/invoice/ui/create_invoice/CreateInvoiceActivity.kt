@@ -102,12 +102,8 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
     }
     fun showBottomLayout(){
         binding.isVisible = true
-        binding.tvTitle.slideDownAndAppear()
-        binding.bottomLayout.scrollUpAndVisible()
     }
     fun hideBottomLayout(){
         binding.isVisible = false
-        binding.tvTitle.slideUpAndDisappear()
-        binding.bottomLayout.scrollDownAndInvisible()
     }
 }
