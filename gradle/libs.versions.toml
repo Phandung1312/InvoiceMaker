@@ -38,7 +38,7 @@ rxbinding= '2.0.0'
 retrofit = "2.9.0"
 moshi = "1.13.0"
 okhttp = "4.9.3"
-room = "2.5.2"
+room = "2.4.3"
 
 hilt = "2.44"
 
@@ -94,7 +94,7 @@ firebase-bom = {module = "com.google.firebase:firebase-bom", version.ref = "fire
 firebase-analytics = {module = "com.google.firebase:firebase-analytics-ktx"}
 firebase-crashlytics = {module = "com.google.firebase:firebase-crashlytics-ktx"}
 firebase-config = {module = "com.google.firebase:firebase-config-ktx"}
-firebase-database = {module = "com.google.firebase:firebase-database-ktx"}
+firebase-invoiceMakerDatabase = {module = "com.google.firebase:firebase-invoiceMakerDatabase-ktx"}
 firebase-storage = {module = "com.google.firebase:firebase-storage-ktx"}
 firebase-message = {module = "com.google.firebase:firebase-messaging-ktx"}
 
@@ -140,7 +140,7 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 pdfLibs = ["vision", "common", "image-labeling", "text-recognition"]
 hiltLibs = ["hilt-compiler", "hilt-android"]
 autodisposeLibs = ["autodispose-android-archcomponents", "autodispose-autodispose", "autodispose-lifycycle"]
-firebaseLibs = ["firebase-analytics", "firebase-config", "firebase-crashlytics", "firebase-database", "firebase-storage", "firebase-message"]
+firebaseLibs = ["firebase-analytics", "firebase-config", "firebase-crashlytics", "firebase-invoiceMakerDatabase", "firebase-storage", "firebase-message"]
 rxLibs = ["rxjava2-rxandroid", "rxjava2-rxkotlin", "rxpref"]
 coroutinesLibs = ["coroutines-android", "coroutines-core"]
 dimen = ["sdp", "ssp"]

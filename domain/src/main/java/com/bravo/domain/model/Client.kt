@@ -3,10 +3,12 @@ package com.bravo.domain.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity
-data class Client(
-    @PrimaryKey val id: Int = 0,
+
+data class Client (
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "billingName") val billingName: String?,
     @ColumnInfo(name = "mobile") val mobileNumber: String?,
     @ColumnInfo(name = "email") val email: String?,
@@ -17,4 +19,4 @@ data class Client(
     @ColumnInfo(name = "paymentTerms") val payment: String?,
     @ColumnInfo(name = "billingAddress") val address: String?,
     @ColumnInfo(name = "noteClient") val note: String?
-)
+) : Serializable

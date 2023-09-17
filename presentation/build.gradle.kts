@@ -27,6 +27,7 @@ android {
 
 dependencies {
     implementation(project(":basic"))
+    implementation(project(":app"))
     implementation(project(":data"))
     implementation(project(":domain"))
     implementation(project(":cropper"))
@@ -47,6 +48,7 @@ dependencies {
     implementation(libs.moshi)
     implementation(libs.bundles.roomLibs)
     annotationProcessor(libs.roomCompiler)
+    kapt(libs.roomCompiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
