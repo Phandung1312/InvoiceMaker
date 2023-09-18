@@ -51,6 +51,7 @@ class PdfManager(
     }
 
     fun getImpactPdf(): Bitmap? {
+        createLogo()
         createBusinessInfo()
         createTitle()
         createReceiver()
@@ -97,7 +98,11 @@ class PdfManager(
             return null
         }
     }
-
+    private fun createLogo(){
+        invoice.logo.bitmap?.let {
+            canvas.drawBitmap(it,20f,20f, paint)
+        }
+    }
     private fun createBusinessInfo() {
         var currentX = 0f
         var currentY = 0f

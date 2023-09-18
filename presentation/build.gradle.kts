@@ -47,6 +47,7 @@ dependencies {
     implementation(libs.moshi)
     implementation(libs.bundles.roomLibs)
     annotationProcessor(libs.roomCompiler)
+    implementation(libs.dexter)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

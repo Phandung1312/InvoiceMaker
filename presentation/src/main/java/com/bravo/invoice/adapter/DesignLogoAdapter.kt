@@ -12,6 +12,7 @@ import javax.inject.Inject
 
 
 class DesignLogoAdapter @Inject constructor() : BaseAdapter<String, ItemsDesignLogoBinding>(ItemsDesignLogoBinding::inflate) {
+
     val itemClicks : Subject<String> = BehaviorSubject.createDefault("design_logo_1")
     var selectedItem  = 0
         private set

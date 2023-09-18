@@ -1,5 +1,9 @@
 package com.bravo.invoice.common
 
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import com.bravo.domain.model.InvoiceItem
 import com.bravo.invoice.models.BusinessInfoInInvoiceUI
 import com.bravo.invoice.models.ClientInInvoiceUI
@@ -30,5 +34,20 @@ object Utils {
                 InvoiceItem("Chicken", "Chicken from America", 25000f, 1, 10),
             )
         )
+    }
+
+    fun drawableToBitmap(drawable: Drawable): Bitmap {
+        if (drawable is BitmapDrawable) {
+            return drawable.bitmap
+        }
+
+        val bitmap = Bitmap.createBitmap(
+            drawable.intrinsicWidth,
+            drawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        drawable.draw(canvas)
+        return bitmap
     }
 }

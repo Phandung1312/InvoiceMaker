@@ -20,6 +20,7 @@ import com.bravo.invoice.common.Utils
 import com.bravo.invoice.databinding.ActivityCreateInvoiceBinding
 import com.bravo.invoice.models.InvoiceDesign
 import com.bravo.invoice.pdf.PdfManager
+import com.bravo.invoice.ui.create_invoice.design_logo.DesignLogoFragment
 import com.bravo.invoice.ui.create_invoice.select_template.TemplateFragment
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDispose
@@ -47,7 +48,7 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
             binding.bottomNavigation.setOnItemSelectedListener { item ->
                 val selectedFragment = when (item.itemId) {
                     R.id.template -> TemplateFragment()
-//                    R.id.logo -> 2
+                    R.id.logo -> DesignLogoFragment()
 //                    R.id.color -> 3
 //                    R.id.banner -> 4
 //                    R.id.watermark -> 5
