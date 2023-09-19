@@ -23,6 +23,7 @@ dependencies {
     implementation(libs.bundles.rxLibs)
     implementation(libs.bundles.coroutinesLibs)
     implementation (libs.timber)
+    implementation(libs.moshi)
     implementation(libs.bundles.roomLibs)
     annotationProcessor(libs.roomCompiler)
     kapt(libs.roomCompiler)

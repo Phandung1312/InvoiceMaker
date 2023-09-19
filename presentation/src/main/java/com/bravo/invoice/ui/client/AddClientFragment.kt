@@ -13,7 +13,9 @@ import androidx.fragment.app.viewModels
 import com.bravo.basic.extensions.clicks
 import com.bravo.basic.view.BaseFragment
 import com.bravo.domain.model.Client
+import com.bravo.invoice.R
 import com.bravo.invoice.databinding.AddClientClass
+import com.bravo.invoice.ui.main.MainActivity
 import com.bravo.invoice.ui.setupinfo.EnterAddressBottomSheet
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDispose
@@ -105,6 +107,9 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
             val contactPickerIntent =
                 Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI)
             activity?.startActivityForResult(contactPickerIntent, 1)
+        }
+        binding.cancelTextView.clicks {
+            (requireActivity() as MainActivity).backFragment()
         }
     }
 

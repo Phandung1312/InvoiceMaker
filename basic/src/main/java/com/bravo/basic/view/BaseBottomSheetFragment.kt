@@ -4,22 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 
-typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
-abstract class BaseFragment<VB : ViewDataBinding>   (private val inflate: Inflate<VB>) : Fragment() {
+abstract class BaseBottomSheetFragment<VB : ViewDataBinding>   (private val inflate: Inflate<VB>) : BottomSheetDialogFragment() {
     private var _binding: VB? = null
-    val binding get() = _binding!!
-
+    val binding: VB
+        get() = _binding
+            ?: throw RuntimeException("Should only use binding after onCreateView and before onDestroyView")
+    protected val activity by lazy { requireActivity() as? AppCompatActivity }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = inflate.invoke(inflater, container, false)
-        binding.lifecycleOwner = viewLifecycleOwner
 
         initView()
         initListeners()
@@ -37,13 +39,8 @@ abstract class BaseFragment<VB : ViewDataBinding>   (private val inflate: Inflat
     open fun initData(){
 
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
-
-
 }

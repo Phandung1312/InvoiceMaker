@@ -9,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bravo.basic.extensions.clicks
 import com.bravo.basic.view.BaseFragment
 import com.bravo.domain.model.Client
-import com.bravo.invoice.R
 import com.bravo.invoice.adapter.ClientAdapter
-import com.bravo.invoice.common.ConfigApp
 import com.bravo.invoice.databinding.ClientsView
 import com.bravo.invoice.ui.main.MainActivity
 import com.uber.autodispose.android.lifecycle.scope
@@ -65,9 +63,7 @@ class ClientsFragment : BaseFragment<ClientsView>(ClientsView::inflate) {
 
     override fun initListeners() {
         binding.addClientBtn.clicks {
-            activity?.supportFragmentManager?.beginTransaction()
-                ?.add(R.id.viewFragment, AddClientFragment())
-                ?.commit()
+            (requireActivity() as MainActivity).addFragment(AddClientFragment())
         }
 
         clientAdapter

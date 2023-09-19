@@ -28,7 +28,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     @Inject
     lateinit var configApp: ConfigApp
     private val fragments by lazy { listOf(ClientsFragment(), MoreFragment()) }
-    private val tabClicks: Subject<Int> by lazy { BehaviorSubject.createDefault(configApp.tabIndex) }
+    private val tabClicks: Subject<Int> by lazy { BehaviorSubject.createDefault(0) }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -109,11 +109,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     fun addFragment(fragment : Fragment ){
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container_view, fragment)
+            .addToBackStack(null)
             .commit()
     }
     fun backFragment(){
         val fragmentManager = supportFragmentManager
-//        fragmentManager.popBackStack("fragment_name", FragmentManager.POP_BACK_STACK_INCLUSIVE)
         fragmentManager.popBackStack()
+//        fragmentManager.popBackStack("fragment_name", FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 }

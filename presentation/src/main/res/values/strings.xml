@@ -79,4 +79,13 @@
     <string name="message">Message</string>
     <string name="call">Call</string>
     <string name="add_a_phone_number_and_email_address_to_contact_n_this_client">Add a phone number and email address to contact\n this client.</string>
+    <string name="preview">Preview</string>
+    <string name="bill_to">BILL TO</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="discount">Discount</string>
+    <string name="same_day">Same day</string>
+    <string name="payment_methods">PAYMENT METHODS</string>
+    <string name="add_photos">Add photos</string>
+    <string name="project">Project</string>
+    <string name="complete">Complete</string>
 </resources>

@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data class="ClientsView">
+    <data>
         <variable
-            name="clientFragment"
-            type="com.bravo.invoice.ui.client.ClientsFragment" />
+            name="bottomSheetClient"
+            type="com.bravo.invoice.ui.project.BottomSheetClients" />
     </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:background="@color/white"
-    android:id="@+id/viewFragment"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/viewHeader"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_height="@dimen/_120sdp"
         android:elevation="@dimen/_8sdp"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -32,14 +34,26 @@
                 android:layout_marginTop="@dimen/_30sdp">
 
                 <TextView
+                    android:id="@+id/cancelTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_20sdp"
                     android:fontFamily="@font/inter_tight_bold"
+                    android:text="@string/cancel"
+                    android:textColor="@color/blue_button"
+                    android:textSize="@dimen/_16ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/inter_tight_bold"
                     android:text="@string/clients"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_24ssp" />
+                    android:textSize="@dimen/_16ssp" />
 
                 <ImageView
                     android:id="@+id/addClientBtn"
@@ -87,112 +101,74 @@
                         android:textSize="@dimen/_10sdp" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/_20sdp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/_25sdp"
-                        android:layout_height="@dimen/_25sdp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/page"
-                        android:src="@drawable/ic_sorted" />
-
-                    <TextView
-                        android:id="@+id/typeSortTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_10sdp"
-                        android:text="@string/sorted_alphabetically" />
-
-                </LinearLayout>
-
-                <ImageView
-                    android:id="@+id/img_top"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/page"
-                    android:src="@drawable/ic_top" />
-            </RelativeLayout>
-
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/viewCenter"
-        android:visibility="gone"
-        tools:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/page"
-        app:layout_constraintTop_toBottomOf="@+id/viewHeader"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/page"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHeader"
+        tools:visibility="visible">
+
         <ImageView
             android:id="@+id/img_Client"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_170sdp"
             android:layout_marginTop="@dimen/_20sdp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_client_bg"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_client_bg"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/_45sdp"
-            app:layout_constraintTop_toBottomOf="@+id/img_Client"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_Client">
+
             <TextView
                 android:id="@+id/textAddCustomer"
-                android:layout_centerHorizontal="true"
                 style="@style/medium_text_header_blue"
-                android:text="@string/add_customer_details"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_below="@+id/textAddCustomer"
-                android:text="@string/save_your_customer_s_contact_details_for_faster_invoicing"
-                android:layout_width="wrap_content"
-                style="@style/primary_text"
-                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_height="wrap_content"/>
+                android:text="@string/add_customer_details" />
+
+            <TextView
+                style="@style/primary_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textAddCustomer"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:text="@string/save_your_customer_s_contact_details_for_faster_invoicing" />
 
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rVShowAllDataClient"
-        android:visibility="gone"
-        tools:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/page"
-        app:layout_constraintTop_toBottomOf="@+id/viewHeader"
-        android:layout_margin="@dimen/page"
-        tools:listitem="@layout/item_showall_clients"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/page"
+        android:layout_marginTop="@dimen/page"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHeader"
+        tools:listitem="@layout/item_showall_clients"
+        tools:visibility="visible" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
