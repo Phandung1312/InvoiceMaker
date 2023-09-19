@@ -20,7 +20,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_add_logo"
-                android:onClick="@{() -> fragment.onAddLogo()}"
+                android:onClick="@{() -> fragment.onAddLogo(fragment.LOGO)}"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"
                 android:layout_marginStart="@dimen/_10sdp"
@@ -100,6 +100,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_additional_image"
+                android:onClick="@{() -> fragment.onAddLogo(fragment.ADDITIONAL_IMAGE)}"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_width="@dimen/_35sdp"
                 android:layout_height="@dimen/_35sdp"

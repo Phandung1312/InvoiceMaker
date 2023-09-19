@@ -21,11 +21,21 @@ class CropLogoActivity : BaseActivity<ActivityCropLogoBinding>(ActivityCropLogoB
     @Inject lateinit var appPool: AppPool
     override fun initView() {
         binding.activity = this@CropLogoActivity
-        binding.cropImageView.setImageBitmap(appPool.logo)
+        val bitmap = if(appPool.currentOption == DesignLogoFragment.LOGO) appPool.logo else appPool.additionalImage
+        binding.cropImageView.setImageBitmap(bitmap)
     }
     fun onNext(){
-        appPool.logo = binding.cropImageView.getCroppedImage()
+        if(appPool.currentOption == DesignLogoFragment.LOGO){
+            appPool.logo = binding.cropImageView.getCroppedImage()
+        }
+        else{
+            appPool.additionalImage = binding.cropImageView.getCroppedImage()
+        }
         val intent = Intent(this, AdjustLogoActivity::class.java)
         startActivity(intent)
+        finish()
+    }
+    fun onClose(){
+        finish()
     }
 }

@@ -24,6 +24,7 @@ dependencies {
     implementation(libs.bundles.coroutinesLibs)
     implementation (libs.timber)
     implementation(libs.bundles.roomLibs)
+    implementation(libs.moshi)
     annotationProcessor(libs.roomCompiler)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

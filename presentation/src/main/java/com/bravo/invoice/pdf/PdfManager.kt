@@ -2,6 +2,7 @@ package com.bravo.invoice.pdf
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Matrix
@@ -18,6 +19,7 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import androidx.core.content.res.ResourcesCompat
 import com.bravo.invoice.R
+import com.bravo.invoice.common.Constants
 import com.bravo.invoice.models.Invoice
 import java.io.File
 import java.io.FileOutputStream
@@ -34,7 +36,8 @@ class PdfManager(
     private var paint: Paint = Paint()
     private var myPage1: Page = document.startPage(pageInfo1)
     private var canvas: Canvas = myPage1.canvas
-
+    private var logoHeight = 0f
+    private var additionalImageHeight = 0f
     private var currentHeight = 0f
     companion object {
         const val IMPACT = 0
@@ -50,8 +53,10 @@ class PdfManager(
         const val PAGE_RIGHT_DISTANCE = 390f
     }
 
-    fun getImpactPdf(): Bitmap? {
+    fun getInvoicePDF(): Bitmap? {
+        createBanner()
         createLogo()
+        createAdditionalImage()
         createBusinessInfo()
         createTitle()
         createReceiver()
@@ -98,10 +103,38 @@ class PdfManager(
             return null
         }
     }
-    private fun createLogo(){
-        invoice.logo.bitmap?.let {
-            canvas.drawBitmap(it,20f,20f, paint)
+
+    private fun createBanner() {
+        invoice.banner?.let {
+            val bitmap = BitmapFactory.decodeResource(context.resources, it)
+            val scaleBitmap = Bitmap.createScaledBitmap(bitmap, pageInfo1.pageWidth, 77, true)
+            canvas.drawBitmap(scaleBitmap, 0f, 0f, paint)
         }
+    }
+
+    private fun createLogo() {
+        invoice.logo.bitmap?.let { bitmap ->
+            var maxDimension = invoice.logo.size
+            var ratio: Float = if (bitmap.width > bitmap.height) {
+                maxDimension / bitmap.width.toFloat()
+            } else {
+                maxDimension / bitmap.height.toFloat()
+            }
+            val newWidth = (bitmap.width * ratio).toInt()
+            val newHeight = (bitmap.height * ratio).toInt()
+            val scaleBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true)
+            paint.textAlign = Paint.Align.RIGHT
+            var startX = when (invoice.logo.alignment) {
+                Constants.ALIGNMENT_START -> 30f
+                Constants.ALIGNMENT_CENTER -> (pageInfo1.pageWidth / 2).toFloat() - (scaleBitmap.width / 2).toFloat()
+                Constants.ALIGNMENT_RIGHT -> PAGE_RIGHT_DISTANCE - scaleBitmap.width.toFloat()
+                else -> 0f
+            }
+            canvas.drawBitmap(scaleBitmap, startX, 100f, paint)
+        }
+    }
+    private fun createAdditionalImage(){
+
     }
     private fun createBusinessInfo() {
         var currentX = 0f
@@ -159,42 +192,44 @@ class PdfManager(
     private fun createTitle() {
 
         // Trading Name
-        paint.color = Color.BLACK
-        paint.textSize = 21f
-        paint.textAlign = Paint.Align.LEFT
-        paint.typeface = Typeface.create(
-            ResourcesCompat.getFont(
-                context,
-                com.bravo.basic.R.font.inter_tight_semi_bold
-            ), Typeface.NORMAL
-        )
         var currentX = PAGE_LEFT_DISTANCE
         var currentY = 0f
-        when (template) {
-            IMPACT, CLASSIC -> {
-                currentY = 178f
-            }
+        if (!invoice.hiddenCompanyName) {
+            paint.color = Color.BLACK
+            paint.textSize = 21f
+            paint.textAlign = Paint.Align.LEFT
+            paint.typeface = Typeface.create(
+                ResourcesCompat.getFont(
+                    context,
+                    com.bravo.basic.R.font.inter_tight_semi_bold
+                ), Typeface.NORMAL
+            )
+            when (template) {
+                IMPACT, CLASSIC -> {
+                    currentY = 178f
+                }
 
-            MODERN, MINIMAL, SHOWCASE -> {
-                currentY = 150f
-            }
+                MODERN, MINIMAL, SHOWCASE -> {
+                    currentY = 150f
+                }
 
-            TYPEWRITER -> {
-                paint.textAlign = Paint.Align.CENTER
-                paint.color = context.getColor(mColor)
-                currentX = (pageInfo1.pageWidth /2).toFloat()
-                currentY = 137f
-            }
+                TYPEWRITER -> {
+                    paint.textAlign = Paint.Align.CENTER
+                    paint.color = context.getColor(mColor)
+                    currentX = (pageInfo1.pageWidth / 2).toFloat()
+                    currentY = 137f
+                }
 
-            HIP -> {
-                currentY = 137f
-            }
+                HIP -> {
+                    currentY = 137f
+                }
 
-            CREATIVE -> {
-                currentY = 159f
+                CREATIVE -> {
+                    currentY = 159f
+                }
             }
+            canvas.drawText(invoice.businessInfo.tradingName, currentX, currentY, paint)
         }
-        canvas.drawText(invoice.businessInfo.tradingName, currentX, currentY, paint)
 
         //Invoice text
         paint.color = Color.BLACK

@@ -51,6 +51,7 @@ class SelectLogoActivity : BaseActivity<ActivitySelectLogoBinding>(ActivitySelec
             appPool.logo = Utils.drawableToBitmap(imageDrawable)
             val intent = Intent(this, CropLogoActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

@@ -2,6 +2,7 @@ package com.bravo.invoice.common
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import com.bravo.domain.model.InvoiceItem
@@ -50,4 +51,16 @@ object Utils {
         drawable.draw(canvas)
         return bitmap
     }
+    fun resizeBitmap(originalBitmap: Bitmap, newWidth: Int, newHeight: Int): Bitmap {
+        val width = originalBitmap.width
+        val height = originalBitmap.height
+        val scaleWidth = newWidth.toFloat() / width
+        val scaleHeight = newHeight.toFloat() / height
+
+        val matrix = Matrix()
+        matrix.postScale(scaleWidth, scaleHeight)
+
+        return Bitmap.createBitmap(originalBitmap, 0, 0, width, height, matrix, false)
+    }
+
 }

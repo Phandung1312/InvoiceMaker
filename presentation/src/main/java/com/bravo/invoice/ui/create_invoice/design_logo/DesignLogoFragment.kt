@@ -12,11 +12,15 @@ import android.os.Build
 import android.provider.MediaStore
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import com.bravo.basic.extensions.makeToast
 import com.bravo.basic.view.BaseFragment
 import com.bravo.invoice.R
 import com.bravo.invoice.common.AppPool
+import com.bravo.invoice.common.Preferences
 import com.bravo.invoice.databinding.DesignLogoClass
+import com.bravo.invoice.ui.create_invoice.CreateInvoiceViewModel
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -25,36 +29,96 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
+import com.uber.autodispose.android.lifecycle.scope
+import com.uber.autodispose.autoDispose
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflate) {
+    private val viewModel by activityViewModels<CreateInvoiceViewModel>()
+    companion object{
+        const val LOGO = 1
+        const val ADDITIONAL_IMAGE = 2
+    }
+    @Inject lateinit var pref : Preferences
     @Inject lateinit var appPool: AppPool
+
+    private var isExistLogo  = false
+    private var isExistAdditionalImage = false
+
+
     override fun initView() {
         binding.fragment = this
     }
 
-    fun onAddLogo(){
+    override fun initData() {
+        viewModel.invoiceDesign.observe(viewLifecycleOwner){  invoiceDesign ->
+            binding.ivAddLogo.setImageDrawable(context?.getDrawable(R.drawable.ic_add_image))
+            binding.ivAdditionalImage.setImageDrawable(context?.getDrawable(R.drawable.ic_add_image))
+            invoiceDesign.logo.bitmap?.let { bitmap ->
+                binding.ivAddLogo.setImageBitmap(bitmap)
+                isExistLogo = true
+            }
+            invoiceDesign.additionalImageUI.bitmap?.let { bitmap ->
+                binding.ivAdditionalImage.setImageBitmap(bitmap)
+                isExistAdditionalImage = true
+            }
+        }
+    }
+    fun onAddLogo(option : Int = LOGO){
+        appPool.currentOption = option
+        val isLogoNull = if(appPool.currentOption == LOGO){
+            pref.invoiceDesigned.get().logo.bitmap == null
+        }
+        else{
+            pref.invoiceDesigned.get().additionalImageUI.bitmap == null
+        }
+        val actions = if (isLogoNull) {
+            arrayOf("Take a photo", "Choose from photos")
+        } else {
+            arrayOf("Edit", "Remove Logo")
+        }
+
         val builder = AlertDialog.Builder(requireContext())
-        builder.setItems(arrayOf("Take a photo", "Chose from photos")){ _,which ->
-            when(which){
+        builder.setItems(actions) { _, which ->
+            when (which) {
                 0 -> {
-                    cameraCheckPermission()
+                    if (isLogoNull) {
+                        cameraCheckPermission()
+                    } else {
+                        val bitmap = if(appPool.currentOption == LOGO) pref.invoiceDesigned.get().logo.bitmap
+                        else pref.invoiceDesigned.get().additionalImageUI.bitmap
+                        goToCropLogo(bitmap!!)
+                    }
                 }
-                1 ->{
-                    openGallery()
+                1 -> {
+                    if (isLogoNull) {
+                        openGallery()
+                    } else {
+                        removeLogo(appPool.currentOption)
+                    }
                 }
             }
         }
-        builder.setNegativeButton("Cancel"
-        ) { _, _ -> }
+        builder.setNegativeButton("Cancel") { _, _ -> }
         val alterDialog = builder.create()
-        alterDialog.setOnShowListener{
+        alterDialog.setOnShowListener {
             alterDialog.getButton(AlertDialog.BUTTON_NEGATIVE)?.setTextColor(requireContext().getColor(R.color.blue_button))
         }
         alterDialog.show()
+    }
+    private fun removeLogo(option : Int = LOGO){
+        var currentInvoiceDesign = pref.invoiceDesigned.get()
+        if(option == LOGO){
+            currentInvoiceDesign.logo.bitmap = null
+        }
+        else{
+            currentInvoiceDesign.additionalImageUI.bitmap = null
+        }
+        pref.invoiceDesigned.set(currentInvoiceDesign)
+
     }
     private fun cameraCheckPermission(){
         Dexter.withContext(activity)
@@ -156,7 +220,8 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
         startActivity(intent)
     }
     private fun goToCropLogo(bitmap : Bitmap){
-        appPool.logo = bitmap
+        if(appPool.currentOption == LOGO) appPool.logo = bitmap
+        else appPool.additionalImage = bitmap
         val intent = Intent(requireActivity(), CropLogoActivity::class.java)
         startActivity(intent)
     }

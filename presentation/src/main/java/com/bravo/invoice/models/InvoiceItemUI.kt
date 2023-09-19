@@ -3,13 +3,17 @@ package com.bravo.invoice.models
 import android.graphics.Bitmap
 import android.net.Uri
 import com.bravo.domain.model.InvoiceItem
+import com.bravo.invoice.R
 import com.bravo.invoice.common.Constants
 
 
 data class Invoice(
     val invoiceId : Int = 0,
+    var banner : Int? = R.drawable.sample_banner_1,
     var logo : LogoUI = LogoUI(),
+    var additionalImage : AdditionalImageUI = AdditionalImageUI(),
     val businessInfo : BusinessInfoInInvoiceUI = BusinessInfoInInvoiceUI(),
+    var hiddenCompanyName : Boolean = false,
     val client : ClientInInvoiceUI = ClientInInvoiceUI(),
     val date : String = "",
     val terms : String = "",
@@ -38,7 +42,12 @@ data class BusinessInfoInInvoiceUI(
 
 data class LogoUI(
     var bitmap : Bitmap? = null,
-    var size : Int = Constants.SMALL_SIZE,
+    var size : Float = Constants.MEDIUM_SIZE,
     var alignment : Int = Constants.ALIGNMENT_CENTER
+)
+
+data class AdditionalImageUI(
+    var bitmap: Bitmap? = null,
+    var size : Float = Constants.MEDIUM_SIZE
 )
 

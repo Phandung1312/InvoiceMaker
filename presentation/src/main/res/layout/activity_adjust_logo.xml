@@ -9,6 +9,12 @@
         <variable
             name="isVisible"
             type="Boolean" />
+        <variable
+            name="isVisibleAdjust"
+            type="Boolean" />
+        <variable
+            name="animateUtils"
+            type="com.bravo.basic.utils.AnimateUtils" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/background_addClient"
@@ -18,101 +24,120 @@
         <RelativeLayout
             android:id="@+id/relativeLayout"
             android:background="@color/backgroundPrimary"
-            android:padding="@dimen/page"
+            android:paddingStart="@dimen/page"
+            android:paddingEnd="@dimen/page"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="26dp">
+            android:layout_height="@dimen/_70sdp"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/tv_title"
                 style="@style/top_center_title_text"
+                animateVisible="@{isVisible}"
+                option="@{animateUtils.SLIDE_UP_DOWN}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="Commence Invoicing" />
 
             <TextView
-                style="@style/medium_blue"
-                android:textColor="@color/textColorPrimary"
+                android:id="@+id/tv_back"
+                visibleView="@{!isVisible}"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                android:onClick="@{() -> activity.showBottomLayout()}"
+                style="@style/medium_black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
                 android:text="Back" />
             <TextView
+                android:id="@+id/tv_close"
+                visibleView="@{isVisible}"
+                android:onClick="@{() -> activity.onClose()}"
+                style="@style/medium_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="Back" />
+            <TextView
+                android:id="@+id/tv_save"
                 style="@style/medium_blue"
+                android:onClick="@{() -> activity.onSave()}"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:text="Save"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linearLayoutCompat4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_save"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="17dp"
+                android:background="@color/backgroundPrimary"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/blue_button"
+                    app:cardCornerRadius="@dimen/_15sdp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/background_step_bar"
+                    app:cardCornerRadius="@dimen/_15sdp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/background_step_bar"
+                    app:cardCornerRadius="@dimen/_15sdp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/background_step_bar"
+                    app:cardCornerRadius="@dimen/_15sdp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_4sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/background_step_bar"
+                    app:cardCornerRadius="@dimen/_15sdp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </RelativeLayout>
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_marginStart="@dimen/page"
-            android:layout_marginEnd="@dimen/page"
-            android:id="@+id/linearLayoutCompat4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/relativeLayout"
-            tools:layout_editor_absoluteX="26dp">
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_4sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="@color/blue_button"
-                app:cardCornerRadius="@dimen/_15sdp" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_4sdp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="@color/background_step_bar"
-                app:cardCornerRadius="@dimen/_15sdp" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_4sdp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="@color/background_step_bar"
-                app:cardCornerRadius="@dimen/_15sdp" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_4sdp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_marginEnd="@dimen/_5sdp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="@color/background_step_bar"
-                app:cardCornerRadius="@dimen/_15sdp" />
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_4sdp"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:layout_weight="1"
-                app:cardBackgroundColor="@color/background_step_bar"
-                app:cardCornerRadius="@dimen/_15sdp" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/page"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/page"
             android:layout_marginEnd="@dimen/page"
-            android:layout_marginBottom="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             app:cardElevation="@dimen/_2sdp"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat4">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_template"
@@ -121,10 +146,24 @@
                 android:scaleType="centerCrop"
                 tools:src="@drawable/invoice_template" />
         </com.google.android.material.card.MaterialCardView>
-
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_preview"
+            visibleView="@{isVisible}"
+            android:onClick="@{() -> activity.onPreview()}"
+            android:elevation="3dp"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/ic_search"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/bottom_layout"/>
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:id="@+id/bottom_layout"
+            animateVisible="@{isVisible}"
+            option="@{animateUtils.SCROLL_UP_DOWN}"
+            android:elevation="3dp"
+            android:paddingBottom="@dimen/_10sdp"
             android:background="@color/backgroundPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -180,6 +219,7 @@
 
             <RelativeLayout
                 android:id="@+id/relativeLayout3"
+                visibleView="@{isVisibleAdjust}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/page"
@@ -222,12 +262,14 @@
                         android:id="@+id/radio_right_alignment"
                         android:layout_width="@dimen/_35sdp"
                         android:layout_height="@dimen/_35sdp"
-                        android:onClick="@{() -> activity.onAlignmentChanged(3)}"
+                        android:onClick="@{() -> activity.onAlignmentChanged(2)}"
                         android:src="@drawable/right_alignment_selector" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/hide_layout"
+                visibleView="@{isVisibleAdjust}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/page"

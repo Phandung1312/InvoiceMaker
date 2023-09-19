@@ -3,15 +3,9 @@ package com.bravo.invoice.ui.create_invoice
 
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.bravo.basic.extensions.invisible
 import com.bravo.basic.extensions.makeToast
-import com.bravo.basic.extensions.scrollDownAndInvisible
-import com.bravo.basic.extensions.scrollUpAndVisible
-import com.bravo.basic.extensions.slideDownAndAppear
-import com.bravo.basic.extensions.slideUpAndDisappear
-import com.bravo.basic.extensions.visible
 import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.R
 import com.bravo.invoice.adapter.InvoiceTemplateAdapter
@@ -22,6 +16,7 @@ import com.bravo.invoice.models.InvoiceDesign
 import com.bravo.invoice.pdf.PdfManager
 import com.bravo.invoice.ui.create_invoice.design_logo.DesignLogoFragment
 import com.bravo.invoice.ui.create_invoice.select_template.TemplateFragment
+import com.uber.autodispose.android.lifecycle.autoDispose
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDispose
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,7 +33,6 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
     @Inject
     lateinit var templateAdapter: InvoiceTemplateAdapter
     override fun initView() {
-        pref.isFirstDesign.set(true)
         binding.activity = this
         setNavController()
     }
@@ -68,6 +62,9 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
     }
 
     override fun initListener() {
+        pref.invoiceDesigned.asObservable().autoDispose(this).subscribe{
+            viewModel.update(it)
+        }
         viewModel.invoiceDesign.observe(this){ invoiceDesign ->
             createInvoicePdf(invoiceDesign)
         }
@@ -85,8 +82,8 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
     }
     private fun createInvoicePdf(invoiceDesign: InvoiceDesign) {
         lifecycleScope.launch(Dispatchers.Main) {
-            val pdfManager = PdfManager(applicationContext, Utils.getSampleInvoice(), invoiceDesign.templateId, invoiceDesign.color)
-            val bitmap = pdfManager.getImpactPdf()
+            val pdfManager = PdfManager(applicationContext, Utils.getSampleInvoice().copy(logo = invoiceDesign.logo), invoiceDesign.templateId, invoiceDesign.color)
+            val bitmap = pdfManager.getInvoicePDF()
             bitmap?.let{
                 binding.ivTemplate.setImageBitmap(it)
             }
@@ -99,12 +96,9 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
         pref.isFirstDesign.set(false)
     }
     fun onPreview(){
-        hideBottomLayout()
+        binding.isVisible = false
     }
     fun showBottomLayout(){
         binding.isVisible = true
-    }
-    fun hideBottomLayout(){
-        binding.isVisible = false
     }
 }

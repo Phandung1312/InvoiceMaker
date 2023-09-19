@@ -1,5 +1,6 @@
 package com.bravo.invoice.common
 
+import com.bravo.domain.model.converter.BitmapConverter
 import com.bravo.invoice.models.BusinessInfo
 import com.bravo.invoice.models.InvoiceDesign
 import com.f2prateek.rx.preferences2.Preference
@@ -27,12 +28,16 @@ class Preferences @Inject constructor(
     })
     val invoiceDesigned = rxSharedPreferences.getObject("invoiceDesigned", InvoiceDesign(), object  : Preference.Converter<InvoiceDesign>{
         override fun deserialize(serialized: String): InvoiceDesign {
-            val adapter = Moshi.Builder().build().adapter(InvoiceDesign::class.java)
+            val adapter = Moshi.Builder()
+                .add(BitmapConverter()).build()
+                .adapter(InvoiceDesign::class.java)
             return adapter.fromJson(serialized) ?: InvoiceDesign()
         }
 
         override fun serialize(value: InvoiceDesign): String {
-            val adapter = Moshi.Builder().build().adapter(InvoiceDesign::class.java)
+            val adapter = Moshi.Builder()
+                .add(BitmapConverter()).build()
+                .adapter(InvoiceDesign::class.java)
             return adapter.toJson(value)
         }
 
