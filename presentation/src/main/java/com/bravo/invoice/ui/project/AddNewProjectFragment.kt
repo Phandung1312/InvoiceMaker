@@ -99,7 +99,8 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
                 val arrLocation = arrLocation
                 val sdf = SimpleDateFormat("dd/M")
                 val currentDate = sdf.format(Date())
-                val dataProject = Project(0, nameClient, nameProject,currentDate,arrLocation)
+                val dataProject =
+                    Project(0, nameClient, nameProject, currentDate, "", "", arrLocation, "","Active")
                 projectViewModel.insertProjects(dataProject)
                 val bundle = Bundle()
                 val fragment = AddFileProjectFragment()

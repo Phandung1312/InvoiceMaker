@@ -11,7 +11,10 @@ import com.bravo.invoice.ui.main.MainActivity
 class AddFileProjectFragment : BaseFragment<AddFileClass>(AddFileClass::inflate) {
     companion object {
         const val PROJECT_EXTRA = "PROJECT_EXTRA"
+        const val PROJECT_DETAILS = "PROJECT_DETAILS"
     }
+
+
 
     override fun initListeners() {
         binding.viewProjectContact.clicks {
@@ -23,6 +26,18 @@ class AddFileProjectFragment : BaseFragment<AddFileClass>(AddFileClass::inflate)
         }
         binding.closeImg.clicks {
             (requireActivity() as MainActivity).backFragment()
+        }
+        binding.viewProjectDetails.clicks {
+            val receivedProjectData = arguments?.getSerializable(PROJECT_EXTRA) as? Project
+            if (receivedProjectData != null) {
+                val bundle = Bundle()
+                val fragment = ProjectDetailFragment()
+                fragment.arguments = bundle
+                bundle.putSerializable(PROJECT_DETAILS, receivedProjectData)
+                (requireActivity() as MainActivity).addFragment(fragment)
+
+            }
+
         }
     }
 

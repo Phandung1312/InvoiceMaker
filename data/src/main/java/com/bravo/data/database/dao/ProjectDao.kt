@@ -22,4 +22,7 @@ interface ProjectDao {
     @Update
     suspend fun updateProject(project: Project)
 
+    @Query("SELECT status FROM Project WHERE status LIKE '%' || :filter || '%' LIMIT 1")
+    fun getFilteredComplete(filter: String): String
+
 }

@@ -3,6 +3,8 @@ package com.bravo.data.repositories
 import androidx.lifecycle.LiveData
 import com.bravo.data.database.dao.ProjectDao
 import com.bravo.domain.model.Project
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class ProjectsRepository @Inject constructor(
@@ -21,4 +23,9 @@ class ProjectsRepository @Inject constructor(
     }
 
     val getAllProject: LiveData<List<Project>> = projectDao.getAllProject()
+    suspend fun getFilteredStatus(filter: String): String {
+        return withContext(Dispatchers.IO) {
+            projectDao.getFilteredComplete(filter)
+        }
+    }
 }

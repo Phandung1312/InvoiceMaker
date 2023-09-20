@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class ProjectViewModel @Inject constructor(
     private val projectsRepository: ProjectsRepository
@@ -29,6 +30,12 @@ class ProjectViewModel @Inject constructor(
     fun updateProject(project: Project) {
         viewModelScope.launch(Dispatchers.IO) {
             projectsRepository.updateProject(project)
+        }
+    }
+
+    fun filterStatus(query: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            projectsRepository.getFilteredStatus(query)
         }
     }
 }
