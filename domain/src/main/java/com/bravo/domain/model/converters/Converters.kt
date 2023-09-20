@@ -1,4 +1,4 @@
-package com.bravo.domain.model.Converters
+package com.bravo.domain.model.converters
 
 import androidx.room.TypeConverter
 import com.squareup.moshi.JsonAdapter

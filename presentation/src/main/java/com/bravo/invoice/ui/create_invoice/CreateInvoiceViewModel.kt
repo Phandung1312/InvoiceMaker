@@ -8,6 +8,8 @@ import com.bravo.invoice.models.InvoiceDesign
 import com.uber.autodispose.android.autoDispose
 import com.uber.autodispose.autoDispose
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,15 +25,17 @@ class CreateInvoiceViewModel @Inject constructor(
     fun setTemplate(templateId : Int){
         val temp = invoiceDesign.value!!
         temp.templateId = templateId
-        invoiceDesign.value = temp
+        viewModelScope.launch {
+            preferences.invoiceDesigned.set(temp)
+        }
     }
 
-    fun setLogo(){
-
-    }
-
-    fun setColor(){
-
+    fun setColor(color : Int){
+        val temp = invoiceDesign.value!!
+        temp.color = color
+        viewModelScope.launch {
+            preferences.invoiceDesigned.set(temp)
+        }
     }
 
     fun setBanner(){

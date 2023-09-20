@@ -26,7 +26,6 @@ object BindingAdapters {
         textView.isVisible = false
     }
 
-    }
     @JvmStatic
     @BindingAdapter("visibleView")
     fun setVisibleView(view : View, isVisibility: Boolean?){

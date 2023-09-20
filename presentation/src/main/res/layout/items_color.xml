@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+<!--        <variable-->
+<!--            name="colorString"-->
+<!--            type="String" />-->
+    </data>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_color"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        app:strokeWidth="1dp"
+        app:cardCornerRadius="@dimen/_50sdp"
+        tools:strokeColor = "@color/blue_button"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_color"
+            android:src="@drawable/ic_circle"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"/>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

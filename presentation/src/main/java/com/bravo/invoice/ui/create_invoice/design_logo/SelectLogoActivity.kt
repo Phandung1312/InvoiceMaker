@@ -3,12 +3,12 @@ package com.bravo.invoice.ui.create_invoice.design_logo
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.BitmapFactory
 import com.bravo.basic.extensions.clicks
 import com.bravo.basic.extensions.setDrawableString
 import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.adapter.DesignLogoAdapter
-import com.bravo.invoice.common.AppPool
-import com.bravo.invoice.common.Utils
+import com.bravo.invoice.common.pool.InvoicePool
 import com.bravo.invoice.databinding.ActivitySelectLogoBinding
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDispose
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class SelectLogoActivity : BaseActivity<ActivitySelectLogoBinding>(ActivitySelectLogoBinding::inflate) {
-    @Inject lateinit var appPool: AppPool
+    @Inject lateinit var invoicePool: InvoicePool
     @Inject lateinit var designLogoAdapter: DesignLogoAdapter
 
     private var currentLogo : String  = ""
@@ -47,8 +47,7 @@ class SelectLogoActivity : BaseActivity<ActivitySelectLogoBinding>(ActivitySelec
         }
         binding.tvConfirm.clicks {
             val imageResourceId = resources.getIdentifier(currentLogo,"drawable",packageName)
-            val imageDrawable = resources.getDrawable(imageResourceId, null)
-            appPool.logo = Utils.drawableToBitmap(imageDrawable)
+            invoicePool.logo = BitmapFactory.decodeResource(this.resources, imageResourceId)
             val intent = Intent(this, CropLogoActivity::class.java)
             startActivity(intent)
             finish()

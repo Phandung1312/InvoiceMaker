@@ -2,7 +2,7 @@
 <resources>
     <dimen name="primaryTextSize">@dimen/_14ssp</dimen>
     <dimen name="largeTextSize">@dimen/_16ssp</dimen>
-    <dimen name="secondTextSize">@dimen/_14ssp</dimen>
+    <dimen name="secondTextSize">@dimen/_12sdp</dimen>
     <dimen name="tertiaryTextSize">@dimen/_10ssp</dimen>
     <dimen name="headerBlueTextSize">@dimen/_20ssp</dimen>
 

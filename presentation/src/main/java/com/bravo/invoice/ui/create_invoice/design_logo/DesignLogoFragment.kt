@@ -12,14 +12,15 @@ import android.os.Build
 import android.provider.MediaStore
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.fragment.app.activityViewModels
 import com.bravo.basic.extensions.makeToast
 import com.bravo.basic.view.BaseFragment
 import com.bravo.invoice.R
-import com.bravo.invoice.common.AppPool
+import com.bravo.invoice.common.pool.InvoicePool
 import com.bravo.invoice.common.Preferences
 import com.bravo.invoice.databinding.DesignLogoClass
+import com.bravo.invoice.models.AdditionalImageUI
+import com.bravo.invoice.models.LogoUI
 import com.bravo.invoice.ui.create_invoice.CreateInvoiceViewModel
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -29,8 +30,6 @@ import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
-import com.uber.autodispose.android.lifecycle.scope
-import com.uber.autodispose.autoDispose
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import javax.inject.Inject
@@ -43,10 +42,8 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
         const val ADDITIONAL_IMAGE = 2
     }
     @Inject lateinit var pref : Preferences
-    @Inject lateinit var appPool: AppPool
+    @Inject lateinit var invoicePool: InvoicePool
 
-    private var isExistLogo  = false
-    private var isExistAdditionalImage = false
 
 
     override fun initView() {
@@ -59,17 +56,26 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
             binding.ivAdditionalImage.setImageDrawable(context?.getDrawable(R.drawable.ic_add_image))
             invoiceDesign.logo.bitmap?.let { bitmap ->
                 binding.ivAddLogo.setImageBitmap(bitmap)
-                isExistLogo = true
+                invoicePool.logo = bitmap
             }
             invoiceDesign.additionalImageUI.bitmap?.let { bitmap ->
                 binding.ivAdditionalImage.setImageBitmap(bitmap)
-                isExistAdditionalImage = true
+                invoicePool.additionalImage = bitmap
             }
         }
     }
+    fun onDesignLogo() {
+        if(pref.invoiceDesigned.get().logo.bitmap != null){
+            onAddLogo(LOGO)
+        }
+        else{
+            val intent = Intent(requireActivity(), SelectLogoActivity::class.java)
+            startActivity(intent)
+        }
+    }
     fun onAddLogo(option : Int = LOGO){
-        appPool.currentOption = option
-        val isLogoNull = if(appPool.currentOption == LOGO){
+        invoicePool.currentOption = option
+        val isLogoNull = if(invoicePool.currentOption == LOGO){
             pref.invoiceDesigned.get().logo.bitmap == null
         }
         else{
@@ -88,7 +94,7 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
                     if (isLogoNull) {
                         cameraCheckPermission()
                     } else {
-                        val bitmap = if(appPool.currentOption == LOGO) pref.invoiceDesigned.get().logo.bitmap
+                        val bitmap = if(invoicePool.currentOption == LOGO) pref.invoiceDesigned.get().logo.bitmap
                         else pref.invoiceDesigned.get().additionalImageUI.bitmap
                         goToCropLogo(bitmap!!)
                     }
@@ -97,7 +103,7 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
                     if (isLogoNull) {
                         openGallery()
                     } else {
-                        removeLogo(appPool.currentOption)
+                        removeLogo(invoicePool.currentOption)
                     }
                 }
             }
@@ -112,10 +118,10 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
     private fun removeLogo(option : Int = LOGO){
         var currentInvoiceDesign = pref.invoiceDesigned.get()
         if(option == LOGO){
-            currentInvoiceDesign.logo.bitmap = null
+            currentInvoiceDesign.logo = LogoUI()
         }
         else{
-            currentInvoiceDesign.additionalImageUI.bitmap = null
+            currentInvoiceDesign.additionalImageUI = AdditionalImageUI()
         }
         pref.invoiceDesigned.set(currentInvoiceDesign)
 
@@ -128,7 +134,6 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
                     override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
                         p0?.let {
                             if(p0.areAllPermissionsGranted()){
-                                activity?.makeToast("OK")
                                 openCamera()
                             }
                         }
@@ -215,13 +220,9 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
             }
         }
     }
-    fun onDesignLogo(){
-        val intent = Intent(requireActivity(), SelectLogoActivity::class.java)
-        startActivity(intent)
-    }
     private fun goToCropLogo(bitmap : Bitmap){
-        if(appPool.currentOption == LOGO) appPool.logo = bitmap
-        else appPool.additionalImage = bitmap
+        if(invoicePool.currentOption == LOGO) invoicePool.logo = bitmap
+        else invoicePool.additionalImage = bitmap
         val intent = Intent(requireActivity(), CropLogoActivity::class.java)
         startActivity(intent)
     }

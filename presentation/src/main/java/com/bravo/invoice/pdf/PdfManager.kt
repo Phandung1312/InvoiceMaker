@@ -17,13 +17,17 @@ import android.os.ParcelFileDescriptor
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
+import android.util.Log
 import androidx.core.content.res.ResourcesCompat
 import com.bravo.invoice.R
 import com.bravo.invoice.common.Constants
+import com.bravo.invoice.common.Utils
 import com.bravo.invoice.models.Invoice
+import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.logging.Logger
 
 class PdfManager(
     private val context: Context,
@@ -38,6 +42,7 @@ class PdfManager(
     private var canvas: Canvas = myPage1.canvas
     private var logoHeight = 0f
     private var additionalImageHeight = 0f
+    private var additionalHeight = 0f
     private var currentHeight = 0f
     companion object {
         const val IMPACT = 0
@@ -57,6 +62,7 @@ class PdfManager(
         createBanner()
         createLogo()
         createAdditionalImage()
+        additionalHeight = if(logoHeight > additionalImageHeight) logoHeight else additionalImageHeight
         createBusinessInfo()
         createTitle()
         createReceiver()
@@ -115,26 +121,32 @@ class PdfManager(
     private fun createLogo() {
         invoice.logo.bitmap?.let { bitmap ->
             var maxDimension = invoice.logo.size
-            var ratio: Float = if (bitmap.width > bitmap.height) {
-                maxDimension / bitmap.width.toFloat()
-            } else {
-                maxDimension / bitmap.height.toFloat()
-            }
-            val newWidth = (bitmap.width * ratio).toInt()
-            val newHeight = (bitmap.height * ratio).toInt()
-            val scaleBitmap = Bitmap.createScaledBitmap(bitmap, newWidth, newHeight, true)
+            logoHeight = maxDimension
+            val scaleBitmap = Utils.getScaleBitmap(bitmap, maxDimension)
             paint.textAlign = Paint.Align.RIGHT
-            var startX = when (invoice.logo.alignment) {
+            val startX = when (invoice.logo.alignment) {
                 Constants.ALIGNMENT_START -> 30f
                 Constants.ALIGNMENT_CENTER -> (pageInfo1.pageWidth / 2).toFloat() - (scaleBitmap.width / 2).toFloat()
-                Constants.ALIGNMENT_RIGHT -> PAGE_RIGHT_DISTANCE - scaleBitmap.width.toFloat()
+                Constants.ALIGNMENT_END -> PAGE_RIGHT_DISTANCE - scaleBitmap.width.toFloat()
                 else -> 0f
             }
-            canvas.drawBitmap(scaleBitmap, startX, 100f, paint)
+            logoHeight = when(template){
+                 TYPEWRITER, HIP -> 20f
+                else -> 0f
+            }
+            canvas.drawBitmap(scaleBitmap, startX, 80f, paint)
         }
     }
     private fun createAdditionalImage(){
-
+        invoice.additionalImage.bitmap?.let { bitmap ->
+            additionalImageHeight = invoice.additionalImage.size / 1.25f
+            val scaleBitmap = Utils.getScaleBitmap(bitmap, additionalImageHeight)
+            canvas.drawBitmap(scaleBitmap, PAGE_RIGHT_DISTANCE - scaleBitmap.width.toFloat(), 80f, paint )
+            additionalImageHeight = when(template){
+                IMPACT, CLASSIC , CREATIVE-> additionalImageHeight - 20f
+                else -> 0f
+            }
+        }
     }
     private fun createBusinessInfo() {
         var currentX = 0f
@@ -143,36 +155,36 @@ class PdfManager(
         when (template) {
             IMPACT, CLASSIC -> {
                 currentX = (pageInfo1.pageWidth - PAGE_LEFT_DISTANCE)
-                currentY = 110f
+                currentY = 110f + additionalHeight
                 paint.textAlign = Paint.Align.RIGHT
 
             }
 
             MODERN -> {
                 currentX = (pageInfo1.pageWidth - PAGE_LEFT_DISTANCE)
-                currentY = 166f
+                currentY = 166f + additionalHeight
                 paint.textAlign = Paint.Align.RIGHT
             }
 
             MINIMAL, SHOWCASE -> {
                 currentX = PAGE_LEFT_DISTANCE
-                currentY = 166f
+                currentY = 166f + additionalHeight
                 paint.textAlign = Paint.Align.LEFT
             }
             TYPEWRITER -> {
                 currentX = PAGE_RIGHT_DISTANCE
-                currentY = 190f
+                currentY = 190f + additionalHeight
                 paint.textAlign = Paint.Align.RIGHT
             }
             HIP -> {
                 currentX = (pageInfo1.pageWidth - PAGE_LEFT_DISTANCE)
-                currentY = 166f
+                currentY = 166f + additionalHeight
                 paint.textAlign = Paint.Align.RIGHT
             }
 
             CREATIVE -> {
                 currentX = (pageInfo1.pageWidth - PAGE_LEFT_DISTANCE)
-                currentY = 121f
+                currentY = 121f + additionalHeight
                 paint.textAlign = Paint.Align.RIGHT
             }
         }
@@ -190,46 +202,46 @@ class PdfManager(
     }
 
     private fun createTitle() {
-
-        // Trading Name
         var currentX = PAGE_LEFT_DISTANCE
         var currentY = 0f
-        if (!invoice.hiddenCompanyName) {
-            paint.color = Color.BLACK
-            paint.textSize = 21f
-            paint.textAlign = Paint.Align.LEFT
-            paint.typeface = Typeface.create(
-                ResourcesCompat.getFont(
-                    context,
-                    com.bravo.basic.R.font.inter_tight_semi_bold
-                ), Typeface.NORMAL
-            )
-            when (template) {
-                IMPACT, CLASSIC -> {
-                    currentY = 178f
-                }
+        // Trading Name
+        if(!invoice.hiddenCompanyName){
+                paint.color = Color.BLACK
+                paint.textSize = 21f
+                paint.textAlign = Paint.Align.LEFT
+                paint.typeface = Typeface.create(
+                    ResourcesCompat.getFont(
+                        context,
+                        com.bravo.basic.R.font.inter_tight_semi_bold
+                    ), Typeface.NORMAL
+                )
+                when (template) {
+                    IMPACT, CLASSIC -> {
+                        currentY = 178f + additionalHeight
+                    }
 
-                MODERN, MINIMAL, SHOWCASE -> {
-                    currentY = 150f
-                }
+                    MODERN, MINIMAL, SHOWCASE -> {
+                        currentY = 150f + additionalHeight
+                    }
 
-                TYPEWRITER -> {
-                    paint.textAlign = Paint.Align.CENTER
-                    paint.color = context.getColor(mColor)
-                    currentX = (pageInfo1.pageWidth / 2).toFloat()
-                    currentY = 137f
-                }
+                    TYPEWRITER -> {
+                        paint.textAlign = Paint.Align.CENTER
+                        paint.color = context.getColor(mColor)
+                        currentX = (pageInfo1.pageWidth / 2).toFloat()
+                        currentY = 137f + additionalHeight
+                    }
 
-                HIP -> {
-                    currentY = 137f
-                }
+                    HIP -> {
+                        currentY = 137f + additionalHeight
+                    }
 
-                CREATIVE -> {
-                    currentY = 159f
+                    CREATIVE -> {
+                        currentY = 159f + additionalHeight
+                    }
                 }
+                canvas.drawText(invoice.businessInfo.tradingName, currentX, currentY, paint)
             }
-            canvas.drawText(invoice.businessInfo.tradingName, currentX, currentY, paint)
-        }
+
 
         //Invoice text
         paint.color = Color.BLACK
@@ -238,32 +250,32 @@ class PdfManager(
         currentX = PAGE_RIGHT_DISTANCE
         when (template) {
             IMPACT, CLASSIC -> {
-                currentY = 178f
+                currentY = 178f + additionalHeight
                 paint.color = context.getColor(mColor)
             }
 
             MODERN -> {
-                currentY = 150f
+                currentY = 150f + additionalHeight
             }
 
             MINIMAL, SHOWCASE -> {
-                currentY = 204f
+                currentY = 204f + additionalHeight
             }
 
             TYPEWRITER -> {
                 paint.textAlign = Paint.Align.LEFT
                 currentX = PAGE_LEFT_DISTANCE
-                currentY = 168f
+                currentY = 168f + additionalHeight
             }
 
             HIP -> {
-                currentY = 137f
+                currentY = 137f + additionalHeight
                 paint.color = context.getColor(mColor)
             }
 
             CREATIVE -> {
                 currentX = PAGE_LEFT_DISTANCE
-                currentY = 194f
+                currentY = 194f + additionalHeight
                 paint.color = context.getColor(mColor)
                 paint.textAlign = Paint.Align.LEFT
             }
@@ -273,7 +285,7 @@ class PdfManager(
 
         //Title Line
         var startX = 0f
-        var startY = 195f
+        var startY = 195f + additionalImageHeight
         var endX = pageInfo1.pageWidth.toFloat()
         var lineHeight = 1f
         paint.color = Color.BLACK
@@ -285,26 +297,26 @@ class PdfManager(
                 paint.color = context.getColor(mColor)
             }
             MODERN ->{
-                startY = 156f
+                startY = 156f + additionalHeight
                 paint.color = context.getColor(R.color.black_30_alpha)
             }
             MINIMAL, SHOWCASE ->{
-                startY = 214f
+                startY = 214f + additionalHeight
                 paint.color = context.getColor(R.color.black_30_alpha)
             }
             TYPEWRITER ->{
                 startX = PAGE_LEFT_DISTANCE
-                startY = 148f
+                startY = 148f + additionalHeight
                 paint.color = context.getColor(mColor)
             }
             HIP ->{
                 paint.color = context.getColor(R.color.blue_black)
                 lineHeight = 2f
-                startY = 148f
+                startY = 148f + additionalHeight
             }
 
             CREATIVE -> {
-                startY = 171f
+                startY = 171f + additionalHeight
             }
         }
         canvas.drawRect(startX, startY, endX, startY + lineHeight, paint)
@@ -325,41 +337,41 @@ class PdfManager(
         when (template) {
             IMPACT, CLASSIC -> {
                 currentX = (pageInfo1.pageWidth - 113).toFloat()
-                currentY = 218f
+                currentY = 218f + additionalHeight
             }
 
             MODERN -> {
                 paint.textAlign = Paint.Align.LEFT
                 currentX = PAGE_LEFT_DISTANCE
-                currentY = 174f
+                currentY = 174f + additionalHeight
             }
 
             MINIMAL -> {
                 currentX = (pageInfo1.pageWidth - 113).toFloat()
-                currentY = 232f
+                currentY = 232f + additionalHeight
             }
 
             SHOWCASE -> {
                 currentX = (pageInfo1.pageWidth - 113).toFloat()
-                currentY = 232f
+                currentY = 232f + additionalHeight
             }
 
             TYPEWRITER -> {
                 paint.textAlign = Paint.Align.LEFT
                 currentX = PAGE_LEFT_DISTANCE
-                currentY = 190f
+                currentY = 190f + additionalHeight
             }
 
             HIP -> {
                 paint.textAlign = Paint.Align.LEFT
                 currentX = PAGE_LEFT_DISTANCE
-                currentY = 168f
+                currentY = 168f + additionalHeight
             }
 
             CREATIVE -> {
                 paint.textAlign = Paint.Align.LEFT
                 currentX = PAGE_LEFT_DISTANCE
-                currentY = 215f
+                currentY = 215f + additionalHeight
             }
         }
         canvas.drawText("Invoice No:", currentX, currentY, paint)
@@ -415,20 +427,20 @@ class PdfManager(
         var currentY = 0f
         when (template) {
             IMPACT, CLASSIC -> {
-                currentY = 218f
+                currentY = 218f + additionalHeight
             }
 
             MODERN, MINIMAL, SHOWCASE -> {
-                currentY = 232f
+                currentY = 232f + additionalHeight
             }
 
             TYPEWRITER, HIP -> {
-                currentY = 248f
+                currentY = 248f + additionalHeight
             }
 
             CREATIVE -> {
                 currentX = 198f
-                currentY = 215f
+                currentY = 215f + additionalHeight
             }
         }
         canvas.drawText("Bill to:", currentX, currentY, paint)
@@ -461,7 +473,7 @@ class PdfManager(
 
     private fun createTableTitle(){
         //Title Row
-        currentHeight +=30f
+        currentHeight +=30f + additionalHeight
         when(template){
             IMPACT, SHOWCASE, HIP, CREATIVE ->{
                 if(template == IMPACT || template == SHOWCASE || template == CREATIVE){

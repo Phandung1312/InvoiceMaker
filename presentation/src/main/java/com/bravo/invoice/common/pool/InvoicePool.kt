@@ -1,13 +1,14 @@
-package com.bravo.invoice.common
+package com.bravo.invoice.common.pool
 
 import android.graphics.Bitmap
+import com.bravo.invoice.pdf.PdfManager
 import com.bravo.invoice.ui.create_invoice.design_logo.DesignLogoFragment
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
-class AppPool @Inject constructor(
+class InvoicePool @Inject constructor(
 
 ){
     var logo : Bitmap? = null

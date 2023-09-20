@@ -1,4 +1,4 @@
-package com.bravo.domain.model.converter
+package com.bravo.domain.model.converters
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory

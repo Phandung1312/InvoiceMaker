@@ -1,6 +1,6 @@
 package com.bravo.invoice.common
 
-import com.bravo.domain.model.converter.BitmapConverter
+import com.bravo.domain.model.converters.BitmapConverter
 import com.bravo.invoice.models.BusinessInfo
 import com.bravo.invoice.models.InvoiceDesign
 import com.f2prateek.rx.preferences2.Preference
