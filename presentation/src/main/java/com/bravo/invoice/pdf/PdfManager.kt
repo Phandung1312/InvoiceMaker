@@ -226,7 +226,7 @@ class PdfManager(
 
                     TYPEWRITER -> {
                         paint.textAlign = Paint.Align.CENTER
-                        paint.color = context.getColor(mColor)
+                        paint.color = mColor
                         currentX = (pageInfo1.pageWidth / 2).toFloat()
                         currentY = 137f + additionalHeight
                     }
@@ -251,7 +251,7 @@ class PdfManager(
         when (template) {
             IMPACT, CLASSIC -> {
                 currentY = 178f + additionalHeight
-                paint.color = context.getColor(mColor)
+                paint.color = mColor
             }
 
             MODERN -> {
@@ -270,13 +270,13 @@ class PdfManager(
 
             HIP -> {
                 currentY = 137f + additionalHeight
-                paint.color = context.getColor(mColor)
+                paint.color = mColor
             }
 
             CREATIVE -> {
                 currentX = PAGE_LEFT_DISTANCE
                 currentY = 194f + additionalHeight
-                paint.color = context.getColor(mColor)
+                paint.color = mColor
                 paint.textAlign = Paint.Align.LEFT
             }
 
@@ -294,7 +294,7 @@ class PdfManager(
                 startX = 0f
                 endX = pageInfo1.pageWidth.toFloat()
                 lineHeight = 5f
-                paint.color = context.getColor(mColor)
+                paint.color = mColor
             }
             MODERN ->{
                 startY = 156f + additionalHeight
@@ -307,7 +307,7 @@ class PdfManager(
             TYPEWRITER ->{
                 startX = PAGE_LEFT_DISTANCE
                 startY = 148f + additionalHeight
-                paint.color = context.getColor(mColor)
+                paint.color = mColor
             }
             HIP ->{
                 paint.color = context.getColor(R.color.blue_black)
@@ -477,25 +477,25 @@ class PdfManager(
         when(template){
             IMPACT, SHOWCASE, HIP, CREATIVE ->{
                 if(template == IMPACT || template == SHOWCASE || template == CREATIVE){
-                    paint.color = context.getColor(mColor)
+                    paint.color = mColor
                 }
                 if(template == HIP) paint.color = context.getColor(R.color.blue_black)
                 if(template == CREATIVE) paint.alpha = 51 //(20%)
                 canvas.drawRect(0f, currentHeight, pageInfo1.pageWidth.toFloat(), currentHeight + 25f, paint)
             }
             CLASSIC -> {
-                paint.color = context.getColor(mColor)
+                paint.color = mColor
                 canvas.drawRect(0f, currentHeight - 5f,  pageInfo1.pageWidth.toFloat(), currentHeight, paint)
                 paint.alpha = 51 //(20%)
                 canvas.drawRect(0f, currentHeight,  pageInfo1.pageWidth.toFloat(), currentHeight + 25f, paint)
             }
             MODERN, MINIMAL -> {
-                paint.color = if(template == MODERN) Color.BLACK else context.getColor(mColor)
+                paint.color = if(template == MODERN) Color.BLACK else mColor
                 canvas.drawLine(0f, currentHeight, pageInfo1.pageWidth.toFloat(), currentHeight, paint)
                 canvas.drawLine(0f, currentHeight + 24f, pageInfo1.pageWidth.toFloat(), currentHeight + 24f, paint)
             }
             TYPEWRITER ->{
-                paint.color = context.getColor(mColor)
+                paint.color = mColor
                 canvas.drawLine(PAGE_LEFT_DISTANCE, currentHeight + 25f, pageInfo1.pageWidth.toFloat(), currentHeight + 25f, paint)
             }
         }
@@ -635,7 +635,7 @@ class PdfManager(
         when(template){
             IMPACT, MODERN, SHOWCASE, HIP ->{
 
-                paint.color = if(template == SHOWCASE || template == HIP) context.getColor(mColor) else Color.BLACK
+                paint.color = if(template == SHOWCASE || template == HIP) mColor else Color.BLACK
                 if(template == HIP) paint.alpha = 51
                 canvas.drawRect(
                     (pageInfo1.pageWidth - 215).toFloat(),
@@ -651,7 +651,7 @@ class PdfManager(
                 canvas.drawLine((pageInfo1.pageWidth - 215).toFloat(),currentHeight + 26f, pageInfo1.pageWidth.toFloat() + 26f, currentHeight + 26f, paint)
             }
             CREATIVE ->{
-                paint.color = context.getColor(mColor)
+                paint.color = mColor
                 paint.alpha = 51
                 canvas.drawPath(getCornerRect(), paint)
             }
@@ -673,7 +673,7 @@ class PdfManager(
                 paint.color = Color.WHITE
             }
             CLASSIC ->{
-                paint.color = context.getColor(mColor)
+                paint.color = mColor
             }
             else -> {
                 paint.color = Color.BLACK
