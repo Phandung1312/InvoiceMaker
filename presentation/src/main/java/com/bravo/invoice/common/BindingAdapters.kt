@@ -12,6 +12,19 @@ object BindingAdapters {
     @BindingAdapter("isValidate")
     fun setVisibilityErrorText(textView: TextView,isValidate : Boolean?){
         textView.isVisible = isValidate == false
+    }
+    @JvmStatic
+    @BindingAdapter("dataEmailClient")
+    fun setVisibilityEmail(textView: TextView,dataEmail :String?){
+        dataEmail?.let {
+            if(dataEmail.isNotEmpty()) {
+                textView.isVisible = true
+                textView.text = it
+                return
+            }
+        }
+        textView.isVisible = false
+    }
 
     }
     @JvmStatic

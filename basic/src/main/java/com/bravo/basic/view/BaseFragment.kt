@@ -44,4 +44,6 @@ abstract class BaseFragment<VB : ViewDataBinding>   (private val inflate: Inflat
     }
 
 
+
+
 }

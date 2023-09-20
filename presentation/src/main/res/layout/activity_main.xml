@@ -10,7 +10,8 @@
         android:id="@+id/fragment_container_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/layout_bottom" />
+        app:layout_constraintBottom_toTopOf="@+id/layout_bottom"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_marginBottom="@dimen/_15sdp"
         android:orientation="horizontal"
@@ -43,6 +44,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/iv_top_line1"
+                android:tint="@color/blue_button"
                 android:src="@drawable/ic_home" />
 
             <TextView

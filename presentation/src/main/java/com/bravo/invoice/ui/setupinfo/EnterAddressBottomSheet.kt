@@ -15,6 +15,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.lifecycleScope
 import com.bravo.basic.extensions.clicks
 import com.bravo.basic.extensions.hideKeyboard
 import com.bravo.basic.extensions.showKeyboard
@@ -25,6 +26,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDispose
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject
 
@@ -33,20 +36,32 @@ class EnterAddressBottomSheet(
     private val currentAddress: String,
     private val result: (String) -> Unit
 ) : BottomSheetDialogFragment() {
-    private lateinit var binding : BottomSheetEnterAddressBinding
-    @Inject lateinit var nearbyAddressAdapter: NearbyAddressAdapter
+    private lateinit var binding: BottomSheetEnterAddressBinding
+    @Inject
+    lateinit var nearbyAddressAdapter: NearbyAddressAdapter
     private val locationManager: LocationManager by lazy {
         return@lazy requireContext().getSystemService(LOCATION_SERVICE) as LocationManager
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding  = BottomSheetEnterAddressBinding.inflate(inflater, container, false)
+        binding = BottomSheetEnterAddressBinding.inflate(inflater, container, false)
         initView()
         initListeners()
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.run {
+            lifecycleScope.launch {
+                delay(500)
+                edAddress.showKeyboard()
+            }
+        }
     }
 
     private fun initView() {
@@ -55,14 +70,14 @@ class EnterAddressBottomSheet(
             setText(currentAddress)
             setSelection(currentAddress.length)
             requestFocus()
-            showKeyboard()
+            // showKeyboard()
         }
     }
 
     private fun initListeners() {
         binding.edAddress.doOnTextChanged { text, _, _, _ ->
             if (text != null) {
-                if(text.isEmpty()){
+                if (text.isEmpty()) {
                     showLoading()
                 }
             }
@@ -79,6 +94,7 @@ class EnterAddressBottomSheet(
             dismiss()
         }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         findNearbyAddress()
@@ -90,7 +106,8 @@ class EnterAddressBottomSheet(
                 ActivityResultContracts.RequestPermission()
             ) { isGranted ->
                 if (isGranted) {
-                    val location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    val location =
+                        locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
                     showData(getAddressList(location))
                 }
             }
@@ -100,7 +117,8 @@ class EnterAddressBottomSheet(
             showData(getAddressList(location))
         }
     }
-    private fun showData(addressList : List<NearbyAddress>){
+
+    private fun showData(addressList: List<NearbyAddress>) {
         binding.viewLoading.addAnimatorListener(object : Animator.AnimatorListener {
             override fun onAnimationStart(p0: Animator) {
             }
@@ -114,6 +132,7 @@ class EnterAddressBottomSheet(
             override fun onAnimationRepeat(p0: Animator) {
                 binding.apply {
                     viewLoading.cancelAnimation()
+                    viewLoading.cancelAnimation()
                     viewLoading.isVisible = false
                     nearbyAddressAdapter.data = addressList
                     rvNearbyAddress.isVisible = true
@@ -122,7 +141,8 @@ class EnterAddressBottomSheet(
             }
         })
     }
-    private fun showLoading(){
+
+    private fun showLoading() {
         binding.apply {
             rvNearbyAddress.isVisible = false
             viewLoading.isVisible = true
@@ -130,6 +150,7 @@ class EnterAddressBottomSheet(
         }
         findNearbyAddress()
     }
+
     private fun getAddressList(location: Location?): List<NearbyAddress> {
         val geocoder = Geocoder(requireContext())
         val addresses = location?.let {
@@ -143,9 +164,11 @@ class EnterAddressBottomSheet(
             addressLocation.latitude = address.latitude
             addressLocation.longitude = address.longitude
             val distanceInMeters = currentLocation.distanceTo(addressLocation)
-            val distanceInKilometers = String.format(Locale.US, "%.1f", distanceInMeters / 1000.0).toFloat()
-           val formattedAddress   =  address.getAddressLine(0).split(", ").take(3).joinToString(", ") + ", " + address.adminArea + ", " + address.countryName
-            return@map NearbyAddress(formattedAddress  , distance = distanceInKilometers)
+            val distanceInKilometers =
+                String.format(Locale.US, "%.1f", distanceInMeters / 1000.0).toFloat()
+            val formattedAddress = address.getAddressLine(0).split(", ").take(3)
+                .joinToString(", ") + ", " + address.adminArea + ", " + address.countryName
+            return@map NearbyAddress(formattedAddress, distance = distanceInKilometers)
         }.take(5).toSet().toList()
     }
 }

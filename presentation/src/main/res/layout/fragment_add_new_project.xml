@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="AddProjectClass">
+
+        <variable
+            name="fragment"
+            type="com.bravo.invoice.ui.project.AddNewProjectFragment" />
+
+        <variable
+            name="isVisible"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_addClient">
+
+        <RelativeLayout
+            android:id="@+id/viewHeaderAddProject"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/cancelTextView"
+                style="@style/medium_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="@dimen/page"
+                android:layout_marginTop="@dimen/page"
+                android:layout_marginEnd="@dimen/page"
+                android:layout_marginBottom="@dimen/page"
+                android:text="@string/cancel" />
+
+            <TextView
+                android:id="@+id/addClientTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:fontFamily="@font/inter_tight_bold"
+                android:text="@string/new_project"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp" />
+
+
+            <TextView
+                android:id="@+id/saveTextView"
+                style="@style/medium_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/page"
+                android:text="@string/save" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/gray_line" />
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/viewHeaderAddProject">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/whoIsThisTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/page"
+                    android:text="@string/who_is_this_project_for"
+                    android:textColor="#6D7081"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/viewAddProject"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/white"
+                    app:cardElevation="@dimen/_2sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/whoIsThisTitle">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_40sdp">
+
+                        <ImageView
+                            android:id="@+id/iconAdd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/page"
+                            android:src="@drawable/ic_user_square" />
+
+                        <TextView
+                            android:id="@+id/nameClientTextView"
+                            style="@style/titleHeaderMoreH2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/_8sdp"
+                            android:layout_toEndOf="@+id/iconAdd"
+                            android:text="Add client" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/projectDetailsTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/page"
+                    android:text="@string/project_details"
+                    android:textColor="#6D7081"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewAddProject" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/white"
+                    app:cardElevation="@dimen/_2sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/projectDetailsTitle">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/projectTextView"
+                            style="@style/primary_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="Project name" />
+
+                        <EditText
+                            android:id="@+id/projectEdt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/projectTextView"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@null"
+                            android:hint="@string/united"
+                            android:textColorHint="@color/color_hint_edt" />
+
+                        <View
+                            android:id="@+id/lineGray"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_below="@+id/projectEdt"
+                            android:layout_marginStart="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:background="@color/gray_line" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvListLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/lineGray"
+                            android:layout_marginStart="@dimen/page"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            tools:listitem="@layout/item_add_location" />
+
+                        <RelativeLayout
+                            android:id="@+id/viewClickLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_below="@+id/rvListLocation"
+                            android:layout_marginStart="@dimen/page"
+                            android:layout_marginTop="@dimen/_5sdp">
+
+                            <RelativeLayout
+                                android:id="@+id/viewAddAnotherLocation"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_40sdp"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:id="@+id/imagePlus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:src="@drawable/ic_pluscircle" />
+
+                                <TextView
+                                    style="@style/titleHeaderMoreH2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginStart="@dimen/_8sdp"
+                                    android:layout_toEndOf="@+id/imagePlus"
+                                    android:text="@string/add_another_location" />
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/locationTextView"
+                                style="@style/primary_text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:text="@string/location" />
+
+
+                            <ImageView
+                                android:id="@+id/rightImg"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:src="@drawable/ic_right" />
+
+
+                        </RelativeLayout>
+                    </RelativeLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+
+        <include
+            android:id="@+id/button_Create"
+            layout="@layout/button_blue_main"
+            visibleView="@{isVisible}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/page"
+            android:layout_marginEnd="@dimen/page"
+            android:layout_marginBottom="@dimen/_40sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:textButton="@{`Create project`}" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

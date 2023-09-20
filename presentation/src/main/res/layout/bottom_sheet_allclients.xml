@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="bottomSheetClient"
+            type="com.bravo.invoice.ui.project.BottomSheetClients" />
+    </data>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/viewHeader"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_120sdp"
+        android:elevation="@dimen/_8sdp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:id="@+id/viewTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_30sdp">
+
+                <TextView
+                    android:id="@+id/cancelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/inter_tight_bold"
+                    android:text="@string/cancel"
+                    android:textColor="@color/blue_button"
+                    android:textSize="@dimen/_16ssp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:fontFamily="@font/inter_tight_bold"
+                    android:text="@string/clients"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
+
+                <ImageView
+                    android:id="@+id/addClientBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:src="@drawable/ic_pluscircle" />
+            </RelativeLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/viewSearch"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_below="@+id/viewTitle"
+                android:layout_marginStart="@dimen/page"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/page"
+                android:elevation="@dimen/_8sdp"
+                app:cardBackgroundColor="#EFEFF2"
+                app:cardCornerRadius="@dimen/page">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/searchIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/page"
+                        android:src="@drawable/ic_searchbar" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_toEndOf="@+id/searchIcon"
+                        android:background="@null"
+                        android:fontFamily="@font/inter_tight_medium"
+                        android:hint="Search..."
+                        android:textColorHint="@color/color_hint_edt"
+                        android:textSize="@dimen/_10sdp" />
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/viewCenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/page"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHeader"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/img_Client"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_170sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:src="@drawable/ic_client_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_45sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_Client">
+
+            <TextView
+                android:id="@+id/textAddCustomer"
+                style="@style/medium_text_header_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/add_customer_details" />
+
+            <TextView
+                style="@style/primary_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textAddCustomer"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:text="@string/save_your_customer_s_contact_details_for_faster_invoicing" />
+
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rVShowAllDataClient"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/page"
+        android:layout_marginTop="@dimen/page"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHeader"
+        tools:listitem="@layout/item_showall_clients"
+        tools:visibility="visible" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
