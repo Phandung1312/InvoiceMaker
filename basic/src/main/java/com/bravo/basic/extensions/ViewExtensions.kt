@@ -1,5 +1,8 @@
 package com.bravo.basic.extensions
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.ColorStateList
@@ -8,9 +11,11 @@ import android.os.Build
 import android.os.SystemClock
 import android.util.TypedValue
 import android.view.View
+import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bravo.basic.widget.scale.PushDownAnim
@@ -135,4 +140,179 @@ fun ImageView.setTint(color: Int) {
 fun ImageView.setDrawableString(imgString : String){
     val imageResourceId = context.resources.getIdentifier(imgString,"drawable",context.packageName)
     setImageResource(imageResourceId)
+}
+
+fun View.invisible(animate: Boolean = true) {
+    if (animate) {
+        clearAnimation()
+        val centerX = width / 2f
+        val centerY = height.toFloat() // Điểm chính giữa phía dưới của view
+
+        val animatorSet = AnimatorSet()
+        animatorSet.playTogether(
+            ObjectAnimator.ofFloat(this, View.TRANSLATION_X, centerX - pivotX),
+            ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, centerY - pivotY),
+            ObjectAnimator.ofFloat(this, View.SCALE_X, 0f),
+            ObjectAnimator.ofFloat(this, View.SCALE_Y, 0f),
+            ObjectAnimator.ofFloat(this, View.ALPHA, 0f)
+        )
+        animatorSet.interpolator = AccelerateInterpolator()
+        animatorSet.duration = 500L
+        animatorSet.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(p0: Animator) {
+
+            }
+
+            override fun onAnimationEnd(p0: Animator) {
+                this@invisible.visibility = View.INVISIBLE
+            }
+
+            override fun onAnimationCancel(p0: Animator) {
+
+            }
+
+            override fun onAnimationRepeat(p0: Animator) {
+            }
+        })
+        animatorSet.start()
+    } else {
+        this.visibility = View.INVISIBLE
+    }
+}
+
+/**
+ * Makes the view come back
+ *
+ * @param animate adds animation to the process
+ */
+fun View.visible(animate: Boolean) {
+    if (animate) {
+        clearAnimation()
+        this.animate()
+            .scaleY(1F)
+            .scaleX(1F)
+            .alpha(1F)
+            .setInterpolator(LinearOutSlowInInterpolator())
+            .setDuration(500L)
+            .setListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(p0: Animator) {
+                    this@visible.visibility = View.VISIBLE
+                }
+
+                override fun onAnimationEnd(p0: Animator) {
+
+                }
+
+                override fun onAnimationCancel(p0: Animator) {
+
+                }
+
+                override fun onAnimationRepeat(p0: Animator) {
+                }
+            })
+            .start()
+    } else {
+        this.visibility = View.VISIBLE
+    }
+}
+
+fun View.scrollUpAndVisible(animate: Boolean = true) {
+    if (animate) {
+        this.translationY = this.height.toFloat()
+        this.visibility = View.VISIBLE
+
+        val animator = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, 0f)
+        animator.interpolator = AccelerateInterpolator()
+        animator.duration = 300L
+        animator.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {}
+
+            override fun onAnimationEnd(animation: Animator) {}
+
+            override fun onAnimationCancel(animation: Animator) {}
+
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
+        animator.start()
+    } else {
+        this.visibility = View.VISIBLE
+    }
+}
+
+fun View.scrollDownAndInvisible(animate: Boolean = true) {
+    if (animate) {
+        val animator = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, this.height.toFloat())
+        animator.interpolator = AccelerateInterpolator()
+        animator.duration = 300L
+        animator.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {}
+
+            override fun onAnimationEnd(animation: Animator) {
+                this@scrollDownAndInvisible.visibility = View.INVISIBLE
+            }
+
+            override fun onAnimationCancel(animation: Animator) {}
+
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
+        animator.start()
+    } else {
+        this.visibility = View.INVISIBLE
+    }
+}
+
+fun View.slideUpAndDisappear(animate: Boolean = true) {
+    if (animate) {
+
+        this.translationY = 0f
+        this.visibility = View.VISIBLE
+
+        val animatorSet = AnimatorSet()
+        val translationAnimator = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, -100f)
+        val alphaAnimator = ObjectAnimator.ofFloat(this, View.ALPHA, 0f)
+
+        animatorSet.playTogether(translationAnimator, alphaAnimator)
+        animatorSet.interpolator = AccelerateInterpolator()
+        animatorSet.duration = 300L
+        animatorSet.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {}
+
+            override fun onAnimationEnd(animation: Animator) {
+                this@slideUpAndDisappear.visibility = View.INVISIBLE
+            }
+
+            override fun onAnimationCancel(animation: Animator) {}
+
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
+        animatorSet.start()
+    } else {
+        this.visibility = View.INVISIBLE
+    }
+}
+fun View.slideDownAndAppear(animate: Boolean = true) {
+    if (animate) {
+
+        this.translationY = -100f
+        this.visibility = View.VISIBLE
+
+        val animatorSet = AnimatorSet()
+        val translationAnimator = ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, 0f)
+        val alphaAnimator = ObjectAnimator.ofFloat(this, View.ALPHA, 1f)
+        animatorSet.playTogether(translationAnimator, alphaAnimator)
+        animatorSet.interpolator = AccelerateInterpolator()
+        animatorSet.duration = 300L
+        animatorSet.addListener(object : Animator.AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {}
+
+            override fun onAnimationEnd(animation: Animator) {}
+
+            override fun onAnimationCancel(animation: Animator) {}
+
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
+        animatorSet.start()
+    } else {
+        this.visibility = View.VISIBLE
+    }
 }

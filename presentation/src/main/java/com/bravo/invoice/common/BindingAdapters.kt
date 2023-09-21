@@ -1,10 +1,10 @@
 package com.bravo.invoice.common
 
-import android.opengl.Visibility
 import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
+import com.bravo.basic.utils.AnimateUtils
 
 object BindingAdapters {
 
@@ -34,4 +34,11 @@ object BindingAdapters {
         }
     }
 
+    @JvmStatic
+    @BindingAdapter(value = ["animateVisible","option"])
+    fun visibleViewWithAnimation(view : View, isVisibility: Boolean?, option : Int){
+        isVisibility?.let {
+            AnimateUtils.animateShowAndHide(view, it, option)
+        }
+    }
 }

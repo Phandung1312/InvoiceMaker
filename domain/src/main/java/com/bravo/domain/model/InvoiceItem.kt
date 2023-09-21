@@ -1,4 +1,4 @@
-package com.bravo.invoice.models
+package com.bravo.domain.model
 
 data class InvoiceItem(
     val name : String = "",

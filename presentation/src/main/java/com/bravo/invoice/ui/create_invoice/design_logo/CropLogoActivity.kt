@@ -1,75 +1,33 @@
 package com.bravo.invoice.ui.create_invoice.design_logo
 
 
-import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
-import com.bravo.basic.extensions.makeToast
 import com.bravo.basic.view.BaseActivity
-import com.bravo.invoice.R
+import com.bravo.invoice.common.pool.InvoicePool
 import com.bravo.invoice.databinding.ActivityCropLogoBinding
-import com.canhub.cropper.CropImageView
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CropLogoActivity : BaseActivity<ActivityCropLogoBinding>(ActivityCropLogoBinding::inflate) {
-    var oldBitmap : Bitmap? = null
-    companion object {
-        const val LOGO_STRING_EXTRA ="LOGO_STRING_EXTRA"
-    }
+    @Inject lateinit var invoicePool: InvoicePool
     override fun initView() {
         binding.activity = this@CropLogoActivity
-        binding.cropImageView.setImageBitmap(getDrawable(R.drawable.design_logo_1)?.let {
-            drawableToBitmap(
-                it
-            )
-        })
+        val bitmap = if(invoicePool.currentOption == DesignLogoFragment.LOGO) invoicePool.logo else invoicePool.additionalImage
+        binding.cropImageView.setImageBitmap(bitmap)
     }
     fun onNext(){
-        val intent = Intent(this, AdjustLogoActivity::class.java)
-        startActivity(intent)
-    }
-    fun onTurn(){
-        binding.cropImageView.rotateImage(90)
-    }
-    fun onCrop(){
-        val newBitmap = binding.cropImageView.getCroppedImage(reqHeight = 300, reqWidth = 300,
-            options = CropImageView.RequestSizeOptions.RESIZE_FIT
-        )
-        if(oldBitmap != newBitmap){
-            oldBitmap = newBitmap
+        if(invoicePool.currentOption == DesignLogoFragment.LOGO){
+            invoicePool.logo = binding.cropImageView.getCroppedImage()
         }
         else{
-            makeToast("Same")
+            invoicePool.additionalImage = binding.cropImageView.getCroppedImage()
         }
-        binding.ivResult.setImageBitmap(oldBitmap)
+        val intent = Intent(this, AdjustLogoActivity::class.java)
+        startActivity(intent)
+        finish()
     }
-    fun drawableToBitmap(drawable: Drawable): Bitmap {
-        if (drawable is BitmapDrawable) {
-            return drawable.bitmap
-        }
-
-        val bitmap = Bitmap.createBitmap(
-            drawable.intrinsicWidth,
-            drawable.intrinsicHeight,
-            Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        drawable.draw(canvas)
-        return bitmap
+    fun onClose(){
+        finish()
     }
 }
-
-//object ImageConverter {
-//
-//
-//    fun drawableToBitmap(context: Context, drawableId: Int): Bitmap {
-//        val options = BitmapFactory.Options()
-//        options.inScaled = false
-//        return BitmapFactory.decodeResource(context.resources, drawableId, options)
-//    }
-//}

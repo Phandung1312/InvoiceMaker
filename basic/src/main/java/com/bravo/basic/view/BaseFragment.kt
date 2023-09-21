@@ -43,6 +43,13 @@ abstract class BaseFragment<VB : ViewDataBinding>   (private val inflate: Inflat
         _binding = null
     }
 
+    fun addFragment(fragment : Fragment){
+        (requireActivity() as BaseActivity<*>).addFragment(fragment)
+    }
+
+    fun popBackStack(){
+        (requireActivity() as BaseActivity<*>).popBackStack()
+    }
 
 
 

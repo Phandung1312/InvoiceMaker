@@ -25,6 +25,7 @@ dependencies {
     implementation (libs.timber)
     implementation(libs.moshi)
     implementation(libs.bundles.roomLibs)
+    implementation(libs.moshi)
     annotationProcessor(libs.roomCompiler)
     kapt(libs.roomCompiler)
     androidTestImplementation(libs.androidx.test.ext.junit)

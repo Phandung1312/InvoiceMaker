@@ -6,9 +6,8 @@ import androidx.room.TypeConverters
 import com.bravo.data.database.dao.ClientDao
 import com.bravo.data.database.dao.ProjectDao
 import com.bravo.domain.model.Client
-import com.bravo.domain.model.Converters.Converters
+import com.bravo.domain.model.converters.Converters
 import com.bravo.domain.model.Project
-import dagger.Binds
 
 @Database(
     entities = [Client::class,Project::class],

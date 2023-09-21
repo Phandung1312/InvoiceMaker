@@ -6,6 +6,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.viewpager.widget.ViewPager
 import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.R
 import com.bravo.invoice.common.ConfigApp
@@ -62,86 +64,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                         .commit()
                 }
 
-                changeTitleTabColor(index)
             }
 
-    }
-
-    private fun changeTitleTabColor(index: Int) {
-        when (index) {
-            0 -> {
-                binding.tvMenu1.changeTextColorSelected(true)
-                binding.tvMenu2.changeTextColorSelected(false)
-                binding.tvMenu3.changeTextColorSelected(false)
-                binding.tvMenu4.changeTextColorSelected(false)
-                binding.tvMenu5.changeTextColorSelected(false)
-
-                binding.ivIcon1.changeImageSelected(true)
-                binding.ivIcon2.changeImageSelected(false)
-                binding.ivIcon3.changeImageSelected(false)
-                binding.ivIcon4.changeImageSelected(false)
-                binding.ivIcon5.changeImageSelected(false)
-
-            }
-
-            1 -> {
-                binding.tvMenu1.changeTextColorSelected(false)
-                binding.tvMenu2.changeTextColorSelected(true)
-                binding.tvMenu3.changeTextColorSelected(false)
-                binding.tvMenu4.changeTextColorSelected(false)
-                binding.tvMenu5.changeTextColorSelected(false)
-
-                binding.ivIcon1.changeImageSelected(false)
-                binding.ivIcon2.changeImageSelected(true)
-                binding.ivIcon3.changeImageSelected(false)
-                binding.ivIcon4.changeImageSelected(false)
-                binding.ivIcon5.changeImageSelected(false)
-
-            }
-
-            2 -> {
-                binding.tvMenu1.changeTextColorSelected(false)
-                binding.tvMenu2.changeTextColorSelected(false)
-                binding.tvMenu3.changeTextColorSelected(true)
-                binding.tvMenu4.changeTextColorSelected(false)
-                binding.tvMenu5.changeTextColorSelected(false)
-
-                binding.ivIcon1.changeImageSelected(false)
-                binding.ivIcon2.changeImageSelected(false)
-                binding.ivIcon3.changeImageSelected(true)
-                binding.ivIcon4.changeImageSelected(false)
-                binding.ivIcon5.changeImageSelected(false)
-            }
-
-            3 -> {
-                binding.tvMenu1.changeTextColorSelected(false)
-                binding.tvMenu2.changeTextColorSelected(false)
-                binding.tvMenu3.changeTextColorSelected(false)
-                binding.tvMenu4.changeTextColorSelected(true)
-                binding.tvMenu5.changeTextColorSelected(false)
-
-                binding.ivIcon1.changeImageSelected(false)
-                binding.ivIcon2.changeImageSelected(false)
-                binding.ivIcon3.changeImageSelected(false)
-                binding.ivIcon4.changeImageSelected(true)
-                binding.ivIcon5.changeImageSelected(false)
-            }
-
-            4 -> {
-                binding.tvMenu1.changeTextColorSelected(false)
-                binding.tvMenu2.changeTextColorSelected(false)
-                binding.tvMenu3.changeTextColorSelected(false)
-                binding.tvMenu4.changeTextColorSelected(false)
-                binding.tvMenu5.changeTextColorSelected(true)
-
-                binding.ivIcon1.changeImageSelected(false)
-                binding.ivIcon2.changeImageSelected(false)
-                binding.ivIcon3.changeImageSelected(false)
-                binding.ivIcon4.changeImageSelected(false)
-                binding.ivIcon5.changeImageSelected(true)
-            }
-
-        }
     }
 
     override fun initView() {
@@ -151,7 +75,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
         }
     }
-
     private val tabBottoms by lazy {
         listOf(
             Tab(binding.tabBottom1, binding.ivIcon1, binding.tvMenu1),
@@ -194,15 +117,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     fun addFragment(fragment: Fragment) {
+    override fun addFragment(fragment : Fragment ){
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container_view, fragment)
             .addToBackStack(null)
             .commit()
     }
 
-    fun backFragment() {
+    override fun popBackStack() {
         val fragmentManager = supportFragmentManager
         fragmentManager.popBackStack()
-//        fragmentManager.popBackStack("fragment_name", FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 }

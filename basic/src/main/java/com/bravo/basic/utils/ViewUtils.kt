@@ -1,9 +1,15 @@
 package com.bravo.basic.utils
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.app.Activity
 import android.graphics.Rect
 import android.util.DisplayMetrics
 import android.view.View
+import android.view.animation.AccelerateInterpolator
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
+import com.bravo.basic.R
 
 
 object ViewUtils {
@@ -99,75 +105,6 @@ object ViewUtils {
      *
      * @param animate adds animation to the process
      */
-//    fun View.invisible(animate: Boolean) {
-//        if (animate) {
-//            clearAnimation()
-//            this.animate()
-//                .scaleY(0F)
-//                .scaleX(0F)
-//                .alpha(0F)
-//                .setInterpolator(AccelerateInterpolator())
-//                .setDuration(this.resources.getInteger(R.integer.animation_duration).toLong())
-//                .setListener(object : Animator.AnimatorListener {
-//                    override fun onAnimationStart(animation: Animator?) {
-//                        /* no-op */
-//                    }
-//
-//                    override fun onAnimationEnd(animation: Animator?) {
-//                        this@invisible.visibility = View.INVISIBLE
-//                    }
-//
-//                    override fun onAnimationCancel(animation: Animator?) {
-//                        /* no-op */
-//                    }
-//
-//                    override fun onAnimationRepeat(animation: Animator?) {
-//                        /* no-op */
-//                    }
-//                })
-//                .start()
-//        } else {
-//            this.visibility = View.INVISIBLE
-//        }
-//    }
-
-    /**
-     * Makes the view come back
-     *
-     * @param animate adds animation to the process
-     */
-//    fun View.visible(animate: Boolean) {
-//        if (animate) {
-//            clearAnimation()
-//            this.animate()
-//                .scaleY(1F)
-//                .scaleX(1F)
-//                .alpha(1F)
-//                .setInterpolator(LinearOutSlowInInterpolator())
-//                .setDuration(this.resources.getInteger(R.integer.animation_duration).toLong())
-//                .setListener(object : Animator.AnimatorListener {
-//                    override fun onAnimationStart(animation: Animator?) {
-//                        this@visible.visibility = View.VISIBLE
-//                    }
-//
-//                    override fun onAnimationEnd(animation: Animator?) {
-//                        /* no-op */
-//                    }
-//
-//                    override fun onAnimationCancel(animation: Animator?) {
-//                        /* no-op */
-//                    }
-//
-//                    override fun onAnimationRepeat(animation: Animator?) {
-//                        /* no-op */
-//                    }
-//                })
-//                .start()
-//        } else {
-//            this.visibility = View.VISIBLE
-//        }
-//    }
-
     // ViewExtensions
 
     fun View.fadOutAnimation(duration: Long = 300, visibility: Int = View.INVISIBLE, completion: (() -> Unit)? = null) {
