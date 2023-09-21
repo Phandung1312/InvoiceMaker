@@ -1,9 +1,12 @@
 package com.bravo.invoice.ui.project
 
 import android.annotation.SuppressLint
+import android.app.DatePickerDialog
+import android.graphics.Color
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.DatePicker
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
@@ -22,9 +25,10 @@ import java.util.Calendar
 import javax.inject.Inject
 
 
+@SuppressLint("NotifyDataSetChanged")
 @AndroidEntryPoint
 class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate) {
-    val receivedData by lazy { arguments?.getSerializable(AddFileProjectFragment.PROJECT_DETAILS) as? Project }
+    private val receivedData by lazy { arguments?.getSerializable(AddFileProjectFragment.PROJECT_DETAILS) as? Project }
 
     @Inject
     lateinit var addLocationAdapter: AddLocationAdapter
@@ -35,11 +39,16 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
         EnterAddressBottomSheet("") { address ->
             addLocationAdapter.data = when {
                 isAddedData -> ArrayList(addLocationAdapter.data).apply {
-                    add(address)
+                    if (address.isNotEmpty()) {
+                        add(address)
+                    }
+
                 }
 
                 else -> ArrayList(receivedData!!.locationList).apply {
-                    add(address)
+                    if (address.isNotEmpty()) {
+                        add(address)
+                    }
                 }
             }
             isAddedData = true
@@ -50,50 +59,57 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
 
     override fun initListeners() {
 
-        binding.backTextView.clicks {
+        binding.backTextView.clicks(withAnim = false) {
             (requireActivity() as MainActivity).backFragment()
         }
-        binding.viewSetStatus.clicks {
+        binding.viewSetStatus.clicks(withAnim = false) {
             bottomSheetStatus.apply {
                 this.statusData = checkData
                 this.result = { result ->
                     binding.textStatus.text = result
                     checkData = result
+                    if (result != receivedData?.status) {
+                        binding.saveTextView.isEnabled = true
+                        binding.saveTextView.setTextColor(Color.BLUE)
+                    } else {
+                        binding.saveTextView.isEnabled = false
+                        binding.saveTextView.setTextColor(Color.GRAY)
+                    }
                 }
             }
             bottomSheetStatus.show(childFragmentManager, bottomSheetStatus.tag)
         }
-        binding.saveTextView.clicks {
-            val receivedData =
-                arguments?.getSerializable(AddFileProjectFragment.PROJECT_DETAILS) as? Project
+        binding.saveTextView.clicks(withAnim = false) {
             if (receivedData != null) {
                 val data = addLocationAdapter.data
                 val projectData = Project(
-                    receivedData.id,
-                    receivedData.nameClient,
+                    receivedData!!.id,
+                    receivedData?.nameClient,
                     binding.nameProject.text.toString(),
-                    receivedData.dateProject,
+                    receivedData?.dateProject,
                     binding.startDateTextview.text.toString(),
                     binding.endDateTextview.text.toString(),
                     data,
                     binding.notesEdt.text.toString(),
                     binding.textStatus.text.toString()
                 )
-                if (binding.nameProject.text.toString() != receivedData.nameProject
-                    || binding.textStatus.text.toString() != receivedData.status
-                    || binding.notesEdt.text.toString() != receivedData.note
-                    || data != receivedData.locationList
-                    || binding.startDateTextview.text.toString() != receivedData.dateStart
-                    || binding.endDateTextview.text.toString() != receivedData.dateEnd
+                if (binding.nameProject.text.toString() != receivedData?.nameProject
+                    || binding.textStatus.text.toString() != receivedData?.status
+                    || binding.notesEdt.text.toString() != receivedData?.note
+                    || data != receivedData?.locationList
+                    || binding.startDateTextview.text.toString() != receivedData?.dateStart
+                    || binding.endDateTextview.text.toString() != receivedData?.dateEnd
                 ) {
                     projectViewModel.updateProject(projectData)
+                    (requireActivity() as MainActivity).backFragment()
                 } else {
                     binding.saveTextView.isEnabled = false
+                    binding.saveTextView.setTextColor(Color.GRAY)
                 }
             }
 
         }
-        binding.viewClickLocation.clicks {
+        binding.viewClickLocation.clicks(withAnim = false) {
             bottomSheetLocation.show(childFragmentManager, bottomSheetLocation.tag)
         }
     }
@@ -104,11 +120,24 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
         super.initData()
         binding.nameProject.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // This method is called before the text is changed.
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 binding.saveTextView.isEnabled = true
+                binding.saveTextView.setTextColor(Color.BLUE)
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+        binding.notesEdt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.saveTextView.isEnabled = true
+                binding.saveTextView.setTextColor(Color.BLUE)
             }
 
             override fun afterTextChanged(s: Editable?) {
@@ -123,11 +152,13 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
             arguments?.getSerializable(AddFileProjectFragment.PROJECT_DETAILS) as? Project
         if (receivedData != null) {
             binding.nameProject.setText(receivedData.nameProject)
+            binding.notesEdt.setText(receivedData.note)
             binding.rvListLocation.apply {
                 adapter = addLocationAdapter.apply {
                     data = receivedData.locationList
                 }
             }
+
         }
         binding.datePickerStart.setOnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
             val calendar = Calendar.getInstance()
@@ -144,6 +175,8 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
             val formattedDate = dateFormat.format(calendar.time)
             binding.endDateTextview.text = formattedDate
         }
+
+
     }
 
 

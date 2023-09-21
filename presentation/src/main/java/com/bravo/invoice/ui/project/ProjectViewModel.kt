@@ -14,7 +14,8 @@ import javax.inject.Inject
 class ProjectViewModel @Inject constructor(
     private val projectsRepository: ProjectsRepository
 ) : BaseViewModel() {
-    val getAllProjects: LiveData<List<Project>> = projectsRepository.getAllProject
+    val getAllProjectActive: LiveData<List<Project>> = projectsRepository.getAllProjectActive
+    val getAllProjectComplete: LiveData<List<Project>> = projectsRepository.getAllProjectComplete
     fun insertProjects(project: Project) {
         viewModelScope.launch(Dispatchers.IO) {
             projectsRepository.insertProject(project)
@@ -33,9 +34,5 @@ class ProjectViewModel @Inject constructor(
         }
     }
 
-    fun filterStatus(query: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            projectsRepository.getFilteredStatus(query)
-        }
-    }
+
 }

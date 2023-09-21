@@ -13,8 +13,8 @@ interface ProjectDao {
     @Insert(onConflict = REPLACE)
     fun insertProject(project: Project)
 
-    @Query("SELECT * FROM Project")
-    fun getAllProject(): LiveData<List<Project>>
+    @Query("SELECT * FROM Project WHERE status = 'Active'")
+    fun getAllProjectActive(): LiveData<List<Project>>
 
     @Delete
     suspend fun deleteProject(project: Project)
@@ -22,7 +22,7 @@ interface ProjectDao {
     @Update
     suspend fun updateProject(project: Project)
 
-    @Query("SELECT status FROM Project WHERE status LIKE '%' || :filter || '%' LIMIT 1")
-    fun getFilteredComplete(filter: String): String
+    @Query("SELECT * FROM Project WHERE status = 'Complete'")
+    fun getFilteredComplete():LiveData<List<Project>>
 
 }

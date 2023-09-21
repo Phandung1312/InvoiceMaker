@@ -25,7 +25,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflate) {
     private val projectViewModel by viewModels<ProjectViewModel>()
-
     @Inject
     lateinit var projectAdapter: ProjectAdapter
 
@@ -43,7 +42,7 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
 
     override fun initData() {
         binding.rvShowAllProject.apply {
-            projectViewModel.getAllProjects.observe(viewLifecycleOwner) { it ->
+            projectViewModel.getAllProjectActive.observe(viewLifecycleOwner) { it ->
                 if (it.isEmpty()) {
                     binding.isVisible = true
                 } else {
@@ -54,7 +53,6 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
                 }
 
             }
-
         }
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(
@@ -75,28 +73,31 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
     }
 
     override fun initListeners() {
-        binding.viewComplete.clicks {
+        binding.viewComplete.clicks(withAnim = false) {
             binding.isVisibleView = true
+            checkData(true)
 
         }
-        binding.viewActive.clicks {
+        binding.viewActive.clicks(withAnim = false) {
             binding.isVisibleView = false
+            checkData(false)
+
         }
-        binding.closeButton.clicks {
+        binding.closeButton.clicks(withAnim = false) {
             (requireActivity() as MainActivity).backFragment()
         }
-        binding.addImg.clicks {
+        binding.addImg.clicks(withAnim = false) {
             (requireActivity() as MainActivity).addFragment(AddNewProjectFragment())
         }
         projectAdapter.itemClicksProject.autoDispose(scope()).subscribe { project ->
-                val bundle = Bundle()
-                val fragment = AddFileProjectFragment()
-                fragment.arguments = bundle
-                bundle.putSerializable(AddFileProjectFragment.PROJECT_EXTRA, project)
-                (requireActivity() as MainActivity).addFragment(fragment)
+            val bundle = Bundle()
+            val fragment = AddFileProjectFragment()
+            fragment.arguments = bundle
+            bundle.putSerializable(AddFileProjectFragment.PROJECT_EXTRA, project)
+            (requireActivity() as MainActivity).addFragment(fragment)
 
 
-            }
+        }
     }
 
     private fun showAlertConfirm(titleData: String, project: Project, index: Int) {
@@ -112,5 +113,36 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
         }
         val alertDialog = alertDialogBuilder.create()
         alertDialog.show()
+    }
+
+    private fun checkData(isTypeStatus: Boolean) {
+        binding.rvShowAllProject.apply {
+            if (isTypeStatus) {
+                projectViewModel.getAllProjectComplete.observe(viewLifecycleOwner) { it ->
+                    if (it.isEmpty()) {
+                        binding.isVisible = true
+                    } else {
+                        binding.isVisible = false
+                        adapter = projectAdapter.apply {
+                            data = it.reversed()
+                        }
+                    }
+                }
+            } else {
+                projectViewModel.getAllProjectActive.observe(viewLifecycleOwner) { it ->
+                    if (it.isEmpty()) {
+                        binding.isVisible = true
+                    } else {
+                        binding.isVisible = false
+                        adapter = projectAdapter.apply {
+                            data = it.reversed()
+                        }
+                    }
+
+                }
+            }
+
+        }
+
     }
 }

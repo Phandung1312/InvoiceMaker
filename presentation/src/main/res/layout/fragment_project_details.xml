@@ -55,7 +55,6 @@
                 <TextView
                     android:id="@+id/saveTextView"
                     style="@style/medium_blue"
-                    android:enabled="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -64,6 +63,8 @@
                     android:layout_marginTop="@dimen/page"
                     android:layout_marginEnd="@dimen/page"
                     android:layout_marginBottom="@dimen/page"
+                    android:textColor="@color/gray_line"
+                    android:enabled="false"
                     android:text="@string/save" />
 
             </RelativeLayout>
@@ -103,7 +104,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                style="@style/titleHeaderMoreH1"
+                                style="@style/titleHeaderMoreH2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -111,11 +112,12 @@
 
                             <EditText
                                 android:id="@+id/nameProject"
-                                style="@style/titleHeaderMoreH2"
-                                android:background="@null"
-                                android:layout_width="wrap_content"
+                                style="@style/titleHeaderMoreH1"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1" />
+                                android:layout_weight="1"
+                                android:background="@null"
+                                android:hint="United" />
                         </LinearLayout>
                     </RelativeLayout>
 

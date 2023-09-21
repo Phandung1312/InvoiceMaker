@@ -17,7 +17,7 @@ class MoreFragment : BaseFragment<MoreClass>(MoreClass::inflate) {
     }
 
     override fun initListeners() {
-        binding.viewWorkFlow.clicks {
+        binding.viewWorkFlow.clicks(withAnim = false){
             (requireActivity() as MainActivity).addFragment(NewProjectFragment())
         }
     }

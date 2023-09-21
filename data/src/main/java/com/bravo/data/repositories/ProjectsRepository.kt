@@ -22,10 +22,6 @@ class ProjectsRepository @Inject constructor(
         projectDao.updateProject(project)
     }
 
-    val getAllProject: LiveData<List<Project>> = projectDao.getAllProject()
-    suspend fun getFilteredStatus(filter: String): String {
-        return withContext(Dispatchers.IO) {
-            projectDao.getFilteredComplete(filter)
-        }
-    }
+    val getAllProjectActive: LiveData<List<Project>> = projectDao.getAllProjectActive()
+    val getAllProjectComplete:LiveData<List<Project>> = projectDao.getFilteredComplete()
 }

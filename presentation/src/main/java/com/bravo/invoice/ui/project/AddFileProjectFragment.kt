@@ -15,19 +15,18 @@ class AddFileProjectFragment : BaseFragment<AddFileClass>(AddFileClass::inflate)
     }
 
 
-
     override fun initListeners() {
-        binding.viewProjectContact.clicks {
+        binding.viewProjectContact.clicks(withAnim = false) {
             val bundle = Bundle()
             val fragment = ProjectContactFragment()
             fragment.arguments = bundle
             (requireActivity() as MainActivity).addFragment(fragment)
             bundle.putString(ProjectContactFragment.DATACONTACT, binding.nameClient.text.toString())
         }
-        binding.closeImg.clicks {
+        binding.closeImg.clicks(withAnim = false) {
             (requireActivity() as MainActivity).backFragment()
         }
-        binding.viewProjectDetails.clicks {
+        binding.viewProjectDetails.clicks(withAnim = false) {
             val receivedProjectData = arguments?.getSerializable(PROJECT_EXTRA) as? Project
             if (receivedProjectData != null) {
                 val bundle = Bundle()
@@ -37,7 +36,11 @@ class AddFileProjectFragment : BaseFragment<AddFileClass>(AddFileClass::inflate)
                 (requireActivity() as MainActivity).addFragment(fragment)
 
             }
+        }
 
+        binding.viewNotes.clicks(withAnim = false) {
+            val fragment = AddNoteFragment()
+            (requireActivity() as MainActivity).addFragment(fragment)
         }
     }
 

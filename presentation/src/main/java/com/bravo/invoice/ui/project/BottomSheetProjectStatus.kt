@@ -9,7 +9,7 @@ import com.bravo.basic.extensions.clicks
 import com.bravo.invoice.databinding.BottomSheetProjectStatusBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class BottomSheetProjectStatus: BottomSheetDialogFragment() {
+class BottomSheetProjectStatus : BottomSheetDialogFragment() {
 
     private lateinit var binding: BottomSheetProjectStatusBinding
 
@@ -35,13 +35,13 @@ class BottomSheetProjectStatus: BottomSheetDialogFragment() {
 
 
     private fun initListener() {
-        binding.viewActive.clicks {
+        binding.viewActive.clicks(withAnim = false) {
             result.invoke("Active")
             binding.checkedActiveImg.isGone = false
             binding.checkedCompleteImg.isGone = true
             dismiss()
         }
-        binding.viewComplete.clicks {
+        binding.viewComplete.clicks(withAnim = false) {
             result.invoke("Complete")
             binding.checkedCompleteImg.isGone = false
             binding.checkedActiveImg.isGone = true

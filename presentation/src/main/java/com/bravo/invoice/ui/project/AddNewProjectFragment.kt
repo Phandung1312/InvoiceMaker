@@ -82,14 +82,14 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
 
     @SuppressLint("SimpleDateFormat")
     override fun initListeners() {
-        binding.viewAddProject.clicks {
+        binding.viewAddProject.clicks(withAnim = false) {
             bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
         }
 
-        binding.viewClickLocation.clicks {
+        binding.viewClickLocation.clicks(withAnim = false) {
             bottomSheetLocation.show(childFragmentManager, bottomSheetLocation.tag)
         }
-        binding.saveTextView.clicks {
+        binding.saveTextView.clicks(withAnim = false) {
             if (checkDataClient?.isEmpty() != false) {
                 binding.nameClientTextView.setTextColor(Color.RED)
             } else {
@@ -109,7 +109,7 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
                 bundle.putSerializable(AddFileProjectFragment.PROJECT_EXTRA, dataProject)
             }
         }
-        binding.cancelTextView.clicks {
+        binding.cancelTextView.clicks(withAnim = false) {
             (requireActivity() as MainActivity).backFragment()
         }
 

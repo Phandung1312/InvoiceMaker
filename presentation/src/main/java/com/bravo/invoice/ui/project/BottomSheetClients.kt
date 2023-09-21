@@ -15,7 +15,9 @@ import com.bravo.basic.extensions.clicks
 import com.bravo.domain.model.Client
 import com.bravo.invoice.adapter.ClientAdapter
 import com.bravo.invoice.databinding.BottomSheetAllclientsBinding
+import com.bravo.invoice.ui.client.AddClientFragment
 import com.bravo.invoice.ui.client.ClientViewModel
+import com.bravo.invoice.ui.main.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -130,6 +132,9 @@ class BottomSheetClients(
             }
         binding.cancelTextView.clicks {
             dismiss()
+        }
+        binding.addClientBtn.clicks (withAnim = false){
+            (requireActivity() as MainActivity).addFragment(AddClientFragment())
         }
     }
 
