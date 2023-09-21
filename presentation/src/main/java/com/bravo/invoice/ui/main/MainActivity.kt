@@ -2,6 +2,7 @@ package com.bravo.invoice.ui.main
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
@@ -104,6 +105,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                 this.setTextColor(context.getColor(R.color.main_menu_text))
             }
         }
+
     }
 
     override fun addFragment(fragment : Fragment ){
