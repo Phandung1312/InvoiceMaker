@@ -106,15 +106,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
     }
 
-    fun addFragment(fragment : Fragment ){
+    override fun addFragment(fragment : Fragment ){
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container_view, fragment)
             .addToBackStack(null)
             .commit()
     }
-    fun backFragment(){
+
+    override fun popBackStack() {
         val fragmentManager = supportFragmentManager
         fragmentManager.popBackStack()
-//        fragmentManager.popBackStack("fragment_name", FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 }

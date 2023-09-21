@@ -6,11 +6,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animationView"
+        android:layout_margin="@dimen/_10sdp"
         app:lottie_rawRes="@raw/circle_loading"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"/>
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"/>
     <TextView
         android:id="@+id/tv_loading"
         android:layout_marginStart="@dimen/_15sdp"

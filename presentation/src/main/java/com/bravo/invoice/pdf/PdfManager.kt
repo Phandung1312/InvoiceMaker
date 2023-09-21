@@ -1,5 +1,6 @@
 package com.bravo.invoice.pdf
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -201,6 +202,7 @@ class PdfManager(
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun createTitle() {
         var currentX = PAGE_LEFT_DISTANCE
         var currentY = 0f
@@ -471,6 +473,7 @@ class PdfManager(
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun createTableTitle(){
         //Title Row
         currentHeight +=30f + additionalHeight
@@ -576,6 +579,7 @@ class PdfManager(
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     private fun createInvoiceTotal(){
         currentHeight += 30f
 
@@ -635,7 +639,7 @@ class PdfManager(
         when(template){
             IMPACT, MODERN, SHOWCASE, HIP ->{
 
-                paint.color = if(template == SHOWCASE || template == HIP) mColor else Color.BLACK
+                paint.color = if(template == SHOWCASE || template == HIP  || template == MODERN) mColor else Color.BLACK
                 if(template == HIP) paint.alpha = 51
                 canvas.drawRect(
                     (pageInfo1.pageWidth - 215).toFloat(),

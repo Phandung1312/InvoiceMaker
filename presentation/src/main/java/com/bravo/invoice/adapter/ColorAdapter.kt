@@ -30,4 +30,7 @@ class ColorAdapter @Inject constructor() : BaseAdapter<Color, ItemsColorBinding>
             itemClicks.onNext(color)
         }
     }
+    fun setSelectIndex(index : Int){
+        selectedIndex = index
+    }
 }
