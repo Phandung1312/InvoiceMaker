@@ -1,6 +1,5 @@
 package com.bravo.invoice.pdf
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -18,29 +17,27 @@ import android.os.ParcelFileDescriptor
 import android.text.Layout
 import android.text.StaticLayout
 import android.text.TextPaint
-import android.util.Log
 import androidx.core.content.res.ResourcesCompat
 import com.bravo.invoice.R
 import com.bravo.invoice.common.Constants
 import com.bravo.invoice.common.Utils
 import com.bravo.invoice.models.Invoice
-import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.util.logging.Logger
 
 class PdfManager(
     private val context: Context,
     private val invoice: Invoice,
     private val template: Int = IMPACT,
-    private val mColor: Int = R.color.invoice_green,
+    private val mColor: Int = -16380161,
 ) {
     private var document: PdfDocument = PdfDocument()
-    private var pageInfo1: PageInfo = PageInfo.Builder(420, 700, 1).create()
+    private var pageInfo1: PageInfo = PageInfo.Builder(420, 740, 1).create()
     private var paint: Paint = Paint()
     private var myPage1: Page = document.startPage(pageInfo1)
     private var canvas: Canvas = myPage1.canvas
+    private var bannerHeight = 0f
     private var logoHeight = 0f
     private var additionalImageHeight = 0f
     private var additionalHeight = 0f
@@ -64,6 +61,7 @@ class PdfManager(
         createLogo()
         createAdditionalImage()
         additionalHeight = if(logoHeight > additionalImageHeight) logoHeight else additionalImageHeight
+        additionalHeight += bannerHeight
         createBusinessInfo()
         createTitle()
         createReceiver()
@@ -114,15 +112,17 @@ class PdfManager(
     private fun createBanner() {
         invoice.banner?.let {
             val bitmap = BitmapFactory.decodeResource(context.resources, it)
-            val scaleBitmap = Bitmap.createScaledBitmap(bitmap, pageInfo1.pageWidth, 77, true)
-            canvas.drawBitmap(scaleBitmap, 0f, 0f, paint)
+
+            val scaleBitmap = Bitmap.createScaledBitmap(bitmap, pageInfo1.pageWidth, 70, true)
+            canvas.drawBitmap(scaleBitmap, 0f, 35f, paint)
+            bannerHeight = 50f
         }
     }
 
     private fun createLogo() {
         invoice.logo.bitmap?.let { bitmap ->
             var maxDimension = invoice.logo.size
-            logoHeight = maxDimension
+            logoHeight = maxDimension + 10f
             val scaleBitmap = Utils.getScaleBitmap(bitmap, maxDimension)
             paint.textAlign = Paint.Align.RIGHT
             val startX = when (invoice.logo.alignment) {
@@ -135,14 +135,14 @@ class PdfManager(
                  TYPEWRITER, HIP -> 20f
                 else -> 0f
             }
-            canvas.drawBitmap(scaleBitmap, startX, 80f, paint)
+            canvas.drawBitmap(scaleBitmap, startX, 80f + bannerHeight, paint)
         }
     }
     private fun createAdditionalImage(){
         invoice.additionalImage.bitmap?.let { bitmap ->
             additionalImageHeight = invoice.additionalImage.size / 1.25f
             val scaleBitmap = Utils.getScaleBitmap(bitmap, additionalImageHeight)
-            canvas.drawBitmap(scaleBitmap, PAGE_RIGHT_DISTANCE - scaleBitmap.width.toFloat(), 80f, paint )
+            canvas.drawBitmap(scaleBitmap, PAGE_RIGHT_DISTANCE - scaleBitmap.width.toFloat(), 80f + bannerHeight, paint )
             additionalImageHeight = when(template){
                 IMPACT, CLASSIC , CREATIVE-> additionalImageHeight - 20f
                 else -> 0f
@@ -201,8 +201,6 @@ class PdfManager(
             canvas.drawText(additionalInfo, currentX, currentY, paint)
         }
     }
-
-    @SuppressLint("ResourceAsColor")
     private fun createTitle() {
         var currentX = PAGE_LEFT_DISTANCE
         var currentY = 0f
@@ -287,7 +285,7 @@ class PdfManager(
 
         //Title Line
         var startX = 0f
-        var startY = 195f + additionalImageHeight
+        var startY = 195f + additionalHeight
         var endX = pageInfo1.pageWidth.toFloat()
         var lineHeight = 1f
         paint.color = Color.BLACK
@@ -401,14 +399,14 @@ class PdfManager(
         when (template) {
             TYPEWRITER -> {
                 paint.color = context.getColor(R.color.invoice_vertical_line)
-                canvas.drawLine((pageInfo1.pageWidth /2).toFloat(), 182f, (pageInfo1.pageWidth /2).toFloat(), currentHeight, paint)
+                canvas.drawLine((pageInfo1.pageWidth /2).toFloat(), 182f + additionalHeight, (pageInfo1.pageWidth /2).toFloat(), currentHeight, paint)
             }
 
             HIP -> {
                 paint.color = context.getColor(R.color.blue_black)
                 currentHeight += 13f
-                canvas.drawLine((pageInfo1.pageWidth /2).toFloat(), 150f, (pageInfo1.pageWidth /2).toFloat(), currentHeight, paint)
-                canvas.drawLine(0f, 225f, (pageInfo1.pageWidth /2).toFloat(), 225f, paint)
+                canvas.drawLine((pageInfo1.pageWidth /2).toFloat(), 150f + additionalHeight, (pageInfo1.pageWidth /2).toFloat(), currentHeight, paint)
+                canvas.drawLine(0f, 225f + additionalHeight, (pageInfo1.pageWidth /2).toFloat(), 225f + additionalHeight, paint)
                 canvas.drawRect(0f, currentHeight, pageInfo1.pageWidth.toFloat(), currentHeight + 2f, paint)
                 currentHeight += 2f
             }
@@ -473,10 +471,9 @@ class PdfManager(
         }
     }
 
-    @SuppressLint("ResourceAsColor")
     private fun createTableTitle(){
         //Title Row
-        currentHeight +=30f + additionalHeight
+        currentHeight +=30f
         when(template){
             IMPACT, SHOWCASE, HIP, CREATIVE ->{
                 if(template == IMPACT || template == SHOWCASE || template == CREATIVE){
@@ -579,7 +576,6 @@ class PdfManager(
         }
     }
 
-    @SuppressLint("ResourceAsColor")
     private fun createInvoiceTotal(){
         currentHeight += 30f
 

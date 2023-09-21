@@ -109,7 +109,7 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
             activity?.startActivityForResult(contactPickerIntent, 1)
         }
         binding.cancelTextView.clicks {
-            (requireActivity() as MainActivity).backFragment()
+            popBackStack()
         }
     }
 

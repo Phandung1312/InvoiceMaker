@@ -109,7 +109,7 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
             }
         }
         binding.cancelTextView.clicks {
-            (requireActivity() as MainActivity).backFragment()
+            popBackStack()
         }
 
     }

@@ -22,7 +22,7 @@ class AddFileProjectFragment : BaseFragment<AddFileClass>(AddFileClass::inflate)
             bundle.putString(ProjectContactFragment.DATACONTACT, binding.nameClient.text.toString())
         }
         binding.closeImg.clicks {
-            (requireActivity() as MainActivity).backFragment()
+            popBackStack()
         }
     }
 

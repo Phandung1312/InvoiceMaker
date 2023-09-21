@@ -15,6 +15,7 @@ import com.bravo.invoice.databinding.ActivityCreateInvoiceBinding
 import com.bravo.invoice.models.InvoiceDesign
 import com.bravo.invoice.pdf.PdfManager
 import com.bravo.invoice.ui.create_invoice.design_logo.DesignLogoFragment
+import com.bravo.invoice.ui.create_invoice.select_banner.SelectBannerFragment
 import com.bravo.invoice.ui.create_invoice.select_color.SelectColorFragment
 import com.bravo.invoice.ui.create_invoice.select_template.TemplateFragment
 import com.uber.autodispose.android.lifecycle.autoDispose
@@ -45,7 +46,7 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
                     R.id.template -> TemplateFragment()
                     R.id.logo -> DesignLogoFragment()
                     R.id.color -> SelectColorFragment()
-//                    R.id.banner -> 4
+                    R.id.banner -> SelectBannerFragment()
 //                    R.id.watermark -> 5
                     else -> null
                 }
@@ -83,7 +84,11 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
     }
     private fun createInvoicePdf(invoiceDesign: InvoiceDesign) {
         lifecycleScope.launch(Dispatchers.Main) {
-            val pdfManager = PdfManager(applicationContext, Utils.getSampleInvoice().copy(logo = invoiceDesign.logo, additionalImage = invoiceDesign.additionalImageUI), invoiceDesign.templateId, invoiceDesign.color)
+            val pdfManager = PdfManager(applicationContext, Utils.getSampleInvoice().copy(
+                logo = invoiceDesign.logo,
+                banner = invoiceDesign.banner,
+                additionalImage = invoiceDesign.additionalImageUI,
+                hiddenCompanyName = invoiceDesign.hiddenCompanyName), invoiceDesign.templateId, invoiceDesign.color)
             val bitmap = pdfManager.getInvoicePDF()
             bitmap?.let{
                 binding.ivTemplate.setImageBitmap(it)

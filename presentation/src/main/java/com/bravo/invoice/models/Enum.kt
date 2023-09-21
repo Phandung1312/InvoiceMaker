@@ -30,7 +30,26 @@ enum class InvoiceTemplate(
     Hip(PdfManager.HIP, R.drawable.hip_template, "Hip"),
     Creative(PdfManager.CREATIVE, R.drawable.creative_template, "Creative"),
 }
-
+enum class Banner(
+    val bannerDrawableId : Int
+)
+{
+    Banner0(R.drawable.empty_banner),
+    Banner1(R.drawable.banner_1),
+    Banner2(R.drawable.banner_2),
+    Banner3(R.drawable.banner_3),
+    Banner4(R.drawable.banner_4),
+    Banner5(R.drawable.banner_5),
+    Banner6(R.drawable.banner_6),
+    Banner7(R.drawable.banner_7),
+    Banner8(R.drawable.banner_8),
+    Banner9(R.drawable.banner_9),
+    Banner10(R.drawable.banner_10),
+    Banner11(R.drawable.banner_11),
+    Banner12(R.drawable.banner_12),
+    Banner13(R.drawable.banner_13),
+    Banner14(R.drawable.banner_14),
+}
 enum class Color(
    val colorString : String
 ){

@@ -38,8 +38,12 @@ class CreateInvoiceViewModel @Inject constructor(
         }
     }
 
-    fun setBanner(){
-
+    fun setBanner(resourceId : Int?){
+        val temp = invoiceDesign.value!!
+        temp.banner = resourceId
+        viewModelScope.launch {
+            preferences.invoiceDesigned.set(temp)
+        }
     }
 
     fun setWatermark(){

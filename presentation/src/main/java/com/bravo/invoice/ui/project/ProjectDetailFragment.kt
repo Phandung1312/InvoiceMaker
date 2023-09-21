@@ -14,7 +14,7 @@ class ProjectDetailFragment: BaseFragment<DetailProjectContacts>(DetailProjectCo
 
     override fun initListeners() {
         binding.backTextView.clicks {
-            (requireActivity() as MainActivity).backFragment()
+            popBackStack()
         }
     }
 

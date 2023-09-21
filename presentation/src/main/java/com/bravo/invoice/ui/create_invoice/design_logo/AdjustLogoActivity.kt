@@ -30,8 +30,7 @@ class AdjustLogoActivity : BaseActivity<ActivityAdjustLogoBinding>(ActivityAdjus
     @Inject lateinit var invoicePool: InvoicePool
     @Inject lateinit var pref : Preferences
 
-    private var logoUI = LogoUI()
-    private var additionalImageUI = AdditionalImageUI()
+    private lateinit var invoiceDesign : InvoiceDesign
     private val sizeClicks : Subject<Int> by lazy { BehaviorSubject.create() }
     private val alignmentClicks : Subject<Int> by lazy { BehaviorSubject.create() }
 
@@ -41,29 +40,30 @@ class AdjustLogoActivity : BaseActivity<ActivityAdjustLogoBinding>(ActivityAdjus
     }
 
     override fun initData() {
-        logoUI.bitmap = invoicePool.logo
-        additionalImageUI.bitmap = invoicePool.additionalImage
-        val invoiceDesign = pref.invoiceDesigned.get()
-        logoUI.size = invoiceDesign.logo.size
-        logoUI.alignment = invoiceDesign.logo.alignment
-        additionalImageUI.size = invoiceDesign.additionalImageUI.size
+        invoiceDesign = pref.invoiceDesigned.get()
+        invoiceDesign.logo.bitmap = invoicePool.logo
+        invoiceDesign.additionalImageUI.bitmap = invoicePool.additionalImage
+        invoiceDesign.logo.size = invoiceDesign.logo.size
+        invoiceDesign.logo.alignment = invoiceDesign.logo.alignment
+        invoiceDesign.additionalImageUI.size = invoiceDesign.additionalImageUI.size
         setSelection()
     }
     private fun setSelection(){
-        val sizeIndex = when (if(invoicePool.currentOption == DesignLogoFragment.LOGO) pref.invoiceDesigned.get().logo.size else pref.invoiceDesigned.get().additionalImageUI.size){
+        val sizeIndex = when (if(invoicePool.currentOption == DesignLogoFragment.LOGO) invoiceDesign.logo.size else invoiceDesign.additionalImageUI.size){
             Constants.SMALL_SIZE -> 0
             Constants.MEDIUM_SIZE -> 1
             Constants.LARGE_SIZE ->2
             else -> 1
         }
         sizeClicks.onNext(sizeIndex)
-        val alignmentIndex = when (pref.invoiceDesigned.get().logo.alignment){
+        val alignmentIndex = when (invoiceDesign.logo.alignment){
             Constants.ALIGNMENT_START -> 0
             Constants.ALIGNMENT_CENTER -> 1
             Constants.ALIGNMENT_END ->2
             else -> 1
         }
         alignmentClicks.onNext(alignmentIndex)
+        binding.switchHide.isChecked = invoiceDesign.hiddenCompanyName
     }
     override fun initListener() {
         sizeGroup.forEachIndexed { index, size ->
@@ -77,6 +77,10 @@ class AdjustLogoActivity : BaseActivity<ActivityAdjustLogoBinding>(ActivityAdjus
             }
         }
     }
+    fun onHideCompanyName(isHide : Boolean){
+        invoiceDesign.hiddenCompanyName = isHide
+        createInvoicePdf(Utils.getSampleInvoice(),invoiceDesign)
+    }
     override fun initObservable() {
         sizeClicks.autoDispose(scope()).subscribe { index ->
             binding.radioSmall.isSelected = index == 0
@@ -88,21 +92,21 @@ class AdjustLogoActivity : BaseActivity<ActivityAdjustLogoBinding>(ActivityAdjus
                 2 -> Constants.LARGE_SIZE
                 else -> Constants.MEDIUM_SIZE
             }
-            if(invoicePool.currentOption == DesignLogoFragment.LOGO) logoUI.size = size
-            else additionalImageUI.size = size
-            createInvoicePdf(Utils.getSampleInvoice().copy(logo = logoUI, additionalImage = additionalImageUI),pref.invoiceDesigned.get())
+            if(invoicePool.currentOption == DesignLogoFragment.LOGO) invoiceDesign.logo.size = size
+            else invoiceDesign.additionalImageUI.size = size
+            createInvoicePdf(Utils.getSampleInvoice(),invoiceDesign)
         }
         alignmentClicks.autoDispose(scope()).subscribe { index ->
             binding.radioLeftAlignment.isSelected = index == 0
             binding.radioCenterAlignment.isSelected = index == 1
             binding.radioRightAlignment.isSelected = index == 2
-            logoUI.alignment = when(index){
+            invoiceDesign.logo.alignment = when(index){
                 0 -> Constants.ALIGNMENT_START
                 1 -> Constants.ALIGNMENT_CENTER
                 2 -> Constants.ALIGNMENT_END
                 else -> Constants.ALIGNMENT_CENTER
             }
-            createInvoicePdf(Utils.getSampleInvoice().copy(logo = logoUI, additionalImage = additionalImageUI),pref.invoiceDesigned.get())
+            createInvoicePdf(Utils.getSampleInvoice(),invoiceDesign)
         }
     }
     fun onSizeChanged(index : Int){
@@ -132,8 +136,7 @@ class AdjustLogoActivity : BaseActivity<ActivityAdjustLogoBinding>(ActivityAdjus
         lifecycleScope.launch(Dispatchers.Main) {
             val loadingDialog = LoadingDialog(this@AdjustLogoActivity )
             loadingDialog.show()
-            val currentInvoiceDesign = pref.invoiceDesigned.get()
-            pref.invoiceDesigned.set(currentInvoiceDesign.copy(logo = logoUI, additionalImageUI = additionalImageUI))
+            pref.invoiceDesigned.set(invoiceDesign)
             delay(500)
             loadingDialog.dismiss()
             finish()
@@ -151,7 +154,11 @@ class AdjustLogoActivity : BaseActivity<ActivityAdjustLogoBinding>(ActivityAdjus
     }
     private fun createInvoicePdf(invoice : Invoice,invoiceDesign: InvoiceDesign) {
         lifecycleScope.launch(Dispatchers.Main) {
-            val pdfManager = PdfManager(applicationContext, invoice, invoiceDesign.templateId, invoiceDesign.color)
+            val pdfManager = PdfManager(applicationContext, invoice.copy(
+                logo = invoiceDesign.logo,
+                banner = invoiceDesign.banner,
+                additionalImage = invoiceDesign.additionalImageUI,
+                hiddenCompanyName = invoiceDesign.hiddenCompanyName), invoiceDesign.templateId, invoiceDesign.color)
             val bitmap = pdfManager.getInvoicePDF()
             bitmap?.let{
                 binding.ivTemplate.setImageBitmap(it)

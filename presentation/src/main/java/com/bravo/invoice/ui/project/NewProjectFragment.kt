@@ -59,7 +59,7 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
             binding.isVisibleView = false
         }
         binding.closeButton.clicks {
-            (requireActivity() as MainActivity).backFragment()
+            popBackStack()
         }
         binding.addImg.clicks {
             (requireActivity() as MainActivity).addFragment(AddNewProjectFragment())

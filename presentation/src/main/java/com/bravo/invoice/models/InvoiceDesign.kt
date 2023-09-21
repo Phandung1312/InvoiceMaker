@@ -5,6 +5,8 @@ import com.bravo.invoice.pdf.PdfManager
 data class InvoiceDesign(
     var templateId : Int = PdfManager.IMPACT,
     var logo : LogoUI = LogoUI(),
+    var banner : Int? = null,
     var additionalImageUI: AdditionalImageUI = AdditionalImageUI(),
-    var color : Int =  -15985383
+    var hiddenCompanyName : Boolean = false,
+    var color : Int =  -16380161
     )
