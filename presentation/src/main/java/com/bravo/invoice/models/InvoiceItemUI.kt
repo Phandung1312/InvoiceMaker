@@ -9,7 +9,8 @@ import com.bravo.invoice.common.Constants
 
 data class Invoice(
     val invoiceId : Int = 0,
-    var banner : Int? = R.drawable.sample_banner_1,
+    var banner : Int? = null,
+    var watermark : Int? = null,
     var logo : LogoUI = LogoUI(),
     var additionalImage : AdditionalImageUI = AdditionalImageUI(),
     val businessInfo : BusinessInfoInInvoiceUI = BusinessInfoInInvoiceUI(),

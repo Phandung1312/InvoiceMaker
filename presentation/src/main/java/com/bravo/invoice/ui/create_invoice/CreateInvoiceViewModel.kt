@@ -22,28 +22,37 @@ class CreateInvoiceViewModel @Inject constructor(
         invoiceDesign.value = preferences.invoiceDesigned.get()
     }
 
-    fun setTemplate(templateId : Int){
+    private fun saveInvoiceDesign(
+        templateId: Int? = null,
+        color: Int? = null,
+        banner: Int? = null,
+        watermark: Int? = null
+    ) {
         val temp = invoiceDesign.value!!
-        temp.templateId = templateId
+        templateId?.let { temp.templateId = it }
+        color?.let { temp.color = it }
+        banner?.let { temp.banner = it }
+        watermark?.let { temp.watermark = it }
+
         viewModelScope.launch {
             preferences.invoiceDesigned.set(temp)
         }
     }
 
-    fun setColor(color : Int){
-        val temp = invoiceDesign.value!!
-        temp.color = color
-        viewModelScope.launch {
-            preferences.invoiceDesigned.set(temp)
-        }
+    fun setTemplate(templateId: Int) {
+        saveInvoiceDesign(templateId = templateId)
     }
 
-    fun setBanner(){
-
+    fun setColor(color: Int) {
+        saveInvoiceDesign(color = color)
     }
 
-    fun setWatermark(){
+    fun setBanner(resourceId: Int?) {
+        saveInvoiceDesign(banner = resourceId)
+    }
 
+    fun setWatermark(resourceId: Int?) {
+        saveInvoiceDesign(watermark = resourceId)
     }
     fun update(invoiceDesign: InvoiceDesign){
         this.invoiceDesign.value = invoiceDesign

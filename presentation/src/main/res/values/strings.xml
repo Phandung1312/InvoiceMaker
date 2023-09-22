@@ -90,4 +90,5 @@
     <string name="complete">Complete</string>
     <string name="add_your_privates_notes">Add your privates notes</string>
     <string name="no_results_found">No results found.</string>
+    <string name="want_to_change_it_later_or_add_other_rates_go_to_tax_amp_currency_in_settings">Want to change it later or add other rates? Go to <b><![CDATA[Tax & currency in Settings.]]></b></string>
 </resources>
