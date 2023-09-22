@@ -59,7 +59,7 @@
 
 
                 <TextView
-                    android:id="@+id/saveTextView"
+                    android:id="@+id/editTextView"
                     style="@style/medium_blue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

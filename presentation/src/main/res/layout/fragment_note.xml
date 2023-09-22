@@ -25,6 +25,7 @@
                     android:id="@+id/closeNotes"
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
+                    android:layout_marginStart="@dimen/page"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_close" />
 

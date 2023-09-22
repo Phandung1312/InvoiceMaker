@@ -8,6 +8,7 @@ import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import com.bravo.basic.extensions.clicks
 import com.bravo.basic.view.BaseFragment
+import com.bravo.domain.model.ContactInfoProject
 import com.bravo.domain.model.Project
 import com.bravo.invoice.adapter.ClientAdapter
 import com.bravo.invoice.databinding.AddProjectClass
@@ -95,22 +96,32 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
             } else {
                 binding.nameClientTextView.setTextColor(Color.BLACK)
                 val nameClient = binding.nameClientTextView.text.toString()
+                val listContactInfo: List<ContactInfoProject> = arrayListOf()
                 val nameProject = binding.projectEdt.text.toString()
                 val arrLocation = arrLocation
                 val sdf = SimpleDateFormat("dd/M")
                 val currentDate = sdf.format(Date())
-                val dataProject =
-                    Project(0, nameClient, nameProject, currentDate, "", "", arrLocation, "","Active")
+                val dataProject = Project(
+                    0,
+                    nameClient,
+                    nameProject,
+                    currentDate,
+                    "",
+                    "",
+                    arrLocation,
+                    "",
+                    "Active"
+                )
                 projectViewModel.insertProjects(dataProject)
                 val bundle = Bundle()
                 val fragment = AddFileProjectFragment()
                 fragment.arguments = bundle
-                (requireActivity() as MainActivity).addFragment(fragment)
                 bundle.putSerializable(AddFileProjectFragment.PROJECT_EXTRA, dataProject)
+                addFragment(fragment)
             }
         }
         binding.cancelTextView.clicks(withAnim = false) {
-            (requireActivity() as MainActivity).backFragment()
+            popBackStack()
         }
 
     }

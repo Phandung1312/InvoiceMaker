@@ -1,6 +1,7 @@
 package com.bravo.invoice.ui.project
 
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
@@ -84,7 +85,7 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
 
         }
         binding.closeButton.clicks(withAnim = false) {
-            (requireActivity() as MainActivity).backFragment()
+            popBackStack()
         }
         binding.addImg.clicks(withAnim = false) {
             (requireActivity() as MainActivity).addFragment(AddNewProjectFragment())

@@ -20,6 +20,8 @@ import com.bravo.invoice.ui.project.adapter.AddLocationAdapter
 import com.bravo.invoice.ui.setupinfo.EnterAddressBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.ArrayList
 import java.util.Calendar
 import javax.inject.Inject
@@ -60,7 +62,7 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
     override fun initListeners() {
 
         binding.backTextView.clicks(withAnim = false) {
-            (requireActivity() as MainActivity).backFragment()
+            popBackStack()
         }
         binding.viewSetStatus.clicks(withAnim = false) {
             bottomSheetStatus.apply {
@@ -101,7 +103,7 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
                     || binding.endDateTextview.text.toString() != receivedData?.dateEnd
                 ) {
                     projectViewModel.updateProject(projectData)
-                    (requireActivity() as MainActivity).backFragment()
+                    popBackStack()
                 } else {
                     binding.saveTextView.isEnabled = false
                     binding.saveTextView.setTextColor(Color.GRAY)
@@ -115,9 +117,7 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
     }
 
     override fun initData() {
-        (activity as? MainActivity?)?.binding?.layoutBottom?.isVisible = false
-
-        super.initData()
+        visibleBottomLayout(false)
         binding.nameProject.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -158,6 +158,9 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
                     data = receivedData.locationList
                 }
             }
+            Log.e("Quang",receivedData.dateStart.toString())
+            receivedData.dateStart?.let { convertStringToDataPicker(it, binding.datePickerStart) }
+            receivedData.dateEnd?.let { convertStringToDataPicker(it, binding.datePickerEnd) }
 
         }
         binding.datePickerStart.setOnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
@@ -177,6 +180,21 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
         }
 
 
+    }
+
+
+    private fun convertStringToDataPicker(dataTime: String, pikerDateTime: DatePicker) {
+        val pattern = "yyyy-MM-dd"
+        val formatter = DateTimeFormatter.ofPattern(pattern)
+        try {
+            val dateTime = LocalDateTime.parse(dataTime, formatter)
+            val day = dateTime.dayOfMonth
+            val month = dateTime.monthValue
+            val year = dateTime.year
+            pikerDateTime.init(year, month, day, null)
+        } catch (e: Exception) {
+            println("Error parsing the input string: ${e.message}")
+        }
     }
 
 

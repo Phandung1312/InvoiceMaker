@@ -17,14 +17,16 @@ class AddFileProjectFragment : BaseFragment<AddFileClass>(AddFileClass::inflate)
 
     override fun initListeners() {
         binding.viewProjectContact.clicks(withAnim = false) {
+            val receivedProjectData = arguments?.getSerializable(PROJECT_EXTRA) as? Project
             val bundle = Bundle()
             val fragment = ProjectContactFragment()
             fragment.arguments = bundle
+            bundle.putLong(ProjectContactFragment.DATA_ID, receivedProjectData!!.id)
+            bundle.putString(ProjectContactFragment.DATA_PROJECT, receivedProjectData.nameClient)
             (requireActivity() as MainActivity).addFragment(fragment)
-            bundle.putString(ProjectContactFragment.DATACONTACT, binding.nameClient.text.toString())
         }
         binding.closeImg.clicks(withAnim = false) {
-            (requireActivity() as MainActivity).backFragment()
+            popBackStack()
         }
         binding.viewProjectDetails.clicks(withAnim = false) {
             val receivedProjectData = arguments?.getSerializable(PROJECT_EXTRA) as? Project

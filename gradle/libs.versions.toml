@@ -150,4 +150,5 @@ dimen = ["sdp", "ssp"]
 viewKtx = ["fragment-ktx", "activity-ktx"]
 mapsLibs = ["location", "maps"]
 roomLibs = ["room-runtime","room-ktx"]
+lifecycle = ["lifecycle-livedata","lifecycle-viewmodel"]
 

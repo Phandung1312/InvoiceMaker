@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data class="AddInfoContactItem">
+        <variable
+            name="itemShowContactInfoProject"
+            type="com.bravo.domain.model.ContactInfoProject" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+   >
+
+        <LinearLayout
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:background="#D9D9D9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    tools:text="Nam Qunag"
+                    android:fontFamily="@font/inter_tight_semi_bold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16sdp"
+                    android:layout_marginStart="@dimen/page"
+                    android:layout_centerVertical="true"
+                    android:text="@{itemShowContactInfoProject.role}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/page"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp">
+
+                <TextView
+                    android:id="@+id/fullNameTextView"
+                    tools:text="Quang Nam"
+                    style="@style/titleHeaderMoreH2"
+                    android:layout_marginStart="@dimen/page"
+                    android:text="@{itemShowContactInfoProject.givenName+itemShowContactInfoProject.surName}"
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+
+            <View
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/page"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray_line" />
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

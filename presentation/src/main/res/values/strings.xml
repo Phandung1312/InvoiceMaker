@@ -89,4 +89,5 @@
     <string name="project">Project</string>
     <string name="complete">Complete</string>
     <string name="add_your_privates_notes">Add your privates notes</string>
+    <string name="no_results_found">No results found.</string>
 </resources>
