@@ -158,6 +158,7 @@ class AdjustLogoActivity : BaseActivity<ActivityAdjustLogoBinding>(ActivityAdjus
                 logo = invoiceDesign.logo,
                 banner = invoiceDesign.banner,
                 additionalImage = invoiceDesign.additionalImageUI,
+                watermark = invoiceDesign.watermark,
                 hiddenCompanyName = invoiceDesign.hiddenCompanyName), invoiceDesign.templateId, invoiceDesign.color)
             val bitmap = pdfManager.getInvoicePDF()
             bitmap?.let{

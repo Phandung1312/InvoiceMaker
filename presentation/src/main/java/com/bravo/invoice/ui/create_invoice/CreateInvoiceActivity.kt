@@ -1,11 +1,13 @@
 package com.bravo.invoice.ui.create_invoice
 
 
+import android.content.Intent
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.bravo.basic.extensions.invisible
 import com.bravo.basic.extensions.makeToast
+import com.bravo.basic.extensions.tryOrNull
 import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.R
 import com.bravo.invoice.adapter.InvoiceTemplateAdapter
@@ -15,9 +17,11 @@ import com.bravo.invoice.databinding.ActivityCreateInvoiceBinding
 import com.bravo.invoice.models.InvoiceDesign
 import com.bravo.invoice.pdf.PdfManager
 import com.bravo.invoice.ui.create_invoice.design_logo.DesignLogoFragment
+import com.bravo.invoice.ui.create_invoice.finalize_setup.FinalizeSetUpActivity
 import com.bravo.invoice.ui.create_invoice.select_banner.SelectBannerFragment
 import com.bravo.invoice.ui.create_invoice.select_color.SelectColorFragment
 import com.bravo.invoice.ui.create_invoice.select_template.TemplateFragment
+import com.bravo.invoice.ui.create_invoice.select_watermark.SelectWatermarkFragment
 import com.uber.autodispose.android.lifecycle.autoDispose
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDispose
@@ -47,7 +51,7 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
                     R.id.logo -> DesignLogoFragment()
                     R.id.color -> SelectColorFragment()
                     R.id.banner -> SelectBannerFragment()
-//                    R.id.watermark -> 5
+                    R.id.watermark -> SelectWatermarkFragment()
                     else -> null
                 }
                 if (selectedFragment != null) {
@@ -88,6 +92,7 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
                 logo = invoiceDesign.logo,
                 banner = invoiceDesign.banner,
                 additionalImage = invoiceDesign.additionalImageUI,
+                watermark = invoiceDesign.watermark,
                 hiddenCompanyName = invoiceDesign.hiddenCompanyName), invoiceDesign.templateId, invoiceDesign.color)
             val bitmap = pdfManager.getInvoicePDF()
             bitmap?.let{
@@ -96,10 +101,16 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
         }
     }
     fun onClose(){
-        makeToast("Close")
+
     }
     fun onGotIt(){
         pref.isFirstDesign.set(false)
+    }
+    fun onNext(){
+        val intent = Intent(this, FinalizeSetUpActivity::class.java)
+        startActivity(intent)
+        tryOrNull { overridePendingTransition(com.bravo.basic.R.anim.slide_in_left, com.bravo.basic.R.anim.nothing) }
+        finish()
     }
     fun onPreview(){
         binding.isVisible = false

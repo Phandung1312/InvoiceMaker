@@ -130,13 +130,12 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginStart="@dimen/page"
             android:layout_marginEnd="@dimen/page"
             android:layout_marginBottom="@dimen/_20sdp"
             app:cardElevation="@dimen/_2sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
             <androidx.appcompat.widget.AppCompatImageView

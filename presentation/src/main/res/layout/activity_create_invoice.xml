@@ -61,6 +61,7 @@
                 android:text="Back" />
             <TextView
                 style="@style/medium_blue"
+                android:onClick="@{() -> activity.onNext()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -125,7 +126,6 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@color/background_addClient"
@@ -134,11 +134,10 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/page"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/page"
-                android:layout_marginBottom="@dimen/_30sdp"
                 app:cardElevation="@dimen/_2sdp"
                 app:layout_constraintTop_toTopOf="parent">
 

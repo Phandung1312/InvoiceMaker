@@ -60,6 +60,7 @@ class PdfManager(
         createBanner()
         createLogo()
         createAdditionalImage()
+        createWatermark()
         additionalHeight = if(logoHeight > additionalImageHeight) logoHeight else additionalImageHeight
         additionalHeight += bannerHeight
         createBusinessInfo()
@@ -136,6 +137,12 @@ class PdfManager(
                 else -> 0f
             }
             canvas.drawBitmap(scaleBitmap, startX, 80f + bannerHeight, paint)
+        }
+    }
+    private fun createWatermark(){
+        invoice.watermark?.let {
+            val bitmap = BitmapFactory.decodeResource(context.resources, it)
+            canvas.drawBitmap(bitmap, -30f, (pageInfo1.pageHeight - bitmap.height).toFloat() + 10f, paint)
         }
     }
     private fun createAdditionalImage(){

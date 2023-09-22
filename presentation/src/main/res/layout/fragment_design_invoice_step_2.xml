@@ -2,10 +2,17 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <data class="DesignInvoiceStep2Class">
+        <variable
+            name="fragment"
+            type="com.bravo.invoice.ui.create_invoice.finalize_setup.DesignInvoiceStep2Fragment" />
+    </data>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/textView4"
             android:layout_marginStart="@dimen/page"
@@ -174,28 +181,29 @@
 
         <include
             android:id="@+id/btn_next"
-            android:layout_marginBottom="@dimen/_15sdp"
-            android:layout_marginStart="@dimen/page"
-            android:layout_marginEnd="@dimen/page"
+            android:onClick="@{() -> fragment.onNext()}"
+            android:layout_marginTop="@dimen/_20sdp"
             layout="@layout/button_blue_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/materialCardView3"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/page"
+            android:layout_marginEnd="@dimen/page"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat5"
             app:textButton="@{`Next`}"
             tools:layout_editor_absoluteX="26dp" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView3"
-            android:layout_marginBottom="@dimen/_20sdp"
-            app:cardElevation="0dp"
-            app:strokeColor="@color/blue_button"
-            app:strokeWidth="1dp"
-            android:layout_marginStart="@dimen/page"
-            android:layout_marginEnd="@dimen/page"
+            android:layout_margin="@dimen/page"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="@dimen/_8sdp"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_next"
+            app:strokeColor="@color/blue_button"
+            app:strokeWidth="1dp">
 
             <TextView
                 android:id="@+id/tv_text_button"
@@ -210,4 +218,5 @@
 
         </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 </layout>

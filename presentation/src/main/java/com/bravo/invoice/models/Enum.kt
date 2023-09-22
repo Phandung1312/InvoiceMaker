@@ -50,6 +50,42 @@ enum class Banner(
     Banner13(R.drawable.banner_13),
     Banner14(R.drawable.banner_14),
 }
+enum class Watermark(
+    val iconId : Int,
+    val watermarkId : Int
+){
+    Watermark0(R.drawable.ic_watermark_0, 0),
+    Watermark1(R.drawable.ic_watermark_1, R.drawable.watermark_1),
+    Watermark2(R.drawable.ic_watermark_2, R.drawable.watermark_2),
+    Watermark3(R.drawable.ic_watermark_3, R.drawable.watermark_3),
+    Watermark4(R.drawable.ic_watermark_4, R.drawable.watermark_4),
+    Watermark5(R.drawable.ic_watermark_5, R.drawable.watermark_5),
+    Watermark6(R.drawable.ic_watermark_6, R.drawable.watermark_6),
+    Watermark7(R.drawable.ic_watermark_7, R.drawable.watermark_7),
+    Watermark8(R.drawable.ic_watermark_8, R.drawable.watermark_8),
+    Watermark9(R.drawable.ic_watermark_9, R.drawable.watermark_9),
+    Watermark10(R.drawable.ic_watermark_10, R.drawable.watermark_10),
+    Watermark11(R.drawable.ic_watermark_11, R.drawable.watermark_11),
+    Watermark12(R.drawable.ic_watermark_12, R.drawable.watermark_12),
+    Watermark13(R.drawable.ic_watermark_13, R.drawable.watermark_13),
+    Watermark14(R.drawable.ic_watermark_14, R.drawable.watermark_14),
+    Watermark15(R.drawable.ic_watermark_15, R.drawable.watermark_15),
+    Watermark16(R.drawable.ic_watermark_16, R.drawable.watermark_16),
+    Watermark17(R.drawable.ic_watermark_17, R.drawable.watermark_17),
+    Watermark18(R.drawable.ic_watermark_18, R.drawable.watermark_18),
+    Watermark19(R.drawable.ic_watermark_19, R.drawable.watermark_19),
+    Watermark20(R.drawable.ic_watermark_20, R.drawable.watermark_20),
+    Watermark21(R.drawable.ic_watermark_21, R.drawable.watermark_21),
+    Watermark22(R.drawable.ic_watermark_22, R.drawable.ic_watermark_22),
+    Watermark23(R.drawable.ic_watermark_23, R.drawable.watermark_23),
+    Watermark24(R.drawable.ic_watermark_24, R.drawable.watermark_24),
+    Watermark25(R.drawable.ic_watermark_25, R.drawable.watermark_25),
+    Watermark26(R.drawable.ic_watermark_26, R.drawable.watermark_26),
+    Watermark27(R.drawable.ic_watermark_27, R.drawable.watermark_27),
+    Watermark28(R.drawable.ic_watermark_28, R.drawable.watermark_28),
+    Watermark29(R.drawable.ic_watermark_29, R.drawable.watermark_29),
+    Watermark30(R.drawable.ic_watermark_30, R.drawable.watermark_30),
+}
 enum class Color(
    val colorString : String
 ){
