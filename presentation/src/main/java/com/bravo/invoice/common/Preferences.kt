@@ -1,8 +1,9 @@
 package com.bravo.invoice.common
 
-import com.bravo.domain.model.converters.BitmapConverter
+
 import com.bravo.invoice.models.BusinessInfo
 import com.bravo.invoice.models.InvoiceDesign
+import com.bravo.invoice.models.converters.InvoiceDesignConverter
 import com.f2prateek.rx.preferences2.Preference
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import com.squareup.moshi.Moshi
@@ -26,22 +27,16 @@ class Preferences @Inject constructor(
             return adapter.toJson(value)
         }
     })
-    val invoiceDesigned = rxSharedPreferences.getObject("invoiceDesigned", InvoiceDesign(), object  : Preference.Converter<InvoiceDesign>{
-        override fun deserialize(serialized: String): InvoiceDesign {
-            val adapter = Moshi.Builder()
-                .add(BitmapConverter()).build()
-                .adapter(InvoiceDesign::class.java)
-            return adapter.fromJson(serialized) ?: InvoiceDesign()
-        }
-
-        override fun serialize(value: InvoiceDesign): String {
-            val adapter = Moshi.Builder()
-                .add(BitmapConverter()).build()
-                .adapter(InvoiceDesign::class.java)
-            return adapter.toJson(value)
-        }
-
-    })
+    val invoiceDesignedTemp = rxSharedPreferences.getObject("invoiceDesignedTemp", InvoiceDesign(), InvoiceDesignConverter())
+    val invoiceDesigned = rxSharedPreferences.getObject("invoiceDesigned", InvoiceDesign(), InvoiceDesignConverter())
     val enableNotify = rxSharedPreferences.getBoolean("enableNotify", false)
     val enableMail = rxSharedPreferences.getBoolean("enableMail", false)
+
+    val notifyBeforeDueDay = rxSharedPreferences.getBoolean("notifyBeforeDueDay", true)
+    val notifyOnDueDay = rxSharedPreferences.getBoolean("notifyOnDueDay", true)
+    val notifyAfterDueDate3 = rxSharedPreferences.getBoolean("notifyAfterDueDate3", true)
+    val notifyAfterDueDate7 = rxSharedPreferences.getBoolean("notifyAfterDueDate7", true)
+
+    val taxType = rxSharedPreferences.getInteger("taxType", Constants.EXCLUSIVE)
+    val taxRate = rxSharedPreferences.getFloat("taxRate", 10f)
 }

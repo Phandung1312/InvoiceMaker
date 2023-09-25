@@ -65,7 +65,7 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
         }
     }
     fun onDesignLogo() {
-        if(pref.invoiceDesigned.get().logo.bitmap != null){
+        if(pref.invoiceDesignedTemp.get().logo.bitmap != null){
             onAddLogo(LOGO)
         }
         else{
@@ -76,10 +76,10 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
     fun onAddLogo(option : Int = LOGO){
         invoicePool.currentOption = option
         val isLogoNull = if(invoicePool.currentOption == LOGO){
-            pref.invoiceDesigned.get().logo.bitmap == null
+            pref.invoiceDesignedTemp.get().logo.bitmap == null
         }
         else{
-            pref.invoiceDesigned.get().additionalImageUI.bitmap == null
+            pref.invoiceDesignedTemp.get().additionalImageUI.bitmap == null
         }
         val actions = if (isLogoNull) {
             arrayOf("Take a photo", "Choose from photos")
@@ -94,8 +94,8 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
                     if (isLogoNull) {
                         cameraCheckPermission()
                     } else {
-                        val bitmap = if(invoicePool.currentOption == LOGO) pref.invoiceDesigned.get().logo.bitmap
-                        else pref.invoiceDesigned.get().additionalImageUI.bitmap
+                        val bitmap = if(invoicePool.currentOption == LOGO) pref.invoiceDesignedTemp.get().logo.bitmap
+                        else pref.invoiceDesignedTemp.get().additionalImageUI.bitmap
                         goToCropLogo(bitmap!!)
                     }
                 }
@@ -116,14 +116,14 @@ class DesignLogoFragment : BaseFragment<DesignLogoClass>(DesignLogoClass::inflat
         alterDialog.show()
     }
     private fun removeLogo(option : Int = LOGO){
-        var currentInvoiceDesign = pref.invoiceDesigned.get()
+        var currentInvoiceDesign = pref.invoiceDesignedTemp.get()
         if(option == LOGO){
             currentInvoiceDesign.logo = LogoUI()
         }
         else{
             currentInvoiceDesign.additionalImageUI = AdditionalImageUI()
         }
-        pref.invoiceDesigned.set(currentInvoiceDesign)
+        pref.invoiceDesignedTemp.set(currentInvoiceDesign)
 
     }
     private fun cameraCheckPermission(){

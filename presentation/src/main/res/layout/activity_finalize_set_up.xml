@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
-
+        <variable
+            name="activity"
+            type="com.bravo.invoice.ui.create_invoice.finalize_setup.FinalizeSetUpActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,6 +15,8 @@
 
         <TextView
             android:id="@+id/tv_back"
+            android:background="?android:attr/selectableItemBackground"
+            android:onClick="@{() -> activity.onBack()}"
             android:layout_marginStart="@dimen/page"
             android:layout_marginEnd="@dimen/page"
             android:layout_marginTop="@dimen/_25sdp"

@@ -21,7 +21,7 @@ class SelectColorFragment : BaseFragment<SelectColorClass>(SelectColorClass::inf
     override fun initView() {
         binding.rvColors.adapter = colorAdapter.apply {
             data = Color.values().toList()
-            val invoiceDesign = pref.invoiceDesigned.get()
+            val invoiceDesign = pref.invoiceDesignedTemp.get()
             val selectedColorIndex = tryOrNull {
                 data.indexOfFirst { invoiceDesign.color == android.graphics.Color.parseColor(it.colorString) }
              } ?: -15985383

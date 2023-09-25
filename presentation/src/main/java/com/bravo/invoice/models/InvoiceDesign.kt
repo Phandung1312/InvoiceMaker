@@ -9,5 +9,5 @@ data class InvoiceDesign(
     var watermark : Int? = null,
     var additionalImageUI: AdditionalImageUI = AdditionalImageUI(),
     var hiddenCompanyName : Boolean = false,
-    var color : Int =  -16380161
+    var color : Int =  -16711926
     )

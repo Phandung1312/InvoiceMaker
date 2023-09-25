@@ -1,8 +1,6 @@
 package com.bravo.invoice.ui.create_invoice.finalize_setup
 
 
-import androidx.core.view.forEach
-import androidx.core.view.forEachIndexed
 import androidx.fragment.app.Fragment
 import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.R
@@ -34,13 +32,13 @@ class FinalizeSetUpActivity : BaseActivity<ActivityFinalizeSetUpBinding>(Activit
         if(fragment is DesignInvoiceStep5Fragment) currentStep = 4
         setStepBar()
     }
-    fun onFinalize(){
-
-    }
     private fun setStepBar(){
         currentStep++
         stepBarLists.forEachIndexed { index, view ->
             view.setCardBackgroundColor(this.getColor((if(index < currentStep) R.color.blue_button else R.color.background_step_bar)))
         }
+    }
+    fun onBack(){
+        finish()
     }
 }

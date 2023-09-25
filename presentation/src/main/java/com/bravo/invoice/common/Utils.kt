@@ -42,4 +42,5 @@ object Utils {
         val newHeight = (originBitmap.height * ratio).toInt()
         return Bitmap.createScaledBitmap(originBitmap, newWidth, newHeight, true)
     }
+
 }

@@ -10,10 +10,8 @@ import com.bravo.invoice.common.Preferences
 import com.bravo.invoice.common.Utils
 import com.bravo.invoice.databinding.ActivityAdjustLogoBinding
 import com.bravo.invoice.dialogs.LoadingDialog
-import com.bravo.invoice.models.AdditionalImageUI
 import com.bravo.invoice.models.Invoice
 import com.bravo.invoice.models.InvoiceDesign
-import com.bravo.invoice.models.LogoUI
 import com.bravo.invoice.pdf.PdfManager
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDispose
@@ -40,7 +38,7 @@ class AdjustLogoActivity : BaseActivity<ActivityAdjustLogoBinding>(ActivityAdjus
     }
 
     override fun initData() {
-        invoiceDesign = pref.invoiceDesigned.get()
+        invoiceDesign = pref.invoiceDesignedTemp.get()
         invoiceDesign.logo.bitmap = invoicePool.logo
         invoiceDesign.additionalImageUI.bitmap = invoicePool.additionalImage
         invoiceDesign.logo.size = invoiceDesign.logo.size
@@ -136,7 +134,7 @@ class AdjustLogoActivity : BaseActivity<ActivityAdjustLogoBinding>(ActivityAdjus
         lifecycleScope.launch(Dispatchers.Main) {
             val loadingDialog = LoadingDialog(this@AdjustLogoActivity )
             loadingDialog.show()
-            pref.invoiceDesigned.set(invoiceDesign)
+            pref.invoiceDesignedTemp.set(invoiceDesign)
             delay(500)
             loadingDialog.dismiss()
             finish()
@@ -154,12 +152,7 @@ class AdjustLogoActivity : BaseActivity<ActivityAdjustLogoBinding>(ActivityAdjus
     }
     private fun createInvoicePdf(invoice : Invoice,invoiceDesign: InvoiceDesign) {
         lifecycleScope.launch(Dispatchers.Main) {
-            val pdfManager = PdfManager(applicationContext, invoice.copy(
-                logo = invoiceDesign.logo,
-                banner = invoiceDesign.banner,
-                additionalImage = invoiceDesign.additionalImageUI,
-                watermark = invoiceDesign.watermark,
-                hiddenCompanyName = invoiceDesign.hiddenCompanyName), invoiceDesign.templateId, invoiceDesign.color)
+            val pdfManager = PdfManager(applicationContext, invoice.copy(), invoiceDesign)
             val bitmap = pdfManager.getInvoicePDF()
             bitmap?.let{
                 binding.ivTemplate.setImageBitmap(it)

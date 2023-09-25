@@ -1,8 +1,6 @@
 package com.bravo.invoice.common.pool
 
-import android.graphics.Bitmap
-import com.bravo.invoice.pdf.PdfManager
-import com.bravo.invoice.ui.create_invoice.design_logo.DesignLogoFragment
+import android.graphics.Bitmap import com.bravo.invoice.ui.create_invoice.design_logo.DesignLogoFragment
 import javax.inject.Inject
 import javax.inject.Singleton
 

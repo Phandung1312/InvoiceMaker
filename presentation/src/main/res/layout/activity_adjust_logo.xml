@@ -129,20 +129,26 @@
 
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginStart="@dimen/page"
+            android:layout_marginTop="@dimen/page"
             android:layout_marginEnd="@dimen/page"
-            android:layout_marginBottom="@dimen/_20sdp"
             app:cardElevation="@dimen/_2sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <com.jsibbold.zoomage.ZoomageView
                 android:id="@+id/iv_template"
+                app:zoomage_restrictBounds="false"
+                app:zoomage_zoomable="true"
+                app:zoomage_translatable="true"
+                app:zoomage_minScale="1"
+                app:zoomage_maxScale="8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 tools:src="@drawable/invoice_template" />
         </com.google.android.material.card.MaterialCardView>
         <androidx.appcompat.widget.AppCompatImageView

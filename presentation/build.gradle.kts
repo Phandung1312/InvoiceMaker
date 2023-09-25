@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.bundles.roomLibs)
     annotationProcessor(libs.roomCompiler)
     kapt(libs.roomCompiler)
+    implementation(libs.zoomage)
     implementation(libs.dexter)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)

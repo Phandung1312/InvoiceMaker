@@ -3,18 +3,12 @@ package com.bravo.invoice.models
 import android.graphics.Bitmap
 import android.net.Uri
 import com.bravo.domain.model.InvoiceItem
-import com.bravo.invoice.R
 import com.bravo.invoice.common.Constants
 
 
 data class Invoice(
     val invoiceId : Int = 0,
-    var banner : Int? = null,
-    var watermark : Int? = null,
-    var logo : LogoUI = LogoUI(),
-    var additionalImage : AdditionalImageUI = AdditionalImageUI(),
     val businessInfo : BusinessInfoInInvoiceUI = BusinessInfoInInvoiceUI(),
-    var hiddenCompanyName : Boolean = false,
     val client : ClientInInvoiceUI = ClientInInvoiceUI(),
     val date : String = "",
     val terms : String = "",

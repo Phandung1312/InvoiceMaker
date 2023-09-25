@@ -19,9 +19,11 @@ import android.text.StaticLayout
 import android.text.TextPaint
 import androidx.core.content.res.ResourcesCompat
 import com.bravo.invoice.R
+import com.bravo.invoice.common.BitmapSizeHelper
 import com.bravo.invoice.common.Constants
 import com.bravo.invoice.common.Utils
 import com.bravo.invoice.models.Invoice
+import com.bravo.invoice.models.InvoiceDesign
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -29,8 +31,7 @@ import java.io.IOException
 class PdfManager(
     private val context: Context,
     private val invoice: Invoice,
-    private val template: Int = IMPACT,
-    private val mColor: Int = -16380161,
+    private val invoiceDesign : InvoiceDesign,
 ) {
     private var document: PdfDocument = PdfDocument()
     private var pageInfo1: PageInfo = PageInfo.Builder(420, 740, 1).create()
@@ -111,28 +112,30 @@ class PdfManager(
     }
 
     private fun createBanner() {
-        invoice.banner?.let {
+        invoiceDesign.banner?.let {
             val bitmap = BitmapFactory.decodeResource(context.resources, it)
 
-            val scaleBitmap = Bitmap.createScaledBitmap(bitmap, pageInfo1.pageWidth, 70, true)
-            canvas.drawBitmap(scaleBitmap, 0f, 35f, paint)
-            bannerHeight = 50f
+//            val scaleBitmap = Bitmap.createScaledBitmap(bitmap, pageInfo1.pageWidth, 70, true)
+            val scaleBitmap = BitmapSizeHelper.createScaledBitmap(bitmap,pageInfo1.pageWidth, 70, BitmapSizeHelper.ScalingLogic.FIT )
+            canvas.drawBitmap(scaleBitmap, 0f, 0f, paint)
+            bannerHeight = 25f
         }
     }
 
     private fun createLogo() {
-        invoice.logo.bitmap?.let { bitmap ->
-            var maxDimension = invoice.logo.size
+        invoiceDesign.logo.bitmap?.let { bitmap ->
+            var maxDimension = invoiceDesign.logo.size
             logoHeight = maxDimension + 10f
-            val scaleBitmap = Utils.getScaleBitmap(bitmap, maxDimension)
+//            val scaleBitmap = Utils.getScaleBitmap(bitmap, maxDimension)
+            val scaleBitmap = BitmapSizeHelper.createScaledBitmap(bitmap,maxDimension.toInt(), maxDimension.toInt(), BitmapSizeHelper.ScalingLogic.FIT )
             paint.textAlign = Paint.Align.RIGHT
-            val startX = when (invoice.logo.alignment) {
+            val startX = when (invoiceDesign.logo.alignment) {
                 Constants.ALIGNMENT_START -> 30f
                 Constants.ALIGNMENT_CENTER -> (pageInfo1.pageWidth / 2).toFloat() - (scaleBitmap.width / 2).toFloat()
                 Constants.ALIGNMENT_END -> PAGE_RIGHT_DISTANCE - scaleBitmap.width.toFloat()
                 else -> 0f
             }
-            logoHeight = when(template){
+            logoHeight = when(invoiceDesign.templateId){
                  TYPEWRITER, HIP -> 20f
                 else -> 0f
             }
@@ -140,17 +143,17 @@ class PdfManager(
         }
     }
     private fun createWatermark(){
-        invoice.watermark?.let {
+        invoiceDesign.watermark?.let {
             val bitmap = BitmapFactory.decodeResource(context.resources, it)
             canvas.drawBitmap(bitmap, -30f, (pageInfo1.pageHeight - bitmap.height).toFloat() + 10f, paint)
         }
     }
     private fun createAdditionalImage(){
-        invoice.additionalImage.bitmap?.let { bitmap ->
-            additionalImageHeight = invoice.additionalImage.size / 1.25f
+        invoiceDesign.additionalImageUI.bitmap?.let { bitmap ->
+            additionalImageHeight = invoiceDesign.additionalImageUI.size / 1.25f
             val scaleBitmap = Utils.getScaleBitmap(bitmap, additionalImageHeight)
             canvas.drawBitmap(scaleBitmap, PAGE_RIGHT_DISTANCE - scaleBitmap.width.toFloat(), 80f + bannerHeight, paint )
-            additionalImageHeight = when(template){
+            additionalImageHeight = when(invoiceDesign.templateId){
                 IMPACT, CLASSIC , CREATIVE-> additionalImageHeight - 20f
                 else -> 0f
             }
@@ -160,7 +163,7 @@ class PdfManager(
         var currentX = 0f
         var currentY = 0f
         paint.textSize = 7f
-        when (template) {
+        when (invoiceDesign.templateId) {
             IMPACT, CLASSIC -> {
                 currentX = (pageInfo1.pageWidth - PAGE_LEFT_DISTANCE)
                 currentY = 110f + additionalHeight
@@ -212,7 +215,7 @@ class PdfManager(
         var currentX = PAGE_LEFT_DISTANCE
         var currentY = 0f
         // Trading Name
-        if(!invoice.hiddenCompanyName){
+        if(!invoiceDesign.hiddenCompanyName){
                 paint.color = Color.BLACK
                 paint.textSize = 21f
                 paint.textAlign = Paint.Align.LEFT
@@ -222,7 +225,7 @@ class PdfManager(
                         com.bravo.basic.R.font.inter_tight_semi_bold
                     ), Typeface.NORMAL
                 )
-                when (template) {
+                when (invoiceDesign.templateId) {
                     IMPACT, CLASSIC -> {
                         currentY = 178f + additionalHeight
                     }
@@ -233,7 +236,7 @@ class PdfManager(
 
                     TYPEWRITER -> {
                         paint.textAlign = Paint.Align.CENTER
-                        paint.color = mColor
+                        paint.color = invoiceDesign.color
                         currentX = (pageInfo1.pageWidth / 2).toFloat()
                         currentY = 137f + additionalHeight
                     }
@@ -255,10 +258,10 @@ class PdfManager(
         paint.textSize = 14f
         paint.textAlign = Paint.Align.RIGHT
         currentX = PAGE_RIGHT_DISTANCE
-        when (template) {
+        when (invoiceDesign.templateId) {
             IMPACT, CLASSIC -> {
                 currentY = 178f + additionalHeight
-                paint.color = mColor
+                paint.color = invoiceDesign.color
             }
 
             MODERN -> {
@@ -277,13 +280,13 @@ class PdfManager(
 
             HIP -> {
                 currentY = 137f + additionalHeight
-                paint.color = mColor
+                paint.color = invoiceDesign.color
             }
 
             CREATIVE -> {
                 currentX = PAGE_LEFT_DISTANCE
                 currentY = 194f + additionalHeight
-                paint.color = mColor
+                paint.color = invoiceDesign.color
                 paint.textAlign = Paint.Align.LEFT
             }
 
@@ -296,12 +299,12 @@ class PdfManager(
         var endX = pageInfo1.pageWidth.toFloat()
         var lineHeight = 1f
         paint.color = Color.BLACK
-        when(template){
+        when(invoiceDesign.templateId){
             CLASSIC ->{
                 startX = 0f
                 endX = pageInfo1.pageWidth.toFloat()
                 lineHeight = 5f
-                paint.color = mColor
+                paint.color = invoiceDesign.color
             }
             MODERN ->{
                 startY = 156f + additionalHeight
@@ -314,7 +317,7 @@ class PdfManager(
             TYPEWRITER ->{
                 startX = PAGE_LEFT_DISTANCE
                 startY = 148f + additionalHeight
-                paint.color = mColor
+                paint.color = invoiceDesign.color
             }
             HIP ->{
                 paint.color = context.getColor(R.color.blue_black)
@@ -341,7 +344,7 @@ class PdfManager(
         )
         var currentX = 0f
         var currentY = 0f
-        when (template) {
+        when (invoiceDesign.templateId) {
             IMPACT, CLASSIC -> {
                 currentX = (pageInfo1.pageWidth - 113).toFloat()
                 currentY = 218f + additionalHeight
@@ -387,7 +390,7 @@ class PdfManager(
         canvas.drawText("Due Date:", currentX, currentY + 45f, paint)
 
         paint.typeface = Typeface.defaultFromStyle(Typeface.NORMAL)
-        currentX += when(template){
+        currentX += when(invoiceDesign.templateId){
             IMPACT, CLASSIC, MINIMAL, SHOWCASE ->{
                 84f
             }
@@ -403,7 +406,7 @@ class PdfManager(
             canvas.drawText(dueDate, currentX, currentY + 45f, paint)
         }
 
-        when (template) {
+        when (invoiceDesign.templateId) {
             TYPEWRITER -> {
                 paint.color = context.getColor(R.color.invoice_vertical_line)
                 canvas.drawLine((pageInfo1.pageWidth /2).toFloat(), 182f + additionalHeight, (pageInfo1.pageWidth /2).toFloat(), currentHeight, paint)
@@ -432,7 +435,7 @@ class PdfManager(
         )
         var currentX = PAGE_LEFT_DISTANCE
         var currentY = 0f
-        when (template) {
+        when (invoiceDesign.templateId) {
             IMPACT, CLASSIC -> {
                 currentY = 218f + additionalHeight
             }
@@ -481,28 +484,28 @@ class PdfManager(
     private fun createTableTitle(){
         //Title Row
         currentHeight +=30f
-        when(template){
+        when(invoiceDesign.templateId){
             IMPACT, SHOWCASE, HIP, CREATIVE ->{
-                if(template == IMPACT || template == SHOWCASE || template == CREATIVE){
-                    paint.color = mColor
+                if(invoiceDesign.templateId == IMPACT || invoiceDesign.templateId == SHOWCASE || invoiceDesign.templateId == CREATIVE){
+                    paint.color = invoiceDesign.color
                 }
-                if(template == HIP) paint.color = context.getColor(R.color.blue_black)
-                if(template == CREATIVE) paint.alpha = 51 //(20%)
+                if(invoiceDesign.templateId == HIP) paint.color = context.getColor(R.color.blue_black)
+                if(invoiceDesign.templateId == CREATIVE) paint.alpha = 51 //(20%)
                 canvas.drawRect(0f, currentHeight, pageInfo1.pageWidth.toFloat(), currentHeight + 25f, paint)
             }
             CLASSIC -> {
-                paint.color = mColor
+                paint.color = invoiceDesign.color
                 canvas.drawRect(0f, currentHeight - 5f,  pageInfo1.pageWidth.toFloat(), currentHeight, paint)
                 paint.alpha = 51 //(20%)
                 canvas.drawRect(0f, currentHeight,  pageInfo1.pageWidth.toFloat(), currentHeight + 25f, paint)
             }
             MODERN, MINIMAL -> {
-                paint.color = if(template == MODERN) Color.BLACK else mColor
+                paint.color = if(invoiceDesign.templateId == MODERN) Color.BLACK else invoiceDesign.color
                 canvas.drawLine(0f, currentHeight, pageInfo1.pageWidth.toFloat(), currentHeight, paint)
                 canvas.drawLine(0f, currentHeight + 24f, pageInfo1.pageWidth.toFloat(), currentHeight + 24f, paint)
             }
             TYPEWRITER ->{
-                paint.color = mColor
+                paint.color = invoiceDesign.color
                 canvas.drawLine(PAGE_LEFT_DISTANCE, currentHeight + 25f, pageInfo1.pageWidth.toFloat(), currentHeight + 25f, paint)
             }
         }
@@ -516,7 +519,7 @@ class PdfManager(
                 com.bravo.basic.R.font.inter_tight_semi_bold
             ), Typeface.NORMAL
         )
-        paint.color = when(template){
+        paint.color = when(invoiceDesign.templateId){
             SHOWCASE, HIP -> {
                 context.getColor(R.color.white)
             }
@@ -639,11 +642,11 @@ class PdfManager(
         //Balance Due
 
         currentHeight += 30f
-        when(template){
+        when(invoiceDesign.templateId){
             IMPACT, MODERN, SHOWCASE, HIP ->{
 
-                paint.color = if(template == SHOWCASE || template == HIP  || template == MODERN) mColor else Color.BLACK
-                if(template == HIP) paint.alpha = 51
+                paint.color = if(invoiceDesign.templateId == SHOWCASE || invoiceDesign.templateId == HIP  || invoiceDesign.templateId == MODERN) invoiceDesign.color else Color.BLACK
+                if(invoiceDesign.templateId == HIP) paint.alpha = 51
                 canvas.drawRect(
                     (pageInfo1.pageWidth - 215).toFloat(),
                     currentHeight,
@@ -658,7 +661,7 @@ class PdfManager(
                 canvas.drawLine((pageInfo1.pageWidth - 215).toFloat(),currentHeight + 26f, pageInfo1.pageWidth.toFloat() + 26f, currentHeight + 26f, paint)
             }
             CREATIVE ->{
-                paint.color = mColor
+                paint.color = invoiceDesign.color
                 paint.alpha = 51
                 canvas.drawPath(getCornerRect(), paint)
             }
@@ -675,12 +678,12 @@ class PdfManager(
                 com.bravo.basic.R.font.inter_tight_semi_bold
             ), Typeface.NORMAL
         )
-        when(template){
+        when(invoiceDesign.templateId){
             IMPACT, MODERN, SHOWCASE ->{
                 paint.color = Color.WHITE
             }
             CLASSIC ->{
-                paint.color = mColor
+                paint.color = invoiceDesign.color
             }
             else -> {
                 paint.color = Color.BLACK

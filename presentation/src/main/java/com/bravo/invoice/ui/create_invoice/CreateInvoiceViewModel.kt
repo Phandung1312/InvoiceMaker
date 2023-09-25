@@ -5,10 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.bravo.basic.view.BaseViewModel
 import com.bravo.invoice.common.Preferences
 import com.bravo.invoice.models.InvoiceDesign
-import com.uber.autodispose.android.autoDispose
-import com.uber.autodispose.autoDispose
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,7 +16,7 @@ class CreateInvoiceViewModel @Inject constructor(
     var invoiceDesign : MutableLiveData<InvoiceDesign> = MutableLiveData(InvoiceDesign())
     private set
     init {
-        invoiceDesign.value = preferences.invoiceDesigned.get()
+        invoiceDesign.value = preferences.invoiceDesignedTemp.get()
     }
 
     private fun saveInvoiceDesign(
@@ -35,7 +32,7 @@ class CreateInvoiceViewModel @Inject constructor(
         watermark?.let { temp.watermark = it }
 
         viewModelScope.launch {
-            preferences.invoiceDesigned.set(temp)
+            preferences.invoiceDesignedTemp.set(temp)
         }
     }
 

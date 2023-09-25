@@ -6,7 +6,6 @@ import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.bravo.basic.extensions.invisible
-import com.bravo.basic.extensions.makeToast
 import com.bravo.basic.extensions.tryOrNull
 import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.R
@@ -68,7 +67,7 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
     }
 
     override fun initListener() {
-        pref.invoiceDesigned.asObservable().autoDispose(this).subscribe{
+        pref.invoiceDesignedTemp.asObservable().autoDispose(this).subscribe{
             viewModel.update(it)
         }
         viewModel.invoiceDesign.observe(this){ invoiceDesign ->
@@ -88,12 +87,7 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
     }
     private fun createInvoicePdf(invoiceDesign: InvoiceDesign) {
         lifecycleScope.launch(Dispatchers.Main) {
-            val pdfManager = PdfManager(applicationContext, Utils.getSampleInvoice().copy(
-                logo = invoiceDesign.logo,
-                banner = invoiceDesign.banner,
-                additionalImage = invoiceDesign.additionalImageUI,
-                watermark = invoiceDesign.watermark,
-                hiddenCompanyName = invoiceDesign.hiddenCompanyName), invoiceDesign.templateId, invoiceDesign.color)
+            val pdfManager = PdfManager(applicationContext, Utils.getSampleInvoice().copy(), invoiceDesign)
             val bitmap = pdfManager.getInvoicePDF()
             bitmap?.let{
                 binding.ivTemplate.setImageBitmap(it)

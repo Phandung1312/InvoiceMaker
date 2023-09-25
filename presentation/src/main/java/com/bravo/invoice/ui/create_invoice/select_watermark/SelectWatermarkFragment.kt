@@ -1,6 +1,5 @@
 package com.bravo.invoice.ui.create_invoice.select_watermark
 
-import android.graphics.Color
 import androidx.fragment.app.activityViewModels
 import com.bravo.basic.extensions.tryOrNull
 import com.bravo.basic.view.BaseFragment
@@ -22,7 +21,7 @@ class SelectWatermarkFragment : BaseFragment<SelectWatermarkClass>(SelectWaterma
     override fun initView() {
         binding.rvWatermarks.adapter = watermarkAdapter.apply {
             data = Watermark.values().toList()
-            val invoiceDesign = pref.invoiceDesigned.get()
+            val invoiceDesign = pref.invoiceDesignedTemp.get()
             val selectedIndex = tryOrNull {
                 data.indexOfFirst { invoiceDesign.watermark == it.watermarkId }
             } ?: 0

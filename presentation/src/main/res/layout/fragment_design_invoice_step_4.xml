@@ -6,6 +6,10 @@
         <variable
             name="fragment"
             type="com.bravo.invoice.ui.create_invoice.finalize_setup.DesignInvoiceStep4Fragment" />
+        <variable
+            name="viewModel"
+            type="com.bravo.invoice.ui.create_invoice.finalize_setup.FinalizeSetUpViewModel" />
+        <import type="com.bravo.invoice.common.Constants"/>
     </data>
     <ScrollView
         android:layout_width="match_parent"
@@ -55,29 +59,59 @@
                 android:text="Default tax rate"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/taxRate_layout"
+                    android:layout_marginEnd="@dimen/page"
+                    app:layout_constraintTop_toBottomOf="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <EditText
-                android:id="@+id/ed_tax_rate"
-                android:inputType="number"
-                android:backgroundTint="@color/backgroundPrimary"
-                android:layout_marginStart="@dimen/page"
-                android:fontFamily="@font/inter_tight_semi_bold"
-                android:textSize="@dimen/largeTextSize"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/textView14"
-                app:layout_constraintStart_toStartOf="parent"
-                android:text="10.00" />
+                    <EditText
+                        android:id="@+id/ed_tax_rate"
+                        android:onTextChanged="@{(text,start,before,count) -> viewModel.onTaxRateChanged(text)}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/page"
+                        android:backgroundTint="@color/backgroundPrimary"
+                        android:fontFamily="@font/inter_tight_semi_bold"
+                        android:inputType="numberDecimal"
+                        android:text="10.00"
+                        android:textSize="@dimen/largeTextSize"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="-3dp"
+                        android:fontFamily="@font/inter_tight_semi_bold"
+                        android:text="%"
+                        android:textSize="@dimen/largeTextSize"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ed_tax_rate"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
+                android:id="@+id/view11"
                 android:layout_marginStart="@dimen/page"
                 android:layout_marginEnd="@dimen/page"
-                android:id="@+id/view11"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/gray_line"
-                app:layout_constraintTop_toBottomOf="@+id/ed_tax_rate"
-                tools:layout_editor_absoluteX="26dp" />
+                app:layout_constraintTop_toBottomOf="@+id/taxRate_layout" />
+
+            <TextView
+                android:id="@+id/tv_error"
+                isValidate="@{viewModel.taxRateValidate}"
+                android:layout_marginStart="@dimen/page"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/error_text"
+                android:visibility="gone"
+                android:text="Tax rate can't be empty"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view11" />
 
             <View
                 android:id="@+id/view12"
@@ -100,13 +134,15 @@
 
             <RelativeLayout
                 android:id="@+id/relativeLayout4"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{() -> viewModel.onTaxTypeChanged(Constants.EXCLUSIVE)}"
                 android:paddingStart="@dimen/page"
                 android:paddingEnd="@dimen/page"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@+id/textView15"
-                tools:layout_editor_absoluteX="26dp">
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@+id/textView15">
 
                 <TextView
                     android:id="@+id/exclusive"
@@ -123,6 +159,7 @@
                     android:text="Tax is excluded from invoice item cost" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    visibleView="@{viewModel.taxType == Constants.EXCLUSIVE}"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_alignParentEnd="true"
@@ -134,20 +171,21 @@
                 android:id="@+id/view13"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_10sdp"
                 android:background="@color/gray_line"
                 app:layout_constraintTop_toBottomOf="@+id/relativeLayout4"
                 tools:layout_editor_absoluteX="26dp" />
 
             <RelativeLayout
                 android:id="@+id/relativeLayout6"
+                android:background="?android:attr/selectableItemBackground"
+                android:onClick="@{() -> viewModel.onTaxTypeChanged(Constants.INCLUSIVE)}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
                 android:paddingStart="@dimen/page"
                 android:paddingEnd="@dimen/page"
-                app:layout_constraintTop_toBottomOf="@+id/view13"
-                tools:layout_editor_absoluteX="26dp">
+                app:layout_constraintTop_toBottomOf="@+id/view13">
 
                 <TextView
                     android:id="@+id/inclusive"
@@ -164,6 +202,8 @@
                     android:text="Tax is included in invoice item cost" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    visibleView="@{viewModel.taxType == Constants.INCLUSIVE}"
+                    android:visibility="gone"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_alignParentEnd="true"
@@ -174,7 +214,7 @@
             <include
                 android:id="@+id/btn_confirm"
                 android:onClick="@{() -> fragment.onConfirm()}"
-                android:layout_marginTop="@dimen/page"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/page"
                 android:layout_marginEnd="@dimen/page"
                 layout="@layout/button_blue_main"
@@ -187,6 +227,7 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView3"
+                android:onClick="@{() -> fragment.onUseExistSetting()}"
                 android:layout_marginTop="@dimen/page"
                 app:layout_constraintTop_toBottomOf="@id/btn_confirm"
                 android:layout_marginBottom="@dimen/_20sdp"

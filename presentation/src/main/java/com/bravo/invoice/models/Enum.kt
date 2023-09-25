@@ -136,7 +136,6 @@ enum class Color(
     _33C0FF("#33C0FF"),
     _52C9FF("#52C9FF"),
     _66CFFF("#66CFFF"),
-    _7AD5FF("#7AD5FF"),
 
     _00FFE7("#00FFE7"),
     _15FFE9("#15FFE9"),
