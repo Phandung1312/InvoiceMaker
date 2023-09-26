@@ -92,7 +92,7 @@ coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", ve
 lottie = {module = "com.airbnb.android:lottie", version.ref = "lottie"}
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber"}
 gson = { module = "com.google.code.gson:gson", version.ref = "gson"}
-sweetalert = {module = "com.github.f0ris.sweetalert:library",version.ref= "sweetalert"}
+
 firebase-bom = {module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom"}
 firebase-analytics = {module = "com.google.firebase:firebase-analytics-ktx"}
 firebase-crashlytics = {module = "com.google.firebase:firebase-crashlytics-ktx"}
@@ -134,6 +134,9 @@ itext = {module = "com.itextpdf:itextpdf", version.ref = "itext"}
 dexter = {module = "com.karumi:dexter", version.ref = "dexter"}
 
 zoomage= {module ="com.jsibbold:zoomage" , version.ref = "zoomage"}
+
+
+sweetalert = {module = "com.github.f0ris.sweetalert:library",version.ref= "sweetalert"}
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "agp" }
 org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "org-jetbrains-kotlin-android" }

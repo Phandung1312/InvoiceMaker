@@ -2,7 +2,7 @@
 <resources>
 
     <style name="primary_text">
-        <item name="android:textColor">@color/black</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
         <item name="android:textSize">@dimen/secondTextSize</item>
     </style>
 

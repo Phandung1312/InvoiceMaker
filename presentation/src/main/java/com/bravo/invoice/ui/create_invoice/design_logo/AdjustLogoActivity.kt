@@ -41,9 +41,6 @@ class AdjustLogoActivity : BaseActivity<ActivityAdjustLogoBinding>(ActivityAdjus
         invoiceDesign = pref.invoiceDesignedTemp.get()
         invoiceDesign.logo.bitmap = invoicePool.logo
         invoiceDesign.additionalImageUI.bitmap = invoicePool.additionalImage
-        invoiceDesign.logo.size = invoiceDesign.logo.size
-        invoiceDesign.logo.alignment = invoiceDesign.logo.alignment
-        invoiceDesign.additionalImageUI.size = invoiceDesign.additionalImageUI.size
         setSelection()
     }
     private fun setSelection(){
