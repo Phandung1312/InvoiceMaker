@@ -4,10 +4,12 @@ import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.bravo.basic.extensions.clicks
 import com.bravo.domain.model.Client
+import com.bravo.invoice.R
 import com.bravo.invoice.adapter.ClientAdapter
 import com.bravo.invoice.databinding.BottomSheetAllclientsBinding
 import com.bravo.invoice.ui.client.AddClientFragment
@@ -138,8 +141,12 @@ class BottomSheetClients(
         binding.cancelTextView.clicks {
             dismiss()
         }
-        binding.addClientBtn.clicks (withAnim = false){
-            (requireActivity() as MainActivity).addFragment(AddClientFragment())
+        binding.addClientBtn.clicks(withAnim = false) {
+            //addFragment(AddClientFragment())
+            val createAddFragment = AddClientFragment()
+            val ft = childFragmentManager.beginTransaction()
+            ft.replace(R.id.bottom_sheet_client, createAddFragment)
+            ft.commit()
         }
     }
 

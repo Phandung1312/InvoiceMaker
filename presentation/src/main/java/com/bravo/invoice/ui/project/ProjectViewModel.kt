@@ -49,6 +49,20 @@ class ProjectViewModel @Inject constructor(
         }
     }
 
+
+    fun updateContact(contact: ContactInfoProject) {
+        viewModelScope.launch(Dispatchers.IO) {
+            projectsRepository.updateContact(contact)
+        }
+    }
+
+    fun updatePrivateNote(id: Long, noteData: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            projectsRepository.updateNoteProject(id, noteData)
+        }
+    }
+
+
     fun getContactById(idProject: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             val result = projectsRepository.getAllContactByProjectID(idProject)

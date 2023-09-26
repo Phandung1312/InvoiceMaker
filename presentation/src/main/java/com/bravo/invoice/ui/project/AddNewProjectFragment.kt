@@ -32,6 +32,7 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
     @Inject
     lateinit var addLocationAdapter: AddLocationAdapter
     private val arrLocation = ArrayList<String>()
+    private val arrFile = ArrayList<String>()
 
     private val bottomSheetFragment by lazy {
         BottomSheetClients { client ->
@@ -96,7 +97,6 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
             } else {
                 binding.nameClientTextView.setTextColor(Color.BLACK)
                 val nameClient = binding.nameClientTextView.text.toString()
-                val listContactInfo: List<ContactInfoProject> = arrayListOf()
                 val nameProject = binding.projectEdt.text.toString()
                 val arrLocation = arrLocation
                 val sdf = SimpleDateFormat("dd/M")
@@ -109,8 +109,8 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
                     "",
                     "",
                     arrLocation,
-                    "",
-                    "Active"
+                    "", "",
+                    "Active", arrFile
                 )
                 projectViewModel.insertProjects(dataProject)
                 val bundle = Bundle()

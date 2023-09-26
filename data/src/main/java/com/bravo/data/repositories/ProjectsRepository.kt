@@ -30,9 +30,18 @@ class ProjectsRepository @Inject constructor(
         projectDao.updateProject(project)
     }
 
+    suspend fun updateContact(contact: ContactInfoProject) {
+        projectDao.updateContactInfo(contact)
+    }
+
+    suspend fun updateNoteProject(id: Long, note: String) {
+        projectDao.updatePrivateNote(id, note)
+    }
+
     fun getAllContactByProjectID(parentId: Long): List<ContactInfoProject> {
         return projectDao.getAllContactInfoByIDProject(parentId)
     }
+
 
     fun getAll(): LiveData<List<ContactInfoProject>> {
         return projectDao.getAllContact()

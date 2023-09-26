@@ -28,7 +28,7 @@
     <color name="background_negative">#141066FF</color>
 
 
-    <color name="background_addClient">#F6F7FA</color>
+    <color name="background_allfragment">#F6F7FA</color>
     <color name="color_textGray">#6D7081</color>
     <color name= "color_hint_edt">#D9D9D9</color>
 
@@ -36,7 +36,7 @@
     <color name= "black_30_alpha">#30000000</color>
     <color name= "blue_black">#1F2336</color>
     <color name= "invoice_vertical_line">#979797</color>
-
+    <color name="background_addClient">#F6F7FA</color>
     <color name= "test">#FFCA7D</color>
 
 

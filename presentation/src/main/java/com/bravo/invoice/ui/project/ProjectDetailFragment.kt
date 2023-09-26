@@ -93,7 +93,8 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
                     binding.endDateTextview.text.toString(),
                     data,
                     binding.notesEdt.text.toString(),
-                    binding.textStatus.text.toString()
+                    "",
+                    binding.textStatus.text.toString(), receivedData!!.fileList
                 )
                 if (binding.nameProject.text.toString() != receivedData?.nameProject
                     || binding.textStatus.text.toString() != receivedData?.status
@@ -158,7 +159,6 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
                     data = receivedData.locationList
                 }
             }
-            Log.e("Quang",receivedData.dateStart.toString())
             receivedData.dateStart?.let { convertStringToDataPicker(it, binding.datePickerStart) }
             receivedData.dateEnd?.let { convertStringToDataPicker(it, binding.datePickerEnd) }
 
@@ -184,7 +184,7 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
 
 
     private fun convertStringToDataPicker(dataTime: String, pikerDateTime: DatePicker) {
-        val pattern = "yyyy-MM-dd"
+        val pattern = "dd/MM/yyyy"
         val formatter = DateTimeFormatter.ofPattern(pattern)
         try {
             val dateTime = LocalDateTime.parse(dataTime, formatter)

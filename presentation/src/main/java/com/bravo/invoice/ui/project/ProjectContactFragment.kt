@@ -11,8 +11,11 @@ import com.bravo.basic.extensions.visible
 import com.bravo.basic.view.BaseFragment
 import com.bravo.data.database.dao.ProjectDao
 import com.bravo.invoice.databinding.DetailProjectContacts
+import com.bravo.invoice.ui.client.DetailsClientFragment
 import com.bravo.invoice.ui.main.MainActivity
 import com.bravo.invoice.ui.project.adapter.AllContactInfoAdapter
+import com.uber.autodispose.android.lifecycle.scope
+import com.uber.autodispose.autoDispose
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -87,6 +90,17 @@ class ProjectContactFragment : BaseFragment<DetailProjectContacts>(DetailProject
 
             }
         }
+        contactInfoAdapter
+            .itemClicksInfoContact
+            .autoDispose(scope())
+            .subscribe { contactInfo ->
+                val bundle = Bundle()
+                val fragment = ShowDetailInfoContactFragment()
+                fragment.arguments = bundle
+                bundle.putSerializable(ShowDetailInfoContactFragment.contactInfo, contactInfo)
+                addFragment(fragment)
+            }
+
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
             override fun onMove(

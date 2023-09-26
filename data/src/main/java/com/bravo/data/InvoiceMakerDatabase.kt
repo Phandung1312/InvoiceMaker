@@ -13,7 +13,7 @@ import com.bravo.domain.model.converters.ContactInfoConverter
 
 @Database(
     entities = [Client::class,Project::class,ContactInfoProject::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(Converters::class, ContactInfoConverter::class)
 abstract class InvoiceMakerDatabase : RoomDatabase() {

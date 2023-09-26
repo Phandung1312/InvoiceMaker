@@ -17,7 +17,9 @@ data class Project(
     @ColumnInfo(name = "dateEnd") val dateEnd: String?,
     @ColumnInfo(name = "locationList") val locationList: List<String>,
     @ColumnInfo(name = "note") val note: String?,
+    @ColumnInfo(name = "notePrivate") val notePrivate: String?,
     @ColumnInfo(name = "status") val status: String,
+    @ColumnInfo(name = "fileList") val fileList: List<String>,
 ) : Serializable
 
 @Entity(
@@ -31,11 +33,11 @@ data class Project(
 )
 data class ContactInfoProject(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    @ColumnInfo(name = "projectId")val projectId: Long?,
+    @ColumnInfo(name = "projectId") val projectId: Long?,
     @ColumnInfo(name = "givenName") val givenName: String?,
     @ColumnInfo(name = "surName") val surName: String?,
     @ColumnInfo(name = "mobileContact") val mobileContact: String?,
     @ColumnInfo(name = "emailContact") val emailContact: String?,
     @ColumnInfo(name = "roleContact") val role: String?
-)
+) : Serializable
 

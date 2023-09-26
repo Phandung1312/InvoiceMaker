@@ -39,8 +39,6 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
     companion object {
         private const val PICK_CONTACT_REQUEST = 111
         const val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-        const val REG = "^(\\+91[\\-\\s]?)?[0]?(91)?[789]\\d{9}\$"
-        const val EDIT_CLIENT = "EDIT_CLIENT"
     }
 
     override fun initView() {
@@ -113,6 +111,7 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
         }
         binding.cancelTextView.clicks {
             popBackStack()
+
         }
         binding.deleteView.clicks {
             clientViewModel.deleteClient(clientObjectData)

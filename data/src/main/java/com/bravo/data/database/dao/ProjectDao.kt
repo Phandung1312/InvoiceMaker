@@ -25,6 +25,12 @@ interface ProjectDao {
     @Update
     suspend fun updateProject(project: Project)
 
+
+    @Query("UPDATE Project SET notePrivate = :noteData WHERE id = :id")
+    suspend fun updatePrivateNote(id :Long, noteData:String)
+
+
+
     @Query("SELECT * FROM Project WHERE status = 'Complete'")
     fun getFilteredComplete(): LiveData<List<Project>>
 
@@ -37,6 +43,8 @@ interface ProjectDao {
     @Insert(onConflict = REPLACE)
     fun insertContact(contact: ContactInfoProject)
 
+    @Update
+    suspend fun updateContactInfo(contact: ContactInfoProject)
 
     @Delete
     suspend fun deleteContactInfoList(contact: ContactInfoProject)
