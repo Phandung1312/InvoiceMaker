@@ -92,8 +92,7 @@ class DetailsClientFragment : BaseFragment<DetailsViewClass>(DetailsViewClass::i
             binding.isVisible = false
         }
         binding.backTextView.clicks {
-            val fragmentManager = requireActivity().
-            fragmentManager.popBackStack()
+            popBackStack()
         }
         binding.viewCall.clicks {
             if (clientData.mobileNumber!!.isNotEmpty()) {
@@ -107,8 +106,9 @@ class DetailsClientFragment : BaseFragment<DetailsViewClass>(DetailsViewClass::i
                 val bundle = Bundle()
                 val fragment = AddClientFragment()
                 fragment.arguments = bundle
-                (requireActivity() as MainActivity).addFragment(fragment)
                 bundle.putSerializable(CLIENT_EXTRA, clientData)
+                (requireActivity() as MainActivity).addFragment(fragment)
+
             }
         }
         binding.viewMail.clicks {
@@ -129,8 +129,9 @@ class DetailsClientFragment : BaseFragment<DetailsViewClass>(DetailsViewClass::i
                 val bundle = Bundle()
                 val fragment = AddClientFragment()
                 fragment.arguments = bundle
-                (requireActivity() as MainActivity).addFragment(fragment)
                 bundle.putSerializable(CLIENT_EXTRA, clientData)
+                (requireActivity() as MainActivity).addFragment(fragment)
+
             }
         }
         binding.viewMess.clicks {
@@ -139,11 +140,19 @@ class DetailsClientFragment : BaseFragment<DetailsViewClass>(DetailsViewClass::i
             intent.type = "vnd.android-dir/mms-sms"
             if (intent.resolveActivity(requireActivity().packageManager) != null) {
                 startActivity(intent)
-            } else {
+            }
+        }
+        binding.editTextView.clicks {
+            val receivedData = arguments?.getSerializable(CLIENT_EXTRA) as? Client
+            if (receivedData != null) {
+                val bundle = Bundle()
+                val fragment = AddClientFragment()
+                fragment.arguments = bundle
+                bundle.putSerializable(CLIENT_EXTRA, clientData)
+                (requireActivity() as MainActivity).addFragment(fragment)
 
             }
         }
-
 
     }
 

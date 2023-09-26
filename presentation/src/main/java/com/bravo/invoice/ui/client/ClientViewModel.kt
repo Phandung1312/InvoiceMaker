@@ -33,6 +33,9 @@ class ClientViewModel @Inject constructor(
         }
     }
 
+    fun searchClient(searchQuery: String): LiveData<List<Client>> {
+        return clientsRepository.searchData(searchQuery)
+    }
 
 
 }

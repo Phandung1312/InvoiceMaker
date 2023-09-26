@@ -2,6 +2,8 @@ package com.bravo.invoice.ui.client
 
 import android.app.Activity
 import android.content.Intent
+import android.database.Cursor
+import android.net.Uri
 import android.provider.ContactsContract
 import android.text.TextUtils
 import android.widget.Toast
@@ -32,15 +34,11 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
 
     private val clientViewModel by viewModels<ClientViewModel>()
     private val subjectEmailChanges: Subject<String> = PublishSubject.create()
-    private  val subjectPhoneChanges : Subject<String> = PublishSubject.create()
-    var PATTERN: Pattern = Pattern.compile(REG)
-    fun CharSequence.isPhoneNumber(): Boolean = PATTERN.matcher(this).find()
     private lateinit var clientObjectData: Client
 
     companion object {
-        private const val SELECT_PHONE_NUMBER = 111
+        private const val PICK_CONTACT_REQUEST = 111
         const val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-        const val REG = "^(\\+91[\\-\\s]?)?[0]?(91)?[789]\\d{9}\$"
     }
 
     override fun initView() {
@@ -75,6 +73,7 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
             clientObjectData = receivedDataClient
             binding.billingNameEdt.setText(receivedDataClient.billingName)
             binding.addClientTextView.text = "Edit Client"
+            binding.deleteView.isGone = false
             binding.mobileEdt.setText(receivedDataClient.mobileNumber)
             binding.emailEdt.setText(receivedDataClient.email)
             binding.billingAddressEdt.setText(receivedDataClient.address)
@@ -85,6 +84,9 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
             binding.noneText.text = receivedDataClient.payment
             binding.noteEdt.setText(receivedDataClient.note)
             binding.viewChooseContacts.isGone = true
+        } else {
+            binding.addClientTextView.text = "Add client"
+            binding.deleteView.isGone = true
         }
     }
 
@@ -104,12 +106,15 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
             openAddBillingAddress()
         }
         binding.viewChooseContacts.clicks {
-            val contactPickerIntent =
-                Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI)
-            activity?.startActivityForResult(contactPickerIntent, 1)
+            val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+            startActivityForResult(intent, PICK_CONTACT_REQUEST)
         }
         binding.cancelTextView.clicks {
             popBackStack()
+
+        }
+        binding.deleteView.clicks {
+            clientViewModel.deleteClient(clientObjectData)
         }
     }
 
@@ -152,6 +157,7 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
                             noteData
                         )
                         clientViewModel.updateClient(clientDataInsert)
+                        popBackStack()
                     } else {
                         val clientDataInsert = Client(
                             0,
@@ -207,6 +213,7 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
                         noteData
                     )
                     clientViewModel.updateClient(clientDataInsert)
+                    popBackStack()
                 } else {
                     clientViewModel.insertClient(clientDataInsert)
                     Toast.makeText(
@@ -224,26 +231,35 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == SELECT_PHONE_NUMBER && resultCode == Activity.RESULT_OK) {
-            val contactUri = data?.data ?: return
+
+        if (requestCode == PICK_CONTACT_REQUEST && resultCode == Activity.RESULT_OK) {
+            val contactUri: Uri? = data?.data
+
+            // Query for the contact name and number
             val projection = arrayOf(
                 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
                 ContactsContract.CommonDataKinds.Phone.NUMBER
             )
-            val cursor = requireContext().contentResolver.query(
-                contactUri, projection,
-                null, null, null
+
+            val cursor: Cursor? = requireActivity().contentResolver.query(
+                contactUri!!,
+                projection,
+                null,
+                null,
+                null
             )
 
-            if (cursor != null && cursor.moveToFirst()) {
-                val nameIndex =
-                    cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-                val numberIndex =
-                    cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
-                val name = cursor.getString(nameIndex)
-                val number = cursor.getString(numberIndex)
+            cursor?.use {
+                if (it.moveToFirst()) {
+                    val nameIndex =
+                        it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
+                    val numberIndex =
+                        it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
+                    val contactName = it.getString(nameIndex)
+                    val contactNumber = it.getString(numberIndex)
+
+                }
             }
-            cursor?.close()
         }
     }
 }

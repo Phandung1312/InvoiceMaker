@@ -8,6 +8,7 @@ import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import androidx.room.Update
 import com.bravo.domain.model.Client
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ClientDao {
@@ -23,4 +24,7 @@ interface ClientDao {
     @Update
     suspend fun updateClient(client: Client)
 
+
+    @Query("SELECT * FROM Client WHERE billingName LIKE '%' || :titleText || '%' OR nameContact LIKE '%' || :titleText || '%'")
+    fun searchClientList(titleText: String): LiveData<List<Client>>
 }

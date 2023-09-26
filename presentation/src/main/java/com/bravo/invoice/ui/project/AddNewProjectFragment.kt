@@ -8,6 +8,7 @@ import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import com.bravo.basic.extensions.clicks
 import com.bravo.basic.view.BaseFragment
+import com.bravo.domain.model.ContactInfoProject
 import com.bravo.domain.model.Project
 import com.bravo.invoice.adapter.ClientAdapter
 import com.bravo.invoice.databinding.AddProjectClass
@@ -31,6 +32,7 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
     @Inject
     lateinit var addLocationAdapter: AddLocationAdapter
     private val arrLocation = ArrayList<String>()
+    private val arrFile = ArrayList<String>()
 
     private val bottomSheetFragment by lazy {
         BottomSheetClients { client ->
@@ -82,14 +84,14 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
 
     @SuppressLint("SimpleDateFormat")
     override fun initListeners() {
-        binding.viewAddProject.clicks {
+        binding.viewAddProject.clicks(withAnim = false) {
             bottomSheetFragment.show(childFragmentManager, bottomSheetFragment.tag)
         }
 
-        binding.viewClickLocation.clicks {
+        binding.viewClickLocation.clicks(withAnim = false) {
             bottomSheetLocation.show(childFragmentManager, bottomSheetLocation.tag)
         }
-        binding.saveTextView.clicks {
+        binding.saveTextView.clicks(withAnim = false) {
             if (checkDataClient?.isEmpty() != false) {
                 binding.nameClientTextView.setTextColor(Color.RED)
             } else {
@@ -99,16 +101,26 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
                 val arrLocation = arrLocation
                 val sdf = SimpleDateFormat("dd/M")
                 val currentDate = sdf.format(Date())
-                val dataProject = Project(0, nameClient, nameProject,currentDate,arrLocation)
+                val dataProject = Project(
+                    0,
+                    nameClient,
+                    nameProject,
+                    currentDate,
+                    "",
+                    "",
+                    arrLocation,
+                    "", "",
+                    "Active", arrFile
+                )
                 projectViewModel.insertProjects(dataProject)
                 val bundle = Bundle()
                 val fragment = AddFileProjectFragment()
                 fragment.arguments = bundle
-                (requireActivity() as MainActivity).addFragment(fragment)
                 bundle.putSerializable(AddFileProjectFragment.PROJECT_EXTRA, dataProject)
+                addFragment(fragment)
             }
         }
-        binding.cancelTextView.clicks {
+        binding.cancelTextView.clicks(withAnim = false) {
             popBackStack()
         }
 

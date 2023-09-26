@@ -45,4 +45,9 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingInflater: (LayoutInflat
     open fun translateFragment(fragment : Fragment){
 
     }
+
+    open fun visibleBottomLayout(isVisible : Boolean = true){
+
+    }
+
 }

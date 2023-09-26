@@ -46,6 +46,8 @@ dependencies {
     implementation(libs.itext)
     implementation(libs.moshi)
     implementation(libs.bundles.roomLibs)
+    implementation(libs.gson)
+    implementation(libs.sweetalert)
     annotationProcessor(libs.roomCompiler)
     kapt(libs.roomCompiler)
     implementation(libs.zoomage)

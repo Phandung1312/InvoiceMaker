@@ -2,20 +2,29 @@ package com.bravo.invoice.ui.project
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.view.marginTop
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.bravo.basic.extensions.clicks
 import com.bravo.domain.model.Client
+import com.bravo.invoice.R
 import com.bravo.invoice.adapter.ClientAdapter
 import com.bravo.invoice.databinding.BottomSheetAllclientsBinding
+import com.bravo.invoice.ui.client.AddClientFragment
 import com.bravo.invoice.ui.client.ClientViewModel
+import com.bravo.invoice.ui.main.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -99,6 +108,7 @@ class BottomSheetClients(
                 )
             }
         }).attachToRecyclerView(binding.rVShowAllDataClient)
+        handleSearchClient()
     }
 
     private fun showAlertConfirm(titleData: String, client: Client, index: Int) {
@@ -131,6 +141,45 @@ class BottomSheetClients(
         binding.cancelTextView.clicks {
             dismiss()
         }
+        binding.addClientBtn.clicks(withAnim = false) {
+            //addFragment(AddClientFragment())
+            val createAddFragment = AddClientFragment()
+            val ft = childFragmentManager.beginTransaction()
+            ft.replace(R.id.bottom_sheet_client, createAddFragment)
+            ft.commit()
+        }
+    }
+
+    private fun handleSearchClient() {
+        binding.edtSearchDialog.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.rVShowAllDataClient.apply {
+                    clientViewModel.searchClient(binding.edtSearchDialog.text.toString())
+                        .observe(viewLifecycleOwner) { it ->
+                            if (it.isEmpty()) {
+                                binding.noResultTextview.isGone = false
+                                binding.rVShowAllDataClient.isVisible = false
+                            } else {
+                                binding.rVShowAllDataClient.isVisible = true
+                                binding.noResultTextview.isGone = true
+                                adapter = clientAdapter.apply {
+                                    data = it.reversed()
+                                }
+                            }
+                        }
+
+                }
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
     }
 
 

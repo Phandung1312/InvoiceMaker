@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data class="NewProjectClass">
 
@@ -83,7 +84,6 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/viewTab"
-                visibleView="@{!isVisible}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/page"
@@ -219,13 +219,14 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvShowAllProject"
                 visibleView="@{!isVisible}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewTab"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_margin="@dimen/page"
+                tools:listitem="@layout/item_show_all_projects"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/page"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewTab" />
 
 
             <include

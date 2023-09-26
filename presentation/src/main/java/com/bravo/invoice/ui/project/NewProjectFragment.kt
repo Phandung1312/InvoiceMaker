@@ -1,22 +1,24 @@
 package com.bravo.invoice.ui.project
 
+import android.os.Bundle
 import android.view.WindowManager
-import androidx.core.view.isVisible
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import com.bravo.basic.extensions.clicks
 import com.bravo.basic.view.BaseFragment
+import com.bravo.domain.model.Project
 import com.bravo.invoice.R
 import com.bravo.invoice.databinding.NewProjectClass
 import com.bravo.invoice.ui.main.MainActivity
 import com.bravo.invoice.ui.project.adapter.ProjectAdapter
-import com.google.android.material.card.MaterialCardView
+import com.uber.autodispose.android.lifecycle.scope
+import com.uber.autodispose.autoDispose
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflate) {
     private val projectViewModel by viewModels<ProjectViewModel>()
-
     @Inject
     lateinit var projectAdapter: ProjectAdapter
 
@@ -29,13 +31,12 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
 
     fun openAddNewProject() {
         requireActivity().supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container_view, AddNewProjectFragment())
-            .commit()
+            .add(R.id.fragment_container_view, AddNewProjectFragment()).commit()
     }
 
     override fun initData() {
         binding.rvShowAllProject.apply {
-            projectViewModel.getAllProjects.observe(viewLifecycleOwner) { it ->
+            projectViewModel.getAllProjectActive.observe(viewLifecycleOwner) { it ->
                 if (it.isEmpty()) {
                     binding.isVisible = true
                 } else {
@@ -46,23 +47,84 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
                 }
 
             }
-
         }
+
+
     }
 
     override fun initListeners() {
-        binding.viewComplete.clicks {
+        binding.viewComplete.clicks(withAnim = false) {
             binding.isVisibleView = true
+            checkData(true)
 
         }
-        binding.viewActive.clicks {
+        binding.viewActive.clicks(withAnim = false) {
             binding.isVisibleView = false
+            checkData(false)
+
         }
-        binding.closeButton.clicks {
+        binding.closeButton.clicks(withAnim = false) {
             popBackStack()
         }
-        binding.addImg.clicks {
+        binding.addImg.clicks(withAnim = false) {
             (requireActivity() as MainActivity).addFragment(AddNewProjectFragment())
         }
+        projectAdapter.itemClicksProject.autoDispose(scope()).subscribe { project ->
+            val bundle = Bundle()
+            val fragment = AddFileProjectFragment()
+            fragment.arguments = bundle
+            bundle.putSerializable(AddFileProjectFragment.PROJECT_EXTRA, project)
+            (requireActivity() as MainActivity).addFragment(fragment)
+
+
+        }
     }
+
+    private fun showAlertConfirm(titleData: String, project: Project, index: Int) {
+        val alertDialogBuilder = AlertDialog.Builder(requireActivity())
+        alertDialogBuilder.setTitle("Delete $titleData?")
+        alertDialogBuilder.setMessage("Deleting won't affect invoices or other documents that include these project.")
+        alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
+            projectViewModel.deleteProject(project)
+            projectAdapter.notifyItemRemoved(index)
+        }
+        alertDialogBuilder.setNegativeButton("No") { _, _ ->
+            projectAdapter.notifyItemChanged(index)
+        }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
+    }
+
+    private fun checkData(isTypeStatus: Boolean) {
+        binding.rvShowAllProject.apply {
+            if (isTypeStatus) {
+                projectViewModel.getAllProjectComplete.observe(viewLifecycleOwner) { it ->
+                    if (it.isEmpty()) {
+                        binding.isVisible = true
+                    } else {
+                        binding.isVisible = false
+                        adapter = projectAdapter.apply {
+                            data = it.reversed()
+                        }
+                    }
+                }
+            } else {
+                projectViewModel.getAllProjectActive.observe(viewLifecycleOwner) { it ->
+                    if (it.isEmpty()) {
+                        binding.isVisible = true
+                    } else {
+                        binding.isVisible = false
+                        adapter = projectAdapter.apply {
+                            data = it.reversed()
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+
 }
