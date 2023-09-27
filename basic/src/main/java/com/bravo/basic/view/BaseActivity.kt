@@ -38,7 +38,7 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingInflater: (LayoutInflat
 
     }
 
-    open fun popBackStack(){
+    open fun popBackStack(isVisibleNavBar : Boolean = false){
 
     }
 

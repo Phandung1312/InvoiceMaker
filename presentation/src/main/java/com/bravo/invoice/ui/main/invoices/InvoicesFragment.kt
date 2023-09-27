@@ -5,6 +5,7 @@ import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
 import com.bravo.basic.view.BaseFragment
 import com.bravo.invoice.databinding.InvoicesClass
+import com.bravo.invoice.ui.main.invoices.add_invoice.AddInvoiceFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,5 +30,8 @@ class InvoicesFragment : BaseFragment<InvoicesClass>(InvoicesClass::inflate)
             TransitionManager.beginDelayedTransition(binding.switchLayout, transition)
             applyTo(binding.switchLayout)
         }
+    }
+    fun onAddInvoice(){
+        addFragment(AddInvoiceFragment())
     }
 }

@@ -5,10 +5,12 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.activity.addCallback
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.bravo.basic.extensions.clicks
+import com.bravo.basic.extensions.makeToast
 import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.R
 import com.bravo.invoice.databinding.ActivityMainBinding
@@ -23,8 +25,7 @@ import io.reactivex.subjects.Subject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
-    private val fragments by lazy { listOf(ClientsFragment(), MoreFragment()) }
-    private val tabClicks: Subject<Int> by lazy { BehaviorSubject.createDefault(0) }
+    private val tabClicks: Subject<Int> by lazy { BehaviorSubject.createDefault(2) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +52,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
 
     }
-
     private fun updateTabSelection(selectedIndex: Int) {
         tabBottoms.forEachIndexed { index, tab ->
             val isSelected = index == selectedIndex
@@ -122,11 +122,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             .add(R.id.fragment_container_view, fragment)
             .addToBackStack(null)
             .commit()
+        visibleBottomLayout(false)
     }
 
-    override fun popBackStack() {
+    override fun popBackStack(isVisibleNavBar : Boolean) {
         val fragmentManager = supportFragmentManager
         fragmentManager.popBackStack()
+        visibleBottomLayout(isVisibleNavBar)
     }
 
     override fun visibleBottomLayout(isVisible: Boolean) {

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    <data class = "AddInvoiceClass">
+        <variable
+            name="fragment"
+            type="com.bravo.invoice.ui.main.invoices.add_invoice.AddInvoiceFragment" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/backgroundPrimary"
         android:layout_width="match_parent"
-        android:layout_height="1373dp">
+        android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/viewHeaderEstimate"
@@ -24,11 +30,15 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/closeImg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:id="@+id/iv_close"
+                        android:onClick="@{() -> fragment.onClose()}"
+                        android:background="?android:attr/selectableItemBackgroundBorderless"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
                         android:layout_centerVertical="true"
-                        android:layout_margin="@dimen/_10sdp"
+                        android:padding="@dimen/_8sdp"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
                         android:src="@drawable/ic_close"
                         app:tint="@color/blue_button" />
 
@@ -37,34 +47,30 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:layout_margin="@dimen/page"
+                        android:layout_margin="@dimen/_10sdp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/previewTextView"
+                            android:id="@+id/tv_preview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_tight_semi_bold"
                             android:text="@string/preview"
-                            android:textColor="@color/blue_button"
-                            android:textSize="@dimen/_14sdp" />
+                            style="@style/medium_blue"/>
 
                         <TextView
                             android:id="@+id/SaveTextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/_10sdp"
-                            android:fontFamily="@font/inter_tight_semi_bold"
                             android:text="@string/save"
-                            android:textColor="@color/blue_button"
-                            android:textSize="@dimen/_14sdp" />
+                            style="@style/medium_blue" />
 
                     </LinearLayout>
                 </RelativeLayout>
 
 
                 <TextView
-                    android:id="@+id/dateTextView"
+                    android:id="@+id/tv_date"
                     style="@style/primary_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -75,7 +81,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/dateTextView"
+                    android:layout_below="@+id/tv_date"
                     android:layout_marginStart="@dimen/page"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal">
@@ -83,12 +89,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_tight_semi_bold"
-                        android:text="Estimate 1"
+                        style="@style/top_center_title_text"
+                        android:text="Invoices 1"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_20sdp" />
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_10sdp"
@@ -101,17 +108,19 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            app:layout_constraintBottom_toTopOf="@id/btn_next"
             app:layout_constraintTop_toBottomOf="@+id/viewHeaderEstimate">
 
             <LinearLayout
 
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="#F6F7FA"
+                android:layout_height="wrap_content"
+                android:background="@color/background_allfragment"
                 android:orientation="vertical">
 
                 <TextView
-                    style="@style/titleHeaderMoreH1"
+                    style="@style/more_info_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/page"
@@ -119,12 +128,13 @@
                     android:fontFamily="@font/inter_tight_semi_bold"
                     android:text="@string/bill_to" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/viewClickAdd"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_add_client"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="@dimen/_8sdp"
-                    app:cardBackgroundColor="@color/white">
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="@dimen/_2sdp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -148,10 +158,10 @@
                             android:text="Add client" />
 
                     </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <TextView
-                    style="@style/titleHeaderMoreH1"
+                    style="@style/more_info_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/page"
@@ -159,12 +169,13 @@
                     android:fontFamily="@font/inter_tight_semi_bold"
                     android:text="ITEMS" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/viewClickItem"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cv_add_item"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="@dimen/_8sdp"
-                    app:cardBackgroundColor="@color/white">
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="@dimen/_2sdp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -188,15 +199,15 @@
                             android:text="Add items" />
 
                     </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/page"
-                    android:elevation="@dimen/_8sdp"
-                    app:cardBackgroundColor="@color/white">
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="@dimen/_2sdp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -218,19 +229,19 @@
 
                             <TextView
                                 android:id="@+id/subTotalValueTextview"
+                                style="@style/primary_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentEnd="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginEnd="@dimen/page"
-                                android:text="0 d" />
+                                android:text="đ0" />
                         </RelativeLayout>
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:layout_marginStart="@dimen/_20sdp"
-                            android:layout_marginTop="@dimen/_12sdp"
                             android:background="@color/gray_line" />
 
                         <RelativeLayout
@@ -255,14 +266,14 @@
                                 android:src="@drawable/ic_right" />
                         </RelativeLayout>
                     </LinearLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/page"
-                    android:elevation="@dimen/_8sdp">
+                    app:cardElevation="@dimen/_2sdp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
@@ -279,6 +290,7 @@
 
                         <TextView
                             android:id="@+id/totalValueTextview"
+                            style="@style/primary_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -286,21 +298,21 @@
                             android:layout_marginEnd="@dimen/page"
                             android:text="0 d" />
                     </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
 
                 <TextView
-                    style="@style/titleHeaderMoreH1"
+                    style="@style/more_info_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/page"
                     android:layout_marginTop="@dimen/page"
-                    android:fontFamily="@font/inter_tight_semi_bold"
                     android:text="DUE DATE" />
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:elevation="@dimen/_8sdp"
                     app:cardBackgroundColor="@color/white">
 
@@ -319,19 +331,20 @@
 
                         <TextView
                             android:id="@+id/dayTextview"
+                            style="@style/medium_blue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
                             android:layout_marginEnd="@dimen/page"
-                            android:textColor="@color/blue_button" />
+                            android:text="29 Aug" />
 
                     </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
 
                 <TextView
-                    style="@style/titleHeaderMoreH1"
+                    style="@style/more_info_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/page"
@@ -339,106 +352,138 @@
                     android:fontFamily="@font/inter_tight_semi_bold"
                     android:text="@string/payment_methods" />
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="@dimen/_8sdp"
-                    app:cardBackgroundColor="@color/white">
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="@dimen/_2sdp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_40sdp">
-                    <LinearLayout
-                        android:layout_marginStart="@dimen/page"
-                        android:layout_centerVertical="true"
-                        android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:src="@drawable/icon_paypal"
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"/>
-                        <TextView
-                            android:text="PayPal"
-                            android:layout_gravity="center_vertical"
-                            style="@style/titleHeaderMoreH2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
-                        <ImageView
-                            android:src="@drawable/ic_info"
-                            android:layout_marginStart="@dimen/_10sdp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"/>
-                    </LinearLayout>
-                        <androidx.appcompat.widget.SwitchCompat
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginEnd="@dimen/page"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
 
-                        </androidx.appcompat.widget.SwitchCompat>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginStart="@dimen/page"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/ic_paypal" />
+
+                            <TextView
+                                style="@style/titleHeaderMoreH2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:text="PayPal" />
+
+                            <ImageView
+                                android:layout_width="@dimen/_25sdp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:src="@drawable/ic_info" />
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/page"
+                            android:thumb="@drawable/thumb_layer_list"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:track="@drawable/track_background" />
 
                     </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
                 <TextView
-                    style="@style/titleHeaderMoreH1"
+                    style="@style/more_info_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/page"
                     android:layout_marginTop="@dimen/page"
-                    android:fontFamily="@font/inter_tight_semi_bold"
                     android:text="OTHER" />
 
-                <androidx.cardview.widget.CardView
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:elevation="@dimen/_8sdp"
-                    app:cardBackgroundColor="@color/white">
+                    android:layout_marginTop="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardElevation="@dimen/_2sdp">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/_5sdp">
+
                         <EditText
                             android:id="@+id/inputText"
-                            android:layout_margin="@dimen/page"
-                            android:hint="Comments appear at the bottom of your\n estimate"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@null"/>
-                       <TextView
-                           style="@style/titleHeaderMoreH2"
-                           android:layout_below="@+id/inputText"
-                           android:layout_alignParentBottom="true"
-                           android:layout_alignParentEnd="true"
-                           android:text="5000"
-                           android:layout_marginEnd="@dimen/page"
-                           android:id="@+id/countCharacterText"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"/>
+                            android:layout_marginStart="@dimen/page"
+                            android:layout_marginTop="@dimen/page"
+                            android:layout_marginEnd="@dimen/page"
+                            android:layout_marginBottom="@dimen/page"
+                            android:background="@null"
+                            android:hint="Comments appear at the bottom of your\n estimate"
+                            android:textColorHint="@color/color_hint_edt"
+                            android:textSize="@dimen/primaryTextSize" />
+
+                        <TextView
+                            android:id="@+id/countCharacterText"
+                            style="@style/more_info_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/inputText"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="@dimen/page"
+                            android:text="5000"
+                            android:textSize="@dimen/primaryTextSize" />
                     </RelativeLayout>
-                </androidx.cardview.widget.CardView>
+                </com.google.android.material.card.MaterialCardView>
 
 
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/page"
+                    android:layout_marginBottom="@dimen/_50sdp"
+                    app:cardElevation="@dimen/_2sdp">
 
-               <androidx.cardview.widget.CardView
-                   android:elevation="@dimen/_8sdp"
-                   android:layout_marginTop="@dimen/page"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingStart="@dimen/page"
+                        android:paddingTop="@dimen/_10sdp"
+                        android:paddingBottom="@dimen/_10sdp">
 
-                   <RelativeLayout
-                       android:layout_width="match_parent"
-                       android:layout_height="@dimen/_40sdp">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_25sdp"
+                            android:layout_height="@dimen/_25sdp"
+                            android:src="@drawable/ic_camera_blue" />
 
-                   </RelativeLayout>
+                        <TextView
+                            style="@style/titleHeaderMoreH2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:text="Add photos" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-               </androidx.cardview.widget.CardView>
-
-
-
+                </com.google.android.material.card.MaterialCardView>
 
 
             </LinearLayout>
@@ -446,8 +491,14 @@
 
         </ScrollView>
 
-
-
-
+        <include
+            android:id="@+id/btn_next"
+            layout="@layout/button_blue_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/page"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:textButton="@{`Next`}"
+            tools:layout_editor_absoluteX="26dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
