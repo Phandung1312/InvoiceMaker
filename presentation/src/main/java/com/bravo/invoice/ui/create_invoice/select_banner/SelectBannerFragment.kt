@@ -25,7 +25,7 @@ class SelectBannerFragment : BaseFragment<SelectBannerClass>(SelectBannerClass::
 
     override fun initListeners() {
         bannerAdapter.itemClicks.autoDispose(scope()).subscribe { resourceId ->
-            viewModel.setBanner(if(resourceId == 0) null else resourceId)
+            viewModel.setBanner(if(resourceId == 0) 0 else resourceId)
         }
     }
 }

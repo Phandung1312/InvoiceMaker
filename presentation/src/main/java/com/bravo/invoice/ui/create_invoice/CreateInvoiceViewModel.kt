@@ -28,7 +28,12 @@ class CreateInvoiceViewModel @Inject constructor(
         val temp = invoiceDesign.value!!
         templateId?.let { temp.templateId = it }
         color?.let { temp.color = it }
-        banner?.let { temp.banner = it }
+       if(banner == 0){
+           temp.banner = null
+        } else if(banner != null){
+           temp.banner = banner
+        }
+
         watermark?.let { temp.watermark = it }
 
         viewModelScope.launch {

@@ -127,38 +127,51 @@
                 app:cardCornerRadius="@dimen/_15sdp" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
+        <ScrollView
+            android:background="@color/background_addClient"
+            android:paddingBottom="@dimen/page"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:background="@color/background_addClient"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linearLayoutCompat4">
-
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat4">
             <com.google.android.material.card.MaterialCardView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/page"
                 android:layout_marginTop="@dimen/page"
                 android:layout_marginEnd="@dimen/page"
                 app:cardElevation="@dimen/_2sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.jsibbold.zoomage.ZoomageView
-                    android:id="@+id/iv_template"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/template_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:scaleType="fitCenter"
-                    app:zoomage_maxScale="8"
-                    app:zoomage_minScale="1"
-                    app:zoomage_restrictBounds="false"
-                    app:zoomage_translatable="true"
-                    app:zoomage_zoomable="true"
-                    tools:src="@drawable/invoice_template" />
+                    android:layout_height="wrap_content">
+
+                    <com.jsibbold.zoomage.ZoomageView
+                        android:id="@+id/iv_template"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        tools:layout_constraintDimensionRatio="1:2"
+                        android:scaleType="fitStart"
+                        tools:src="@drawable/invoice_template"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:zoomage_maxScale="8"
+                        app:zoomage_minScale="1"
+                        app:zoomage_restrictBounds="false"
+                        app:zoomage_translatable="true"
+                        app:zoomage_zoomable="true" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </com.google.android.material.card.MaterialCardView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_preview"

@@ -120,6 +120,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     override fun addFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container_view, fragment)
+            .setCustomAnimations(com.bravo.basic.R.anim.slide_up, 0 , 0, 0)
             .addToBackStack(null)
             .commit()
         visibleBottomLayout(false)

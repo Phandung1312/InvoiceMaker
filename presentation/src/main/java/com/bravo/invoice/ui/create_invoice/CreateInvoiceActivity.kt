@@ -3,6 +3,7 @@ package com.bravo.invoice.ui.create_invoice
 
 import android.content.Intent
 import androidx.activity.viewModels
+import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.bravo.basic.extensions.invisible
@@ -91,6 +92,11 @@ class CreateInvoiceActivity : BaseActivity<ActivityCreateInvoiceBinding>(Activit
             val bitmap = pdfManager.getInvoicePDF()
             bitmap?.let{
                 binding.ivTemplate.setImageBitmap(it)
+                ConstraintSet().apply {
+                    clone(binding.templateLayout)
+                    setDimensionRatio(binding.ivTemplate.id , "${bitmap.width}:${bitmap.height}")
+                    applyTo(binding.templateLayout)
+                }
             }
         }
     }

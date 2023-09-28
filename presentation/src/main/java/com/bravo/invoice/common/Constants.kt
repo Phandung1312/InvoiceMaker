@@ -2,9 +2,9 @@ package com.bravo.invoice.common
 
 object Constants {
     // Use for design invoice
-    const val  SMALL_SIZE = 20f
-    const val  MEDIUM_SIZE = 35f
-    const val  LARGE_SIZE = 60f
+    const val  SMALL_SIZE = 100f
+    const val  MEDIUM_SIZE = 175f
+    const val  LARGE_SIZE = 300f
 
     const val ALIGNMENT_START = 1
     const val ALIGNMENT_CENTER = 2

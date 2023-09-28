@@ -3,7 +3,9 @@ package com.bravo.invoice.ui.main.invoices.add_invoice
 import androidx.activity.addCallback
 import com.bravo.basic.view.BaseFragment
 import com.bravo.invoice.databinding.AddInvoiceClass
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddInvoiceFragment : BaseFragment<AddInvoiceClass>(AddInvoiceClass::inflate) {
     override fun initView() {
         binding.fragment = this
@@ -16,6 +18,10 @@ class AddInvoiceFragment : BaseFragment<AddInvoiceClass>(AddInvoiceClass::inflat
     }
     fun onClose(){
         popBackStack(true)
+    }
+
+    fun onNext(){
+        addFragment(CompleteInvoiceFragment())
     }
 
 }
