@@ -5,12 +5,10 @@ import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import androidx.activity.addCallback
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.bravo.basic.extensions.clicks
-import com.bravo.basic.extensions.makeToast
 import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.R
 import com.bravo.invoice.databinding.ActivityMainBinding
@@ -20,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.subjects.BehaviorSubject
 import com.uber.autodispose.autoDispose
 import com.bravo.invoice.ui.client.ClientsFragment
-import com.bravo.invoice.ui.main.invoices.InvoicesFragment
+import com.bravo.invoice.ui.items.add_item.AddItemFragment
 import io.reactivex.subjects.Subject
 
 @AndroidEntryPoint
@@ -38,7 +36,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             .subscribe { index ->
                 val selectedFragment = when (index) {
                     1 -> ClientsFragment()
-                    2 -> InvoicesFragment()
+                    2 -> AddItemFragment()
                     4 -> MoreFragment()
                     else -> null
                 }

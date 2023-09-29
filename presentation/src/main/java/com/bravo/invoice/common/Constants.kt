@@ -21,4 +21,9 @@ object Constants {
 
     const val DEFAULT_TAX_RATE = 10f
 
+    //Unit Type
+    const val NONE = 0
+    const val DAYS = 1
+    const val HOURS = 2
+
 }

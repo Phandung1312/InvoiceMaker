@@ -1,6 +1,7 @@
 package com.bravo.invoice.models
 
 import com.bravo.invoice.R
+import com.bravo.invoice.common.Constants
 import com.bravo.invoice.pdf.PdfManager
 
 
@@ -166,4 +167,13 @@ enum class Color(
     FFB13F("#FFB13F"),
     FFBE60("#FFBE60"),
     FFCA7D("#FFCA7D"),
+}
+
+enum class UnitType(
+    val typeId : Int,
+    val typeName : String
+){
+    None(Constants.NONE, "None"),
+    Days(Constants.DAYS, "Days"),
+    Hours(Constants.HOURS, "Hours")
 }

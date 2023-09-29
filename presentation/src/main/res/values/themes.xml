@@ -11,6 +11,7 @@
         <!-- Customize your theme here. -->
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="android:textColorTertiary">@color/textColorPrimary</item>
+        <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
     </style>
     <!-- Base application theme. -->
     <style name="Base.Theme.InvoiceMaker" parent="Theme.Material3.DayNight.NoActionBar">

@@ -2,8 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <data>
-
+    <data class="ItemsClass">
+        <variable
+            name="fragment"
+            type="com.bravo.invoice.ui.items.ItemsFragment" />
     </data>
     <androidx.appcompat.widget.LinearLayoutCompat
         android:background="@color/background_allfragment"
@@ -11,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <com.google.android.material.card.MaterialCardView
+            app:cardCornerRadius="0dp"
             app:cardElevation="@dimen/_2sdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -19,14 +22,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <RelativeLayout
-
                     android:id="@+id/relativeLayout7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:paddingStart="@dimen/page"
                     android:paddingEnd="@dimen/page">
-
                     <TextView
                         android:layout_centerVertical="true"
                         style="@style/medium_blue"
@@ -35,9 +36,9 @@
                         android:text="Back"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_add"
+                        android:onClick="@{() -> fragment.onAddItem()}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"

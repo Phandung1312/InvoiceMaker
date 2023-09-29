@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="dialog"
+            type="com.bravo.invoice.ui.items.add_item.UnitTypeDialog" />
+        <variable
+            name="viewModel"
+            type="com.bravo.invoice.ui.items.add_item.AddItemViewModel" />
+        <import type="com.bravo.invoice.common.Constants"/>
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:paddingBottom="@dimen/_40sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            app:cardCornerRadius="@dimen/_20sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/background_allfragment"
+                    android:fontFamily="@font/inter_tight_medium"
+                    android:gravity="center_horizontal"
+                    android:text="Unit type"
+                    android:textColor="@color/more_info"
+                    android:textSize="@dimen/secondTextSize" />
+                <View
+                    android:background="@color/gray_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    app:cardElevation="0dp"
+                    android:onClick="@{() -> dialog.onUnitTypeChanged(Constants.NONE)}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_marginStart="@dimen/page"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/page"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            style="@style/primary_text"
+                            android:text="None"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            visibleView="@{viewModel.unitType == Constants.NONE}"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/ic_blue_tick"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"/>
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <View
+                    android:layout_marginEnd="@dimen/page"
+                    android:background="@color/background_allfragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    android:onClick="@{() -> dialog.onUnitTypeChanged(Constants.DAYS)}"
+                    app:cardElevation="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_marginStart="@dimen/page"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/page"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            style="@style/primary_text"
+                            android:text="Days"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            visibleView="@{viewModel.unitType == Constants.DAYS}"
+                            android:visibility="gone"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/ic_blue_tick"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"/>
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <View
+                    android:layout_marginEnd="@dimen/page"
+                    android:background="@color/background_allfragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <com.google.android.material.card.MaterialCardView
+                    app:cardElevation="0dp"
+                    android:onClick="@{() -> dialog.onUnitTypeChanged(Constants.HOURS)}"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_marginStart="@dimen/page"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/page"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            style="@style/primary_text"
+                            android:text="Hours"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:visibility="gone"
+                            visibleView="@{viewModel.unitType == Constants.HOURS}"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/ic_blue_tick"
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"/>
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <View
+                    android:layout_marginEnd="@dimen/page"
+                    android:background="@color/background_allfragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

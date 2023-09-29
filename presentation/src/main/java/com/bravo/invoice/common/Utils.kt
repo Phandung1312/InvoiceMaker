@@ -5,6 +5,9 @@ import com.bravo.domain.model.InvoiceItem
 import com.bravo.invoice.models.BusinessInfoInInvoiceUI
 import com.bravo.invoice.models.ClientInInvoiceUI
 import com.bravo.invoice.models.Invoice
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.Locale
 
 object Utils {
     fun getSampleInvoice() : Invoice{
@@ -42,5 +45,11 @@ object Utils {
         val newHeight = (originBitmap.height * ratio).toInt()
         return Bitmap.createScaledBitmap(originBitmap, newWidth, newHeight, true)
     }
+    fun formatCurrency(number: Double): String {
+        val decimalFormatSymbols = DecimalFormatSymbols(Locale.getDefault())
+        decimalFormatSymbols.groupingSeparator = '.'
 
+        val decimalFormat = DecimalFormat("#,###", decimalFormatSymbols)
+        return decimalFormat.format(number)
+    }
 }

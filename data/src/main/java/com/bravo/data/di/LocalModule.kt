@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.bravo.data.InvoiceMakerDatabase
 import com.bravo.data.database.dao.ClientDao
+import com.bravo.data.database.dao.ItemDao
 import com.bravo.data.database.dao.ProjectDao
 import dagger.Module
 import dagger.Provides
@@ -34,5 +35,9 @@ class LocalModule {
     @Provides
     @Singleton
     fun provideStyleProjectDao(invoiceMakerDatabase: InvoiceMakerDatabase):ProjectDao = invoiceMakerDatabase.projectDao()
+
+    @Provides
+    @Singleton
+    fun providesItemDao(database: InvoiceMakerDatabase) : ItemDao = database.itemDao()
 
 }

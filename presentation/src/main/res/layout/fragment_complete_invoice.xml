@@ -13,6 +13,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.card.MaterialCardView
+            app:cardCornerRadius="0dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -77,6 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <com.google.android.material.card.MaterialCardView
+                    app:cardCornerRadius="0dp"
                     app:cardElevation="@dimen/_1sdp"
                     android:layout_margin="@dimen/page"
                     android:layout_width="match_parent"
@@ -89,6 +91,7 @@
                         android:layout_height="@dimen/_300sdp"/>
                 </com.google.android.material.card.MaterialCardView>
                 <com.google.android.material.card.MaterialCardView
+                    app:cardCornerRadius="0dp"
                     app:cardElevation="@dimen/_1sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -161,6 +164,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
                 <com.google.android.material.card.MaterialCardView
+                    app:cardCornerRadius="0dp"
                     app:cardElevation="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_width="match_parent"
@@ -199,6 +203,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/textView28"/>
 
                         <com.google.android.material.card.MaterialCardView
+                            app:cardCornerRadius="0dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             app:layout_constraintTop_toBottomOf="@+id/view1">
@@ -233,6 +238,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
                 <com.google.android.material.card.MaterialCardView
+                    app:cardCornerRadius="0dp"
                     app:cardElevation="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:layout_width="match_parent"
@@ -242,6 +248,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <com.google.android.material.card.MaterialCardView
+                            app:cardCornerRadius="0dp"
                             android:elevation="0dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -280,6 +287,7 @@
                         </com.google.android.material.card.MaterialCardView>
 
                         <com.google.android.material.card.MaterialCardView
+                            app:cardCornerRadius="0dp"
                             android:elevation="0dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -320,6 +328,7 @@
                     android:layout_marginTop="@dimen/page"
                     android:text="MORE" />
                 <com.google.android.material.card.MaterialCardView
+                    app:cardCornerRadius="0dp"
                     android:layout_marginTop="@dimen/_5sdp"
                     app:cardElevation="@dimen/_1sdp"
                     android:layout_width="match_parent"
@@ -330,6 +339,7 @@
                         android:layout_height="wrap_content">
 
                        <com.google.android.material.card.MaterialCardView
+                           app:cardCornerRadius="0dp"
                            android:elevation="0dp"
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content">
@@ -365,6 +375,7 @@
                            </androidx.constraintlayout.widget.ConstraintLayout>
                        </com.google.android.material.card.MaterialCardView>
                         <com.google.android.material.card.MaterialCardView
+                            app:cardCornerRadius="0dp"
                             android:elevation="0dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -399,6 +410,7 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </com.google.android.material.card.MaterialCardView>
                         <com.google.android.material.card.MaterialCardView
+                            app:cardCornerRadius="0dp"
                             android:elevation="0dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -433,6 +445,7 @@
                             </androidx.constraintlayout.widget.ConstraintLayout>
                         </com.google.android.material.card.MaterialCardView>
                         <com.google.android.material.card.MaterialCardView
+                            app:cardCornerRadius="0dp"
                             android:elevation="0dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
@@ -465,6 +478,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    app:cardCornerRadius="0dp"
                     android:layout_marginTop="@dimen/_10sdp"
                     app:cardElevation="@dimen/_1sdp"
                     android:layout_width="match_parent"
@@ -480,6 +494,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    app:cardCornerRadius="0dp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/page"
                     app:cardElevation="@dimen/_1sdp"

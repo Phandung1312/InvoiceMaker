@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data class="AddItemClass">
+        <variable
+            name="fragment"
+            type="com.bravo.invoice.ui.items.add_item.AddItemFragment" />
+        <variable
+            name="viewModel"
+            type="com.bravo.invoice.ui.items.add_item.AddItemViewModel" />
+        <import type="com.bravo.invoice.models.UnitType"/>
+    </data>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:orientation="vertical"
+        android:background="@color/background_allfragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.card.MaterialCardView
+            app:cardCornerRadius="0dp"
+            app:cardElevation="@dimen/_1sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <RelativeLayout
+            android:id="@+id/relativeLayout7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:paddingStart="@dimen/page"
+            android:paddingEnd="@dimen/page">
+            <TextView
+                android:layout_centerVertical="true"
+                style="@style/medium_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel" />
+            <TextView
+                android:layout_centerInParent="true"
+                style="@style/top_center_title_text"
+                android:text="Add Item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_save"
+                android:onClick="@{() -> fragment.onSave()}"
+                android:layout_centerVertical="true"
+                style="@style/medium_blue"
+                android:text="Save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="?android:attr/selectableItemBackground" />
+        </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            app:cardCornerRadius="0dp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:cardElevation="@dimen/_1sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:paddingStart="@dimen/page"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onItemNameChanged(text)}"
+                    style="@style/primary_edittext"
+                    android:layout_marginEnd="@dimen/page"
+                    android:hint="Item name 1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    style="@style/error_text"
+                    android:visibility="gone"
+                    isValidate="@{viewModel.itemNameValidate}"
+                    android:text="This feild can't be empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <View
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/gray_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"/>
+                <EditText
+                    android:onTextChanged="@{(text, start, before, count) -> viewModel.onItemDescriptionChanged(text)}"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/page"
+                    style="@style/primary_edittext"
+                    android:hint="Item description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            app:cardCornerRadius="0dp"
+            android:layout_marginTop="@dimen/page"
+            app:cardElevation="@dimen/_1sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingTop="@dimen/_10sdp">
+
+                <TextView
+                    style="@style/more_info_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/page"
+                    android:text="Rate" />
+
+                <EditText
+                    android:id="@+id/ed_rate"
+                    style="@style/primary_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/page"
+                    android:layout_marginEnd="@dimen/page"
+                    android:fontFamily="@font/inter_tight_medium"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:onTextChanged="@{(text,start,before,count) -> viewModel.onRateChanged(text)}"
+                    android:text="đ0" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/page"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/gray_line" />
+
+                <TextView
+                    style="@style/more_info_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/page"
+                    android:text="Cost" />
+
+                <EditText
+                    android:id="@+id/ed_cost"
+                    android:inputType="number"
+                    style="@style/primary_edittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/page"
+                    android:layout_marginEnd="@dimen/page"
+                    android:fontFamily="@font/inter_tight_medium"
+                    android:maxLines="1"
+                    android:onTextChanged="@{(text,start,before,count) -> viewModel.onCostChanged(text)}"
+                    android:text="đ0" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/page"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@color/gray_line" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> fragment.onShowUnitType()}">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp">
+
+                        <TextView
+                            style="@style/medium_black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/page"
+                            android:text="Days or hours" />
+
+                        <TextView
+                            style="@style/medium_blue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/page"
+                            android:text="@{UnitType.values()[viewModel.unitType != null ? viewModel.unitType : 0 ].typeName}"
+                            tools:text="None" />
+                    </RelativeLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </com.google.android.material.card.MaterialCardView>
+        <com.google.android.material.card.MaterialCardView
+            app:cardCornerRadius="0dp"
+            android:layout_marginTop="@dimen/page"
+            app:cardElevation="@dimen/_1sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_10sdp"
+                android:paddingStart="@dimen/page"
+                android:paddingEnd="@dimen/page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/apply_taxes"
+                    style="@style/medium_black"
+                    android:text="Apply taxes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_below="@id/apply_taxes"
+                    style="@style/more_info_text"
+                    android:text="Apply taxes to this items when an invoice\nis created."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/swt_auto_save"
+                    android:onCheckedChanged="@{(view, isChecked) -> viewModel.onApplyTaxesChanged(isChecked)}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:thumb="@drawable/thumb_layer_list"
+                    android:checked="true"
+                    app:track="@drawable/track_background" />
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
