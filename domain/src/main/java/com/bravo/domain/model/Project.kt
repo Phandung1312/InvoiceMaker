@@ -20,6 +20,7 @@ data class Project(
     @ColumnInfo(name = "notePrivate") val notePrivate: String?,
     @ColumnInfo(name = "status") val status: String,
     @ColumnInfo(name = "fileList") val fileList: List<String>,
+    @ColumnInfo(name = "isChecked") var isChecked: Boolean = false
 ) : Serializable
 
 @Entity(

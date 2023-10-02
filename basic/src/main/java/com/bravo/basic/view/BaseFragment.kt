@@ -50,7 +50,9 @@ abstract class BaseFragment<VB : ViewDataBinding>   (private val inflate: Inflat
     fun popBackStack(isVisibleNavBar : Boolean = false){
         (requireActivity() as BaseActivity<*>).popBackStack(isVisibleNavBar)
     }
-
+    fun popBackStack(fragment : String){
+        (requireActivity() as BaseActivity<*>).popBackStack(fragment)
+    }
     fun translateFragment(fragment: Fragment){
         (requireActivity() as BaseActivity<*>).translateFragment(fragment)
     }

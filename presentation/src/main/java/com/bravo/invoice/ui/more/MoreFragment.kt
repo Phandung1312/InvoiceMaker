@@ -5,6 +5,7 @@ import com.bravo.basic.view.BaseFragment
 import com.bravo.invoice.R
 import com.bravo.invoice.databinding.MoreClass
 import com.bravo.invoice.databinding.NewProjectClass
+import com.bravo.invoice.ui.ClientPayment.ClientPaymentOptionsFragment
 import com.bravo.invoice.ui.client.AddClientFragment
 import com.bravo.invoice.ui.main.MainActivity
 import com.bravo.invoice.ui.project.AddNewProjectFragment
@@ -14,11 +15,15 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MoreFragment : BaseFragment<MoreClass>(MoreClass::inflate) {
     override fun initView() {
+        visibleBottomLayout(true)
     }
 
     override fun initListeners() {
-        binding.viewWorkFlow.clicks(withAnim = false){
-            (requireActivity() as MainActivity).addFragment(NewProjectFragment())
+        binding.viewWorkFlow.clicks(withAnim = false) {
+            addFragment(NewProjectFragment())
+        }
+        binding.viewCashFlow.clicks(withAnim = false) {
+            addFragment(ClientPaymentOptionsFragment())
         }
     }
 

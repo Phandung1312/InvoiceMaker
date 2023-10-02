@@ -19,6 +19,8 @@ class ProjectViewModel @Inject constructor(
     val getAllProjectActive: LiveData<List<Project>> = projectsRepository.getAllProjectActive
     val getAllProjectComplete: LiveData<List<Project>> = projectsRepository.getAllProjectComplete
     val contactList: MutableLiveData<List<ContactInfoProject>> = MutableLiveData()
+
+
     fun insertProjects(project: Project) {
         viewModelScope.launch(Dispatchers.IO) {
             projectsRepository.insertProject(project)
@@ -43,6 +45,12 @@ class ProjectViewModel @Inject constructor(
         }
     }
 
+    fun deleteProjectByID(id: Long) {
+        viewModelScope.launch(Dispatchers.IO) {
+            projectsRepository.deleteProjectById(id)
+        }
+    }
+
     fun updateProject(project: Project) {
         viewModelScope.launch(Dispatchers.IO) {
             projectsRepository.updateProject(project)
@@ -59,6 +67,18 @@ class ProjectViewModel @Inject constructor(
     fun updatePrivateNote(id: Long, noteData: String) {
         viewModelScope.launch(Dispatchers.IO) {
             projectsRepository.updateNoteProject(id, noteData)
+        }
+    }
+
+    fun updateStatus(id: Long, status: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            projectsRepository.updateStatus(id, status)
+        }
+    }
+
+    fun updateFile(id: Long, fileList: ArrayList<String>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            projectsRepository.updateFile(id, fileList)
         }
     }
 

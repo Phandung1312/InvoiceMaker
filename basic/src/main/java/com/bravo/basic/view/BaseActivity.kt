@@ -41,7 +41,9 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingInflater: (LayoutInflat
     open fun popBackStack(isVisibleNavBar : Boolean = false){
 
     }
+    open fun popBackStack(fragment : String){
 
+    }
     open fun translateFragment(fragment : Fragment){
 
     }

@@ -16,13 +16,11 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
-
-
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
 
     <application
         android:name=".InvoiceMakerApplication"
@@ -36,9 +34,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InvoiceMaker"
         tools:targetApi="tiramisu">
-        <activity
-            android:name=".ui.create_invoice.finalize_setup.FinalizeSetUpActivity"
-            android:exported="false" />
         <activity
             android:name=".ui.create_invoice.IntroInvoiceActivity"
             android:exported="false" />
@@ -55,16 +50,16 @@
             android:name=".ui.create_invoice.CreateInvoiceActivity"
             android:exported="true">
 
-<!--             <intent-filter>-->
-<!--             <action android:name="android.intent.action.MAIN" />-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
 
 
-<!--             <category android:name="android.intent.category.LAUNCHER" />-->
-<!--             </intent-filter>-->
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
 
-<!--            <meta-data-->
-<!--                android:name="android.app.lib_name"-->
-<!--                android:value="" />-->
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
         </activity>
         <activity
             android:name=".ui.main.MainActivity"

@@ -216,6 +216,7 @@
         <ImageView
             android:layout_width="@dimen/_120sdp"
             android:layout_height="0dp"
+            android:id="@+id/img_addFile"
             android:layout_marginTop="@dimen/page"
             android:src="@drawable/ic_bgaddfiles"
             app:layout_constraintBottom_toTopOf="@+id/button_Addfile"
@@ -227,10 +228,13 @@
             android:id="@+id/rv_allFile"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/page"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:spanCount="3"
             tools:listitem="@layout/item_add_file"
+            app:layout_constraintBottom_toTopOf="@+id/button_Addfile"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/textProjectFiles"/>
 
@@ -240,11 +244,13 @@
             layout="@layout/button_blue_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/page"
             android:layout_marginStart="@dimen/page"
             android:layout_marginEnd="@dimen/page"
-            android:layout_marginBottom="@dimen/_30sdp"
             android:onClick="@{() -> fragment.addFile()}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:textButton="@{`Add file`}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

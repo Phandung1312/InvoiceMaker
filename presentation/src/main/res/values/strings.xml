@@ -91,4 +91,18 @@
     <string name="add_your_privates_notes">Add your privates notes</string>
     <string name="no_results_found">No results found.</string>
     <string name="want_to_change_it_later_or_add_other_rates_go_to_tax_amp_currency_in_settings">Want to change it later or add other rates? Go to <b><![CDATA[Tax & currency in Settings.]]></b></string>
+    <string name="online_payment_methods">ONLINE PAYMENT METHODS</string>
+    <string name="set_up">Set up</string>
+    <string name="accept_paypal">Accept Paypal</string>
+    <string name="paypal">Paypal</string>
+    <string name="tips">TIPS</string>
+    <string name="let_customers_add_a_trip_when_they_pay_online">Let customers add a trip when they pay online.</string>
+    <string name="invoice_instructions">INVOICE INSTRUCTIONS</string>
+    <string name="payment_instructions">Payment instructions</string>
+    <string name="allow_users_to_attach_payments_by_adding_a_remittance_advice_n_section_to_the_bottom_of_invoices">.Allow users to attach payments by adding a remittance advice section to the bottom of invoices.</string>
+    <string name="effortlessly_create_and_send_purchase_orders_for_n_supplies">Effortlessly create and send purchase orders for\n supplies</string>
+    <string name="comments_appear_at_the_bottom_of_your_n_estimate">Comments appear at the bottom of your\n estimate</string>
+    <string name="give_customers_credit_for_things_they_ve_returned_n_or_haven_t_received">Give customers credit for things they\'ve returned\n or haven\'t received</string>
+    <string name="this_payment_method_will_be_default_for_all_future_estimates_nyou_can_disable_it_at_any_time_by_editing_an_estimate">This payment method will be default for all future estimates.\nYou can disable it at any time by editing an estimate.</string>
+    <string name="new_appointments">New Appointments</string>
 </resources>

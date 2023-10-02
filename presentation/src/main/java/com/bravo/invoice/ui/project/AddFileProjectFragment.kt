@@ -1,20 +1,20 @@
 package com.bravo.invoice.ui.project
 
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
+
 import android.os.Bundle
-import android.provider.MediaStore
-import androidx.core.view.isVisible
+import androidx.core.view.isGone
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bravo.basic.extensions.clicks
 import com.bravo.basic.view.BaseFragment
+import com.bravo.data.database.dao.ProjectDao
 import com.bravo.domain.model.Project
 import com.bravo.invoice.databinding.AddFileClass
 import com.bravo.invoice.ui.main.MainActivity
-import com.bravo.invoice.ui.project.adapter.AllContactInfoAdapter
 import com.bravo.invoice.ui.project.adapter.AllFileAdapter
+import com.uber.autodispose.android.lifecycle.scope
+import com.uber.autodispose.autoDispose
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,20 +23,17 @@ class AddFileProjectFragment : BaseFragment<AddFileClass>(AddFileClass::inflate)
     companion object {
         const val PROJECT_EXTRA = "PROJECT_EXTRA"
         const val PROJECT_DETAILS = "PROJECT_DETAILS"
-        const val PICK_IMAGE_REQUEST_CODE = 123
     }
-
-    private val projectViewModel by viewModels<ProjectViewModel>()
-
-    @Inject
-    lateinit var allFileAdapter: AllFileAdapter
+    private val projectViewModel by activityViewModels<ProjectViewModel>()
+    @Inject lateinit var allFileAdapter: AllFileAdapter
+    @Inject lateinit var projectDao: ProjectDao
     private val receivedProjectData by lazy { arguments?.getSerializable(PROJECT_EXTRA) as? Project }
-    private var uriImage: Uri? = null
-    private val arrFile = ArrayList<String>()
+    private val bottomSheetAddFile by lazy {
+        BottomSheetAddFile()
+    }
     fun addFile() {
-        val pickImageIntent =
-            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(pickImageIntent, PICK_IMAGE_REQUEST_CODE)
+        bottomSheetAddFile.setData(receivedProjectData!!.id, receivedProjectData!!.fileList)
+        bottomSheetAddFile.show(childFragmentManager, bottomSheetAddFile.tag)
     }
 
     override fun initListeners() {
@@ -85,11 +82,21 @@ class AddFileProjectFragment : BaseFragment<AddFileClass>(AddFileClass::inflate)
                 .setConfirmClickListener { sDialog ->
                     projectViewModel.deleteProject(receivedProjectData!!)
                     sDialog.dismissWithAnimation()
+                    popBackStack()
                 }
                 .setCancelButton(
                     "Cancel"
                 ) { sDialog -> sDialog.dismissWithAnimation() }
                 .show()
+        }
+        allFileAdapter.itemClickFile.autoDispose(scope()).subscribe { string ->
+//            val bundle = Bundle()
+//            val fragment = DetailFileFragment()
+//            fragment.arguments = bundle
+//            bundle.putString(DetailFileFragment.DATA_INFO,proje)
+//            addFragment(fragment)
+
+
         }
     }
 
@@ -99,28 +106,20 @@ class AddFileProjectFragment : BaseFragment<AddFileClass>(AddFileClass::inflate)
         if (receivedProjectData != null) {
             binding.nameClient.text = receivedProjectData.nameClient
             binding.nameProjectTextview.text = receivedProjectData.nameProject
-        }
+            projectDao.findById(receivedProjectData.id).observe(viewLifecycleOwner){ project ->
+                project ?: return@observe
+                binding.rvAllFile.apply {
+                    adapter = allFileAdapter.apply {
+                        binding.imgAddFile.isGone = true
+                        data = project.fileList
 
-    }
-
-    override fun initData() {
-        binding.rvAllFile.apply {
-            adapter = allFileAdapter.apply {
-                data = arrFile
+                    }
+                }
             }
         }
+
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                val selectedImageUri = data.data
-                arrFile.add(selectedImageUri.toString())
-                allFileAdapter.notifyItemInserted(arrFile.size - 1)
 
-            }
-        }
-    }
 }

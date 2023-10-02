@@ -20,10 +20,12 @@ import com.bravo.invoice.ui.project.adapter.AddLocationAdapter
 import com.bravo.invoice.ui.setupinfo.EnterAddressBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.ArrayList
 import java.util.Calendar
+import java.util.Locale
 import javax.inject.Inject
 
 
@@ -31,7 +33,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate) {
     private val receivedData by lazy { arguments?.getSerializable(AddFileProjectFragment.PROJECT_DETAILS) as? Project }
-
+    private var dataStart :String =""
+    private var dataEnd :String =""
     @Inject
     lateinit var addLocationAdapter: AddLocationAdapter
     private val projectViewModel by viewModels<ProjectViewModel>()
@@ -89,8 +92,8 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
                     receivedData?.nameClient,
                     binding.nameProject.text.toString(),
                     receivedData?.dateProject,
-                    binding.startDateTextview.text.toString(),
-                    binding.endDateTextview.text.toString(),
+                    dataStart,
+                    dataEnd,
                     data,
                     binding.notesEdt.text.toString(),
                     "",
@@ -159,23 +162,43 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
                     data = receivedData.locationList
                 }
             }
-            receivedData.dateStart?.let { convertStringToDataPicker(it, binding.datePickerStart) }
-            receivedData.dateEnd?.let { convertStringToDataPicker(it, binding.datePickerEnd) }
+            binding.startDateTextview.text = receivedData.dateStart
+            binding.endDateTextview.text = receivedData.dateEnd
+            if (receivedData.dateStart!!.isNotEmpty()) {
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val date = LocalDate.parse(receivedData.dateStart, formatter)
+                val year = date.year
+                val month = date.monthValue
+                val day = date.dayOfMonth
+                binding.datePickerStart.init(year,month-1,day,null)
+           }
+            if(receivedData.dateEnd!!.isNotEmpty())
+            {
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+                val date = LocalDate.parse(receivedData.dateEnd, formatter)
+                val year = date.year
+                val month = date.monthValue
+                val day = date.dayOfMonth
+                binding.datePickerEnd.init(year,month-1,day,null)
+            }
+
 
         }
         binding.datePickerStart.setOnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
             val calendar = Calendar.getInstance()
             calendar.set(year, monthOfYear, dayOfMonth)
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
             val formattedDate = dateFormat.format(calendar.time)
+            dataStart = formattedDate
             binding.startDateTextview.text = formattedDate
         }
 
         binding.datePickerEnd.setOnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
             val calendar = Calendar.getInstance()
             calendar.set(year, monthOfYear, dayOfMonth)
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy")
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd")
             val formattedDate = dateFormat.format(calendar.time)
+            dataEnd = formattedDate
             binding.endDateTextview.text = formattedDate
         }
 
@@ -183,19 +206,6 @@ class ProjectDetailFragment : BaseFragment<ProjectDetail>(ProjectDetail::inflate
     }
 
 
-    private fun convertStringToDataPicker(dataTime: String, pikerDateTime: DatePicker) {
-        val pattern = "dd/MM/yyyy"
-        val formatter = DateTimeFormatter.ofPattern(pattern)
-        try {
-            val dateTime = LocalDateTime.parse(dataTime, formatter)
-            val day = dateTime.dayOfMonth
-            val month = dateTime.monthValue
-            val year = dateTime.year
-            pikerDateTime.init(year, month, day, null)
-        } catch (e: Exception) {
-            println("Error parsing the input string: ${e.message}")
-        }
-    }
 
 
 }

@@ -19,19 +19,20 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflate) {
     private val projectViewModel by viewModels<ProjectViewModel>()
+    private var isActive = true
+
     @Inject
     lateinit var projectAdapter: ProjectAdapter
-
     override fun initView() {
         super.initView()
+        visibleBottomLayout(false)
         requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         binding.newProject = this@NewProjectFragment
     }
 
 
     fun openAddNewProject() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_container_view, AddNewProjectFragment()).commit()
+        addFragment(AddNewProjectFragment())
     }
 
     override fun initData() {
@@ -48,19 +49,21 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
 
             }
         }
-
-
+        projectAdapter.changeText(true)
     }
 
     override fun initListeners() {
         binding.viewComplete.clicks(withAnim = false) {
+            isActive = false
             binding.isVisibleView = true
             checkData(true)
-
+            projectAdapter.changeText(false)
         }
         binding.viewActive.clicks(withAnim = false) {
+            isActive = true
             binding.isVisibleView = false
             checkData(false)
+            projectAdapter.changeText(true)
 
         }
         binding.closeButton.clicks(withAnim = false) {
@@ -74,10 +77,33 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
             val fragment = AddFileProjectFragment()
             fragment.arguments = bundle
             bundle.putSerializable(AddFileProjectFragment.PROJECT_EXTRA, project)
-            (requireActivity() as MainActivity).addFragment(fragment)
+            addFragment(fragment)
+        }
+        binding.ingChecked.clicks(withAnim = false) {
+            val bundle = Bundle()
+            val fragment = ScreenCheckListProject()
+            fragment.arguments = bundle
+            bundle.putBoolean(ScreenCheckListProject.DATA_LOAD, isActive)
+            addFragment(fragment)
+        }
 
+        projectAdapter.callback = {
+            projectViewModel.deleteProjectByID(it.first)
+            projectAdapter.notifyItemChanged(it.second)
 
         }
+
+        projectAdapter.callbackStatus = {
+            if (isActive) {
+                projectViewModel.updateStatus(it.first, "Complete")
+                projectAdapter.notifyItemChanged(it.second)
+            } else {
+                projectViewModel.updateStatus(it.first, "Active")
+                projectAdapter.notifyItemChanged(it.second)
+            }
+
+        }
+
     }
 
     private fun showAlertConfirm(titleData: String, project: Project, index: Int) {
@@ -101,6 +127,9 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
                 projectViewModel.getAllProjectComplete.observe(viewLifecycleOwner) { it ->
                     if (it.isEmpty()) {
                         binding.isVisible = true
+                        binding.textAddCustomer.text = "Nothing complete yet"
+                        binding.textDesCustomer.text =
+                            "Finished a project? Change its status to complete so it appears here."
                     } else {
                         binding.isVisible = false
                         adapter = projectAdapter.apply {
@@ -112,6 +141,9 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
                 projectViewModel.getAllProjectActive.observe(viewLifecycleOwner) { it ->
                     if (it.isEmpty()) {
                         binding.isVisible = true
+                        binding.textAddCustomer.text = "Create a new project\nfor this client?"
+                        binding.textDesCustomer.text =
+                            "Keep your documents, photos and contacts\n for a project all together in one place."
                     } else {
                         binding.isVisible = false
                         adapter = projectAdapter.apply {
@@ -125,6 +157,8 @@ class NewProjectFragment : BaseFragment<NewProjectClass>(NewProjectClass::inflat
         }
 
     }
+
+
 
 
 }

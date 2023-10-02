@@ -52,6 +52,7 @@ dependencies {
     kapt(libs.roomCompiler)
     implementation(libs.zoomage)
     implementation(libs.dexter)
+    implementation(libs.swipe)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
