@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data class = "Custom_checked_project">
+        <variable
+            name="itemCheckedProject"
+            type="com.bravo.domain.model.Project" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/checkItemImg"
+                android:src="@drawable/ic_uncheck"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_centerVertical="true"
+                android:id="@+id/viewInfo"
+                android:layout_toEndOf="@+id/checkItemImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/groupH1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/nameProjectTextView"
+                        style="@style/titleHeaderMoreH2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:text="@{itemCheckedProject.nameProject}"
+                        tools:text="HIHI" />
+
+                    <TextView
+                        android:id="@+id/dateProject"
+                        style="@style/titleHeaderMoreH1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:text="@{itemCheckedProject.dateProject}"
+                        tools:text="17/07" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/clientNameTextView"
+                    android:layout_below="@+id/groupH1"
+                    style="@style/titleHeaderMoreH1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    tools:text = "17/07"
+                    android:text="@{itemCheckedProject.nameClient}" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_below="@+id/viewInfo"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/page"
+                android:background="@color/gray_line" />
+
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+

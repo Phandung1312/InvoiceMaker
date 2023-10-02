@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_allfragment">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_60sdp"
+                android:background="@color/white">
+
+
+                <TextView
+                    android:id="@+id/cancelTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/page"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/blue_button"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:text="Offer offline payments"
+                    android:textSize="@dimen/_15sdp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/saveTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginEnd="@dimen/page"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:enabled="false"
+                    android:text="@string/save"
+                    android:textColor="@color/blue_button"
+                    android:textSize="@dimen/_14sdp"
+                    android:textStyle="normal" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textPayment"
+            style="@style/titleHeaderMoreH1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/page"
+            android:layout_marginTop="@dimen/page"
+            android:text="PAYMENT METHOD"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewHeader" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="@dimen/_8sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textPayment">
+
+            <LinearLayout
+                android:id="@+id/viewPaymentMethod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/viewTransfer"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp">
+
+                    <TextView
+                        style="@style/titleHeaderMoreH2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/page"
+                        android:text="Direct transfer" />
+
+                    <ImageView
+                        android:id="@+id/imgChecked"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/page"
+                        android:src="@drawable/ic_check" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/page"
+                    android:background="@color/gray_line" />
+
+                <RelativeLayout
+                    android:id="@+id/viewCash"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp">
+
+                    <TextView
+                        style="@style/titleHeaderMoreH2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/page"
+                        android:text="Cash" />
+
+                    <ImageView
+                        android:id="@+id/imgChecked2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/page"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/page"
+                    android:background="@color/gray_line" />
+
+                <RelativeLayout
+                    android:id="@+id/viewCheque"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp">
+
+                    <TextView
+                        style="@style/titleHeaderMoreH2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/page"
+                        android:text="Cheque" />
+
+                    <ImageView
+                        android:id="@+id/imgChecked3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/page"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/page"
+                    android:background="@color/gray_line" />
+
+                <RelativeLayout
+                    android:id="@+id/viewOther"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp">
+
+                    <TextView
+                        style="@style/titleHeaderMoreH2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/page"
+                        android:text="Other" />
+
+                    <ImageView
+                        android:id="@+id/imgChecked4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/page"
+                        android:src="@drawable/ic_check"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/textDetails"
+            style="@style/titleHeaderMoreH1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/page"
+            android:layout_marginTop="@dimen/page"
+            android:text="PAYMENT DETAILS"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewGroup" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/viewDetail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_160sdp"
+            android:elevation="@dimen/_8sdp"
+            app:layout_constraintTop_toBottomOf="@+id/textDetails">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    style="@style/titleHeaderMoreH1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="@dimen/page"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:background="@null"
+                    android:hint="Your bank account details."
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintBottom_toTopOf="@id/textLimit"
+                    app:layout_constraintWidth_default="wrap"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHeight="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"
+                    tools:hint="@tools:sample/lorem/random" />
+
+                <TextView
+                    android:id="@+id/textLimit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:text="1000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity=""
+            android:text="@string/this_payment_method_will_be_default_for_all_future_estimates_nyou_can_disable_it_at_any_time_by_editing_an_estimate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewDetail" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

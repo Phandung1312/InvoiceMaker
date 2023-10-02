@@ -51,6 +51,7 @@ dependencies {
     annotationProcessor(libs.roomCompiler)
     kapt(libs.roomCompiler)
     implementation(libs.dexter)
+    implementation(libs.swipe)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)

@@ -1,13 +1,23 @@
 package com.bravo.invoice.ui.client
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Activity.RESULT_OK
+import android.app.AlertDialog
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.provider.ContactsContract
+import android.provider.Settings
 import android.text.TextUtils
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -19,6 +29,11 @@ import com.bravo.invoice.R
 import com.bravo.invoice.databinding.AddClientClass
 import com.bravo.invoice.ui.main.MainActivity
 import com.bravo.invoice.ui.setupinfo.EnterAddressBottomSheet
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDispose
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +52,8 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
     private lateinit var clientObjectData: Client
 
     companion object {
-        private const val PICK_CONTACT_REQUEST = 111
+        const val CONTACT_PERMISSION_CODE = 1
+        const val CONTACT_PICK_CODE = 2
         const val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
     }
 
@@ -106,8 +122,11 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
             openAddBillingAddress()
         }
         binding.viewChooseContacts.clicks {
-            val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
-            startActivityForResult(intent, PICK_CONTACT_REQUEST)
+            if (checkContactPermission()) {
+                pickContact()
+            } else {
+                requestContactPermission()
+            }
         }
         binding.cancelTextView.clicks {
             popBackStack()
@@ -179,6 +198,7 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
                             LENGTH_SHORT
                         )
                             .show()
+                        popBackStack()
                     }
                 } else {
                     binding.textEmptyValidEmail.isVisible = false
@@ -222,6 +242,7 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
                         LENGTH_SHORT
                     )
                         .show()
+                    popBackStack()
                 }
             }
 
@@ -229,37 +250,97 @@ class AddClientFragment : BaseFragment<AddClientClass>(AddClientClass::inflate) 
     }
 
 
+    private fun showRotationalDialogForPermission() {
+        AlertDialog.Builder(activity)
+            .setMessage("Turn on permission on App settings")
+            .setPositiveButton("Go to SETTINGS") { _, _ ->
+                try {
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                    val uri = Uri.fromParts("package", activity?.packageName, null)
+                    intent.data = uri
+                    startActivity(intent)
+                } catch (e: ActivityNotFoundException) {
+                    e.printStackTrace()
+                }
+            }
+            .setNegativeButton("CANCEL") { dialog, _ ->
+                dialog.dismiss()
+            }.show()
+    }
+
+    private fun checkContactPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireActivity(),
+            Manifest.permission.READ_CONTACTS
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestContactPermission() {
+        val permission = arrayOf(Manifest.permission.READ_CONTACTS)
+        ActivityCompat.requestPermissions(requireActivity(), permission, CONTACT_PERMISSION_CODE)
+    }
+
+    private fun pickContact() {
+        val intent = Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI)
+        startActivityForResult(intent, CONTACT_PICK_CODE)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CONTACT_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                pickContact()
+            } else {
+               showRotationalDialogForPermission()
+            }
+        }
+    }
+    @SuppressLint("Range")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            if (requestCode == CONTACT_PICK_CODE) {
+                val cursor1: Cursor
+                val cursor2: Cursor?
+                val uri = data!!.data
+                cursor1 = requireActivity().contentResolver.query(uri!!, null, null, null, null)!!
+                if (cursor1.moveToFirst()) {
+                    val contactId =
+                        cursor1.getString(cursor1.getColumnIndex(ContactsContract.Contacts._ID))
+                    val contactName =
+                        cursor1.getString(cursor1.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
+                    binding.billingNameEdt.setText(contactName)
+                    val idResults =
+                        cursor1.getString(cursor1.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
+                    val idResultHold = idResults.toInt()
+                    if (idResultHold == 1) {
+                        cursor2 = requireActivity().contentResolver.query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null,
+                            ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + contactId,
+                            null,
+                            null
+                        )
+                        while (cursor2!!.moveToNext()) {
+                            val contactNumber =
+                                cursor2.getString(cursor2.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                            print(contactNumber)
+                            binding.mobileEdt.setText(contactNumber.toString())
 
-        if (requestCode == PICK_CONTACT_REQUEST && resultCode == Activity.RESULT_OK) {
-            val contactUri: Uri? = data?.data
-
-            // Query for the contact name and number
-            val projection = arrayOf(
-                ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-                ContactsContract.CommonDataKinds.Phone.NUMBER
-            )
-
-            val cursor: Cursor? = requireActivity().contentResolver.query(
-                contactUri!!,
-                projection,
-                null,
-                null,
-                null
-            )
-
-            cursor?.use {
-                if (it.moveToFirst()) {
-                    val nameIndex =
-                        it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)
-                    val numberIndex =
-                        it.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
-                    val contactName = it.getString(nameIndex)
-                    val contactNumber = it.getString(numberIndex)
-
+                        }
+                        cursor2.close()
+                    }
+                    cursor1.close()
                 }
             }
+
+        } else {
         }
     }
+
+
 }

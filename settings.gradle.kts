@@ -1,3 +1,4 @@
+import java.net.URI
 pluginManagement {
     includeBuild("build-logic")
     repositories {
@@ -11,7 +12,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = URI.create("https://jitpack.io") }
     }
+
 }
 
 rootProject.name = "InvoiceMaker"

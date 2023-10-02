@@ -22,6 +22,14 @@ class ProjectsRepository @Inject constructor(
         projectDao.deleteProject(project)
     }
 
+    suspend fun deleteProjectById(id: Long) {
+        projectDao.deleteProjectById(id)
+    }
+
+    suspend fun updateStatus(id: Long, status: String) {
+        projectDao.updateStatus(id, status)
+    }
+
     suspend fun deleteContactInfo(contact: ContactInfoProject) {
         projectDao.deleteContactInfoList(contact)
     }
@@ -36,6 +44,10 @@ class ProjectsRepository @Inject constructor(
 
     suspend fun updateNoteProject(id: Long, note: String) {
         projectDao.updatePrivateNote(id, note)
+    }
+
+    suspend fun updateFile(id: Long, fileList: List<String>) {
+        projectDao.updateFileProject(id, fileList)
     }
 
     fun getAllContactByProjectID(parentId: Long): List<ContactInfoProject> {

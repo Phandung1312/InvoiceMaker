@@ -11,55 +11,100 @@
     </data>
 
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.aitsuki.swipe.SwipeLayout
+        android:id="@+id/swipelayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:autoClose="true"
+        app:designer="@string/classic_designer"
+        app:preview="none">
 
         <LinearLayout
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end">
+
+            <TextView
+                android:id="@+id/right_1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/holo_blue_light"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="Active"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/right_2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#ff01"
+                android:gravity="center"
+                android:text="Delete"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainItem"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <RelativeLayout
+                    android:id="@+id/groupH1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/nameProjectTextView"
+                        style="@style/titleHeaderMoreH2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text = "HIHI"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:text="@{itemShowProject.nameProject}" />
+
+                    <TextView
+                        android:id="@+id/dateProject"
+                        style="@style/titleHeaderMoreH1"
+                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        tools:text = "17/07"
+                        android:text="@{itemShowProject.dateProject}"  />
+                </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/nameProjectTextView"
-                    style="@style/titleHeaderMoreH2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text = "HIHI"
-                    android:text="@{itemShowProject.nameProject}" />
-
-                <TextView
-                    android:id="@+id/dateProject"
+                    android:id="@+id/clientNameTextView"
+                    android:layout_below="@+id/groupH1"
                     style="@style/titleHeaderMoreH1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_10sdp"
                     tools:text = "17/07"
-                    android:text="@{itemShowProject.dateProject}"  />
+                    android:text="@{itemShowProject.nameClient}" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_below="@+id/clientNameTextView"
+                    android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/page"
+                    android:background="@color/gray_line" />
+
+
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/clientNameTextView"
-                style="@style/titleHeaderMoreH1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:text="@{itemShowProject.nameClient}" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:background="@color/gray_line" />
-        </LinearLayout>
+    </com.aitsuki.swipe.SwipeLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

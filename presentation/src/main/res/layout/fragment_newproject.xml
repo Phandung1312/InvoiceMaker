@@ -32,10 +32,10 @@
             <ImageView
                 android:id="@+id/closeButton"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/page"
-                android:src="@drawable/ic_close"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_marginStart="@dimen/_10sdp"
+                android:src="@drawable/ic_back_right"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp" />
 
             <LinearLayout
                 android:layout_alignParentEnd="true"
@@ -46,8 +46,8 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
+                    android:id="@+id/ingChecked"
                     android:src="@drawable/ic_checked"
-                    visibleView="@{!isVisibleView}"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/page"
                     android:layout_width="wrap_content"
@@ -206,6 +206,7 @@
                     android:layout_height="wrap_content" />
 
                 <TextView
+                    android:id="@+id/textDesCustomer"
                     android:layout_below="@+id/textAddCustomer"
                     android:text="@string/keep_your_documents_photos_and_contacts_for_a_project_all_together_in_one_place"
                     android:layout_width="wrap_content"
@@ -241,6 +242,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/page"
                 android:layout_marginEnd="@dimen/page" />
+
+
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

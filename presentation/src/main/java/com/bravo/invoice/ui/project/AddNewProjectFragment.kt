@@ -7,17 +7,17 @@ import android.os.Bundle
 import androidx.core.view.isGone
 import androidx.fragment.app.viewModels
 import com.bravo.basic.extensions.clicks
+import com.bravo.basic.extensions.hideKeyboard
 import com.bravo.basic.view.BaseFragment
-import com.bravo.domain.model.ContactInfoProject
 import com.bravo.domain.model.Project
 import com.bravo.invoice.adapter.ClientAdapter
 import com.bravo.invoice.databinding.AddProjectClass
-import com.bravo.invoice.ui.main.MainActivity
 import com.bravo.invoice.ui.project.adapter.AddLocationAdapter
 import com.bravo.invoice.ui.setupinfo.EnterAddressBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 import javax.inject.Inject
 
 
@@ -99,8 +99,8 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
                 val nameClient = binding.nameClientTextView.text.toString()
                 val nameProject = binding.projectEdt.text.toString()
                 val arrLocation = arrLocation
-                val sdf = SimpleDateFormat("dd/M")
-                val currentDate = sdf.format(Date())
+                val dateFormat = SimpleDateFormat("MMMM/dd", Locale.ENGLISH)
+                val currentDate = dateFormat.format(Date())
                 val dataProject = Project(
                     0,
                     nameClient,
@@ -113,6 +113,7 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
                     "Active", arrFile
                 )
                 projectViewModel.insertProjects(dataProject)
+                requireActivity().hideKeyboard()
                 val bundle = Bundle()
                 val fragment = AddFileProjectFragment()
                 fragment.arguments = bundle
@@ -125,5 +126,22 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
         }
 
     }
+
+    override fun onResume() {
+        super.onResume()
+//        initObservable()
+    }
+
+//    private fun initObservable() {
+//        bottomSheetFragment.subject
+//            .autoDispose(scope())
+//            .subscribe {
+//                when(it){
+//                    bottomSheetFragment.addId->{
+//                        addFragment()
+//                    }
+//                }
+//            }
+//    }
 
 }

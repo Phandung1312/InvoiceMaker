@@ -6,6 +6,7 @@ import android.widget.*
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.bravo.basic.extensions.clicks
 import com.bravo.basic.extensions.setBackgroundTint
 import com.bravo.basic.extensions.setTint
@@ -197,6 +198,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         fragmentManager.popBackStack()
     }
 
+    override fun popBackStack(fragment : String){
+        val fragmentManager = supportFragmentManager
+        fragmentManager.popBackStack(fragment, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+    }
     override fun visibleBottomLayout(isVisible: Boolean) {
         binding.layoutBottom.isVisible = isVisible
     }

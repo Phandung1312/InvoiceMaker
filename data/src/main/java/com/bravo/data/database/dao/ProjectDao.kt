@@ -19,16 +19,28 @@ interface ProjectDao {
     @Query("SELECT * FROM Project WHERE status = 'Active'")
     fun getAllProjectActive(): LiveData<List<Project>>
 
+    @Query("SELECT * FROM Project WHERE id = :id")
+    fun findById(id: Long): LiveData<Project?>
+
     @Delete
     suspend fun deleteProject(project: Project)
+
+
+    @Query("DELETE FROM Project WHERE id = :objectId")
+    fun deleteProjectById(objectId: Long)
 
     @Update
     suspend fun updateProject(project: Project)
 
 
     @Query("UPDATE Project SET notePrivate = :noteData WHERE id = :id")
-    suspend fun updatePrivateNote(id :Long, noteData:String)
+    suspend fun updatePrivateNote(id: Long, noteData: String)
 
+    @Query("UPDATE Project SET status = :status WHERE id = :id")
+    suspend fun updateStatus(id: Long, status: String)
+
+    @Query("UPDATE Project SET fileList = :fileList WHERE id = :id")
+    suspend fun updateFileProject(id: Long, fileList: List<String>)
 
 
     @Query("SELECT * FROM Project WHERE status = 'Complete'")
@@ -40,6 +52,7 @@ interface ProjectDao {
 
     @Query("SELECT * FROM ContactInfoProject")
     fun getAllContact(): LiveData<List<ContactInfoProject>>
+
     @Insert(onConflict = REPLACE)
     fun insertContact(contact: ContactInfoProject)
 
@@ -48,7 +61,6 @@ interface ProjectDao {
 
     @Delete
     suspend fun deleteContactInfoList(contact: ContactInfoProject)
-
 
 
 }
