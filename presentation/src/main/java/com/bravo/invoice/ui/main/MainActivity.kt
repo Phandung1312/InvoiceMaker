@@ -18,7 +18,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.subjects.BehaviorSubject
 import com.uber.autodispose.autoDispose
 import com.bravo.invoice.ui.client.ClientsFragment
+import com.bravo.invoice.ui.items.ItemsFragment
 import com.bravo.invoice.ui.items.add_item.AddItemFragment
+import com.bravo.invoice.ui.main.invoices.InvoicesFragment
 import io.reactivex.subjects.Subject
 
 @AndroidEntryPoint
@@ -36,7 +38,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             .subscribe { index ->
                 val selectedFragment = when (index) {
                     1 -> ClientsFragment()
-                    2 -> AddItemFragment()
+                    2 -> ItemsFragment()
                     4 -> MoreFragment()
                     else -> null
                 }
@@ -117,8 +119,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
 
     override fun addFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
+            .setCustomAnimations(com.bravo.basic.R.anim.slide_up, 0, 0, com.bravo.basic.R.anim.slide_out_down )
             .add(R.id.fragment_container_view, fragment)
-            .setCustomAnimations(com.bravo.basic.R.anim.slide_up, 0 , 0, 0)
             .addToBackStack(null)
             .commit()
         visibleBottomLayout(false)

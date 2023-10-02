@@ -49,6 +49,10 @@ class AddItemFragment : BaseFragment<AddItemClass>(AddItemClass::inflate) {
     fun onSave(){
         if(viewModel.isValidateInfo()){
             viewModel.saveItem()
+            popBackStack()
         }
+    }
+    fun onCancel(){
+        popBackStack()
     }
 }

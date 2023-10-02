@@ -2,14 +2,14 @@ package com.bravo.invoice.ui.items.add_item
 
 import androidx.lifecycle.MutableLiveData
 import com.bravo.basic.view.BaseViewModel
-import com.bravo.data.database.dao.ItemDao
 import com.bravo.domain.model.Item
+import com.bravo.domain.repositories.ItemRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class AddItemViewModel @Inject constructor(
-    private val itemDao : ItemDao
+    private val itemRepository: ItemRepository
 ) : BaseViewModel() {
     var item : Item = Item()
     var itemNameValidate : MutableLiveData<Boolean?> = MutableLiveData(null)
@@ -63,6 +63,6 @@ class AddItemViewModel @Inject constructor(
         return false
     }
     fun saveItem(){
-        itemDao.insert(item)
+        itemRepository.addItem(item)
     }
 }

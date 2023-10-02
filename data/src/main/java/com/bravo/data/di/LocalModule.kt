@@ -40,4 +40,6 @@ class LocalModule {
     @Singleton
     fun providesItemDao(database: InvoiceMakerDatabase) : ItemDao = database.itemDao()
 
+
+
 }

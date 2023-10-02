@@ -6,6 +6,9 @@
         <variable
             name="fragment"
             type="com.bravo.invoice.ui.items.ItemsFragment" />
+        <variable
+            name="viewModel"
+            type="com.bravo.invoice.ui.items.ItemsViewModel" />
     </data>
     <androidx.appcompat.widget.LinearLayoutCompat
         android:background="@color/background_allfragment"
@@ -29,6 +32,7 @@
                     android:paddingStart="@dimen/page"
                     android:paddingEnd="@dimen/page">
                     <TextView
+                        android:onClick="@{() -> fragment.onBack()}"
                         android:layout_centerVertical="true"
                         style="@style/medium_blue"
                         android:layout_width="wrap_content"
@@ -86,6 +90,10 @@
 
                         <EditText
                             android:id="@+id/ed_search"
+                            android:inputType="text"
+                            android:imeOptions="actionSearch"
+                            android:maxLines="1"
+                            android:onTextChanged="@{(text, start, before, count) -> viewModel.onSearchTextChanged(text)}"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginStart="@dimen/_10sdp"
@@ -136,15 +144,15 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:background="@color/backgroundPrimary"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_items"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/items_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:listitem="@layout/items_item" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

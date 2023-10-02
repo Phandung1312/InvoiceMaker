@@ -3,6 +3,8 @@ package com.bravo.invoice.common
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
+import android.view.inputmethod.EditorInfo
+import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
@@ -64,5 +66,24 @@ object BindingAdapters {
         } else {
             view.setOnClickListener(null)
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("price")
+    fun setFormatCurrency(view: TextView, price : Long?) {
+        price?.let {
+            val text = "đ" + Utils.formatCurrency(price.toDouble())
+            view.text = text
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("actionId")
+    fun setFormatCurrency(editText: EditText, actionId : Int?) {
+       actionId?.let {
+           if(it == EditorInfo.IME_ACTION_DONE){
+               editText.clearFocus()
+           }
+       }
     }
 }

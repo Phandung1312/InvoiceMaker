@@ -1,47 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:paddingStart="@dimen/page"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <TextView
-        android:id="@+id/textView30"
-        android:layout_marginTop="@dimen/_10sdp"
-        style="@style/medium_black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Item name 1" />
-
-    <TextView
-        android:id="@+id/textView31"
-        style="@style/more_info_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:textSize="@dimen/secondTextSize"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView30"
-        tools:text="items description" />
-    <TextView
-        style="@style/primary_text"
-        android:layout_marginEnd="@dimen/page"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="đ1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <View
-        android:layout_marginTop="@dimen/_10sdp"
+<layout>
+    <data>
+        <variable
+            name="item"
+            type="com.bravo.domain.model.Item" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:paddingStart="@dimen/page"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:background="@color/gray_line"
-        app:layout_constraintTop_toBottomOf="@+id/textView31"
-        tools:layout_editor_absoluteX="26dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <TextView
+            android:id="@+id/textView30"
+            android:text="@{item.name}"
+            android:layout_marginTop="@dimen/_10sdp"
+            style="@style/medium_black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Item name 1" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:text="@{item.description}"
+            style="@style/more_info_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textSize="@dimen/secondTextSize"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView30"
+            tools:text="items description" />
+        <TextView
+            style="@style/primary_text"
+            price = "@{item.rate}"
+            android:layout_marginEnd="@dimen/page"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="đ1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:id="@+id/bottom_line"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/gray_line"
+            app:layout_constraintTop_toBottomOf="@+id/textView31"
+            tools:layout_editor_absoluteX="26dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

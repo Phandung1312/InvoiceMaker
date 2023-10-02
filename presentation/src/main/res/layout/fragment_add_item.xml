@@ -12,6 +12,7 @@
         <import type="com.bravo.invoice.models.UnitType"/>
     </data>
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:clickable="true"
         android:orientation="vertical"
         android:background="@color/background_allfragment"
         android:layout_width="match_parent"
@@ -30,6 +31,8 @@
             android:paddingStart="@dimen/page"
             android:paddingEnd="@dimen/page">
             <TextView
+                android:onClick="@{() -> fragment.onCancel()}"
+                android:background="?android:attr/selectableItemBackground"
                 android:layout_centerVertical="true"
                 style="@style/medium_blue"
                 android:layout_width="wrap_content"
@@ -67,6 +70,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:imeOptions="actionDone"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onItemNameChanged(text)}"
                     style="@style/primary_edittext"
                     android:layout_marginEnd="@dimen/page"
@@ -124,6 +130,7 @@
                     android:layout_marginEnd="@dimen/page"
                     android:fontFamily="@font/inter_tight_medium"
                     android:inputType="number"
+                    android:imeOptions="actionDone"
                     android:maxLines="1"
                     android:onTextChanged="@{(text,start,before,count) -> viewModel.onRateChanged(text)}"
                     android:text="đ0" />
@@ -152,6 +159,7 @@
                     android:layout_marginEnd="@dimen/page"
                     android:fontFamily="@font/inter_tight_medium"
                     android:maxLines="1"
+                    android:imeOptions="actionDone"
                     android:onTextChanged="@{(text,start,before,count) -> viewModel.onCostChanged(text)}"
                     android:text="đ0" />
 
