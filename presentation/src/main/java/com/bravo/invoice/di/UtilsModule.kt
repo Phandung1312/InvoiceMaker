@@ -1,9 +1,6 @@
 package com.bravo.invoice.di
 
 import android.content.Context
-import androidx.room.Room
-import com.bravo.data.InvoiceMakerDatabase
-import com.bravo.data.database.dao.ClientDao
 import com.bravo.invoice.common.Preferences
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import dagger.Module

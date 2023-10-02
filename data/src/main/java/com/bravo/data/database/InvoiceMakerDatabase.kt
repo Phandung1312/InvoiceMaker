@@ -1,4 +1,4 @@
-package com.bravo.data
+package com.bravo.data.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
@@ -15,7 +15,7 @@ import com.bravo.domain.model.converters.ContactInfoConverter
 
 @Database(
     entities = [Client::class,Project::class,ContactInfoProject::class,Item::class],
-    version = 2
+    version = 1
 )
 @TypeConverters(Converters::class, ContactInfoConverter::class)
 abstract class InvoiceMakerDatabase : RoomDatabase() {

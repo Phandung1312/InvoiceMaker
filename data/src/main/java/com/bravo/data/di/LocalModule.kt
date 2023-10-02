@@ -2,7 +2,7 @@ package com.bravo.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.bravo.data.InvoiceMakerDatabase
+import com.bravo.data.database.InvoiceMakerDatabase
 import com.bravo.data.database.dao.ClientDao
 import com.bravo.data.database.dao.ItemDao
 import com.bravo.data.database.dao.ProjectDao

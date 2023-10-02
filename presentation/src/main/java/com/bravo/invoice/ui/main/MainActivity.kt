@@ -13,6 +13,7 @@ import com.bravo.basic.extensions.clicks
 import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.R
 import com.bravo.invoice.databinding.ActivityMainBinding
+import com.bravo.invoice.dialogs.ConfirmDialog
 import com.bravo.invoice.ui.more.MoreFragment
 import com.uber.autodispose.android.lifecycle.scope
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +28,7 @@ import io.reactivex.subjects.Subject
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
     private val tabClicks: Subject<Int> by lazy { BehaviorSubject.createDefault(2) }
-
+    private var currentIndex = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -37,18 +38,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         tabClicks
             .autoDispose(scope())
             .subscribe { index ->
-                val selectedFragment = when (index) {
-                    1 -> ClientsFragment()
-                    2 -> ItemsFragment()
-                    4 -> MoreFragment()
-                    else -> null
-                }
-                if (selectedFragment != null) {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container_view, selectedFragment)
-                        .commit()
-                }
-                updateTabSelection(index)
+               if(index != currentIndex){
+                   val selectedFragment = when (index) {
+                       1 -> ClientsFragment()
+                       2 -> ItemsFragment()
+                       4 -> MoreFragment()
+                       else -> null
+                   }
+                   if (selectedFragment != null) {
+                       supportFragmentManager.beginTransaction()
+                           .replace(R.id.fragment_container_view, selectedFragment)
+                           .commit()
+                   }
+                   updateTabSelection(index)
+                   currentIndex = index
+               }
 
             }
 
@@ -139,6 +143,36 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
     override fun visibleBottomLayout(isVisible: Boolean) {
         binding.layoutBottom.isVisible = isVisible
+    }
+
+    override fun showConfirmDialog(
+        title: Int,
+        content: Int,
+        positiveText: Int,
+        negativeText: Int,
+        positiveCallback: () -> Unit,
+        negativeCallback: () -> (() -> Unit)?
+    ) {
+
+    }
+
+    override fun showConfirmDialog(
+        title: String,
+        content: String,
+        positiveText: String,
+        negativeText: String,
+        positiveCallback: () -> Unit,
+        negativeCallback: (() -> Unit)?
+    ) {
+        val dialog = ConfirmDialog(
+            title,
+            content,
+            positiveText,
+            negativeText,
+            positiveCallback,
+            negativeCallback
+        )
+        dialog.show(supportFragmentManager, "")
     }
 }
 

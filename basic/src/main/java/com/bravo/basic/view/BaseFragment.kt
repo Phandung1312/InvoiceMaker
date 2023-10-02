@@ -61,5 +61,32 @@ abstract class BaseFragment<VB : ViewDataBinding>   (private val inflate: Inflat
         (requireActivity() as BaseActivity<*>).visibleBottomLayout(isVisible)
     }
 
+    fun showConfirmDialog(
+         title  : String,
+        content : String,
+         positiveText : String,
+         negativeText : String,
+         positiveCallback : () -> Unit,
+         negativeCallback : (() -> Unit)?
+    ){
+        (requireActivity() as BaseActivity<*>).showConfirmDialog(
+            title  ,
+            content ,
+            positiveText ,
+            negativeText ,
+            positiveCallback ,
+            negativeCallback
+        )
+    }
+    fun showConfirmDialog(
+        title  : Int,
+        content : Int,
+        positiveText : Int,
+        negativeText : Int,
+        positiveCallback : () -> Unit,
+        negativeCallback : () ->  (() -> Unit)?
+    ){
+
+    }
 
 }

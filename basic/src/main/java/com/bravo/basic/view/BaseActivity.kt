@@ -51,5 +51,24 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingInflater: (LayoutInflat
     open fun visibleBottomLayout(isVisible : Boolean = true){
 
     }
+    open fun showConfirmDialog(
+        title  : String,
+        content : String,
+        positiveText : String,
+        negativeText : String,
+        positiveCallback : () -> Unit,
+        negativeCallback : (() -> Unit)?
+    ){
 
+    }
+    open fun showConfirmDialog(
+        title  : Int,
+        content : Int,
+        positiveText : Int,
+        negativeText : Int,
+        positiveCallback : () -> Unit,
+        negativeCallback : () ->  (() -> Unit)?
+    ){
+
+    }
 }
