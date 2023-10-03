@@ -38,12 +38,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cancel" />
+
             <TextView
-                android:layout_centerInParent="true"
+                android:id="@+id/tv_title"
                 style="@style/top_center_title_text"
-                android:text="Add Item"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Add Item" />
             <TextView
                 android:id="@+id/tv_save"
                 android:onClick="@{() -> fragment.onSave()}"
@@ -70,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <EditText
+                    android:text="@{viewModel.itemLiveData.name}"
                     android:inputType="text"
                     android:maxLines="1"
                     android:imeOptions="actionDone"
@@ -92,6 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"/>
                 <EditText
+                    android:text="@{viewModel.itemLiveData.description}"
                     android:onTextChanged="@{(text, start, before, count) -> viewModel.onItemDescriptionChanged(text)}"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/page"
@@ -124,6 +128,7 @@
                 <EditText
                     android:id="@+id/ed_rate"
                     style="@style/primary_edittext"
+                    price="@{viewModel.itemLiveData.rate}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/page"
@@ -152,6 +157,7 @@
                 <EditText
                     android:id="@+id/ed_cost"
                     android:inputType="number"
+                    price="@{viewModel.itemLiveData.cost}"
                     style="@style/primary_edittext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -227,13 +233,13 @@
                     android:layout_height="wrap_content"/>
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/swt_auto_save"
+                    android:checked="@{viewModel.itemLiveData.applyTaxes}"
                     android:onCheckedChanged="@{(view, isChecked) -> viewModel.onApplyTaxesChanged(isChecked)}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
                     android:thumb="@drawable/thumb_layer_list"
-                    android:checked="true"
                     app:track="@drawable/track_background" />
             </RelativeLayout>
         </com.google.android.material.card.MaterialCardView>

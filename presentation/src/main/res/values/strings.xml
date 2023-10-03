@@ -105,4 +105,7 @@
     <string name="give_customers_credit_for_things_they_ve_returned_n_or_haven_t_received">Give customers credit for things they\'ve returned\n or haven\'t received</string>
     <string name="this_payment_method_will_be_default_for_all_future_estimates_nyou_can_disable_it_at_any_time_by_editing_an_estimate">This payment method will be default for all future estimates.\nYou can disable it at any time by editing an estimate.</string>
     <string name="new_appointments">New Appointments</string>
+    <string name="inform_save_new_item">Save all new items to easily add them in future.\n\nNew items will be saved from invoices, estimates, purchase orders and credit memos.</string>
+    <string name="autosave_new_items">Autosave new items</string>
+    <string name="got_it">GOT IT</string>
 </resources>

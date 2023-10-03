@@ -1,10 +1,12 @@
 package com.bravo.invoice.ui.items
 
+import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import com.bravo.basic.extensions.makeToast
 import com.bravo.basic.view.BaseFragment
-import com.bravo.data.database.dao.ItemDao
+import com.bravo.invoice.R
 import com.bravo.invoice.adapter.ItemAdapter
 import com.bravo.invoice.common.extension.hideKeyboard
 import com.bravo.invoice.databinding.ItemsClass
@@ -43,8 +45,12 @@ class ItemsFragment : BaseFragment<ItemsClass>(ItemsClass::inflate) {
             }
        }
         itemAdapter.apply {
-            itemClicks.autoDispose(scope()).subscribe {
-
+            itemClicks.autoDispose(scope()).subscribe { item ->
+                val data = Bundle()
+                data.putInt(AddItemFragment.ID_EXTRA, item.id)
+                val fragment = AddItemFragment()
+                fragment.arguments = data
+                addFragment(fragment)
             }
             itemSwipe.autoDispose(scope()).subscribe {
                 showConfirmDialog(
@@ -53,12 +59,16 @@ class ItemsFragment : BaseFragment<ItemsClass>(ItemsClass::inflate) {
                     "Delete",
                     "Cancel",
                     {
-
+                        viewModel.deleteItem(it)
                     },
                     {
 
                     }
                 )
+            }
+            selectedAmount.autoDispose(scope()).subscribe {
+                val text = "$it Select"
+                binding.tvAmount.text = text
             }
         }
     }
@@ -80,5 +90,22 @@ class ItemsFragment : BaseFragment<ItemsClass>(ItemsClass::inflate) {
     fun onClose(){
         binding.isVisible = true
         binding.ivCheck.isVisible = itemAdapter.data.isNotEmpty()
+        itemAdapter.showMultiSelect(false)
     }
+    fun onDeleteItems(){
+        val items = itemAdapter.getItemsSelected()
+        if(items.isEmpty()) requireContext().makeToast("Please select at least one item ")
+        else {
+            viewModel.deleteItemsByIds(items)
+        }
+    }
+
+    fun onShowAutoSaveInformation(){
+         showInfoDialog(
+             R.string.autosave_new_items,
+             R.string.inform_save_new_item,
+             R.string.got_it
+         )
+    }
+
 }

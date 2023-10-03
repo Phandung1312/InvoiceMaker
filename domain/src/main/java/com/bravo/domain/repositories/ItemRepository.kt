@@ -12,7 +12,8 @@ interface ItemRepository {
 
     fun getAllItem() : Flow<List<Item>>
 
-    fun removeItem(id : Int)
+    fun deleteItem(item : Item)
 
+    fun deleteItemsByIds(itemIds : List<Int>)
     fun updateItem(item : Item)
 }

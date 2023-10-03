@@ -3,11 +3,8 @@ package com.bravo.basic.view
 import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import com.bravo.basic.extensions.transparent
 
 abstract class BaseActivity<VB : ViewBinding>(val bindingInflater: (LayoutInflater) -> VB) : AppCompatActivity() {
     val binding: VB by lazy { bindingInflater(layoutInflater) }
@@ -70,5 +67,17 @@ abstract class BaseActivity<VB : ViewBinding>(val bindingInflater: (LayoutInflat
         negativeCallback : () ->  (() -> Unit)?
     ){
 
+    }
+
+    open fun showInfoDialog(
+        title : String,
+        content : String,
+        confirmText : String
+    ){}
+    open fun showInfoDialog(
+        title : Int,
+        content : Int,
+        confirmText : Int
+    ){
     }
 }

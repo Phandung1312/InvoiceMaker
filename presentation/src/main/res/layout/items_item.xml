@@ -11,12 +11,14 @@
     </data>
     <com.aitsuki.swipe.SwipeLayout
         android:id="@+id/swipe_layout"
+        android:background="@color/backgroundPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:autoClose="true"
+        app:autoClose="false"
         app:designer="@string/classic_designer"
         app:preview="none">
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/behind_view"
             android:background="@color/red"
             android:layout_gravity="end"
             android:layout_width="match_parent"
@@ -31,6 +33,7 @@
                 android:layout_height="match_parent"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/root_view"
             android:background="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

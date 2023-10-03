@@ -28,11 +28,15 @@ class ItemRepositoryImpl @Inject constructor(
         return itemDao.getAll()
     }
 
-    override fun removeItem(id: Int) {
-        TODO("Not yet implemented")
+    override fun deleteItem(item : Item) {
+        itemDao.delete(item)
+    }
+
+    override fun deleteItemsByIds(itemIds: List<Int>) {
+        itemDao.deleteItemsByIds(itemIds)
     }
 
     override fun updateItem(item: Item) {
-        TODO("Not yet implemented")
+        itemDao.updateItem(item)
     }
 }

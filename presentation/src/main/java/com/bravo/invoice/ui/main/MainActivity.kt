@@ -14,6 +14,7 @@ import com.bravo.basic.view.BaseActivity
 import com.bravo.invoice.R
 import com.bravo.invoice.databinding.ActivityMainBinding
 import com.bravo.invoice.dialogs.ConfirmDialog
+import com.bravo.invoice.dialogs.InformationDialog
 import com.bravo.invoice.ui.more.MoreFragment
 import com.uber.autodispose.android.lifecycle.scope
 import dagger.hilt.android.AndroidEntryPoint
@@ -171,6 +172,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             negativeText,
             positiveCallback,
             negativeCallback
+        )
+        dialog.show(supportFragmentManager, "")
+    }
+
+    override fun showInfoDialog(title: String, content: String, confirmText: String) {
+        val dialog = InformationDialog(
+            title,
+            content,
+            confirmText
+        )
+        dialog.show(supportFragmentManager, "")
+    }
+
+    override fun showInfoDialog(title: Int, content: Int, confirmText: Int) {
+        val dialog = InformationDialog(
+            resources.getString(title),
+            resources.getString(content),
+            resources.getString(confirmText),
         )
         dialog.show(supportFragmentManager, "")
     }

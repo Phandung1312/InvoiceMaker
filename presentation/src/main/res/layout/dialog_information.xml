@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/page"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools">
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/medium_black"
+        android:textSize="@dimen/primaryTextSize"
+        tools:text="@string/autosave_new_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_content"
+        style="@style/primary_text"
+        android:layout_marginTop="@dimen/_10sdp"
+        tools:text="@string/inform_save_new_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tv_confirm"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_gravity="end"
+        style="@style/medium_blue"
+        tools:text="@string/got_it"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

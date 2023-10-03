@@ -88,5 +88,23 @@ abstract class BaseFragment<VB : ViewDataBinding>   (private val inflate: Inflat
     ){
 
     }
+    fun showInfoDialog(
+        title: String, content: String, confirmText: String
+    ){
+        (requireActivity() as BaseActivity<*>).showInfoDialog(
+            title  ,
+            content ,
+            confirmText
+        )
+    }
+    fun showInfoDialog(
+        title: Int, content: Int, confirmText: Int
+    ){
+        (requireActivity() as BaseActivity<*>).showInfoDialog(
+            title  ,
+            content ,
+            confirmText
+        )
+    }
 
 }

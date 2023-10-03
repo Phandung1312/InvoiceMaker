@@ -39,4 +39,6 @@ class Preferences @Inject constructor(
 
     val taxType = rxSharedPreferences.getInteger("taxType", Constants.EXCLUSIVE)
     val taxRate = rxSharedPreferences.getFloat("taxRate", 10f)
+
+    val isAutoSaveItem = rxSharedPreferences.getBoolean("isAutoSaveItem", true)
 }

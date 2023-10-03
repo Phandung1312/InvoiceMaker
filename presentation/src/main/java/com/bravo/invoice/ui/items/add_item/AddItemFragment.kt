@@ -1,6 +1,4 @@
 package com.bravo.invoice.ui.items.add_item
-
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import com.bravo.basic.view.BaseFragment
 import com.bravo.invoice.common.Utils
@@ -9,6 +7,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AddItemFragment : BaseFragment<AddItemClass>(AddItemClass::inflate) {
+    companion object{
+        const val ID_EXTRA = "ID_EXTRA"
+    }
     private val viewModel by activityViewModels<AddItemViewModel>()
     override fun initView() {
         binding.fragment = this@AddItemFragment
@@ -46,6 +47,14 @@ class AddItemFragment : BaseFragment<AddItemClass>(AddItemClass::inflate) {
             }
         }
     }
+
+    override fun initData() {
+       val itemId =  arguments?.getInt(ID_EXTRA) ?: -1
+        if(itemId != -1){
+            binding.tvTitle.text = "Edit Item"
+            viewModel.getItem(itemId)
+        }
+    }
     fun onSave(){
         if(viewModel.isValidateInfo()){
             viewModel.saveItem()
@@ -54,5 +63,10 @@ class AddItemFragment : BaseFragment<AddItemClass>(AddItemClass::inflate) {
     }
     fun onCancel(){
         popBackStack()
+    }
+
+    override fun onDestroyView() {
+        viewModel.clearData()
+        super.onDestroyView()
     }
 }
