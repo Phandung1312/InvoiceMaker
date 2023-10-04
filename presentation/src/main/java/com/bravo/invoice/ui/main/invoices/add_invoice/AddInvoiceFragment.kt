@@ -4,6 +4,7 @@ import androidx.activity.addCallback
 import com.bravo.basic.view.BaseFragment
 import com.bravo.invoice.databinding.AddInvoiceClass
 import com.bravo.invoice.ui.items.ItemsFragment
+import com.bravo.invoice.ui.project.BottomSheetClients
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,8 +25,16 @@ class AddInvoiceFragment : BaseFragment<AddInvoiceClass>(AddInvoiceClass::inflat
     fun onNext(){
         addFragment(CompleteInvoiceFragment())
     }
+    fun onAddClient(){
+        BottomSheetClients{ client ->
+
+        }.show(parentFragmentManager, null)
+    }
     fun onAddItem(){
         addFragment(ItemsFragment())
     }
 
+    fun onAddPaymentInstruction(){
+        addFragment(PaymentInstructionsFragment())
+    }
 }

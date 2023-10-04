@@ -124,7 +124,6 @@ class AddNewProjectFragment : BaseFragment<AddProjectClass>(AddProjectClass::inf
         binding.cancelTextView.clicks(withAnim = false) {
             popBackStack()
         }
-
     }
 
     override fun onResume() {

@@ -42,7 +42,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                if(index != currentIndex){
                    val selectedFragment = when (index) {
                        1 -> ClientsFragment()
-                       2 -> ItemsFragment()
+                       2 -> InvoicesFragment()
                        4 -> MoreFragment()
                        else -> null
                    }

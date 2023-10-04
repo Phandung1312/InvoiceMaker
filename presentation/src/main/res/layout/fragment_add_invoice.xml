@@ -133,6 +133,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_add_client"
+                    android:onClick="@{() -> fragment.onAddClient()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -423,6 +424,7 @@
                     android:text="PAYMENT INSTRUCTIONS" />
 
                 <com.google.android.material.card.MaterialCardView
+                    android:onClick="@{() -> fragment.onAddPaymentInstruction()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
