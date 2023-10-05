@@ -6,6 +6,9 @@
         <variable
             name="fragment"
             type="com.bravo.invoice.ui.main.invoices.add_invoice.AddInvoiceFragment" />
+        <variable
+            name="viewModel"
+            type="com.bravo.invoice.ui.main.invoices.add_invoice.AddInvoiceViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:clickable="true"
@@ -133,7 +136,6 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_add_client"
-                    android:onClick="@{() -> fragment.onAddClient()}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -141,28 +143,89 @@
                     app:cardCornerRadius="0dp"
                     app:cardElevation="@dimen/_2sdp">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_40sdp">
+                  <androidx.appcompat.widget.LinearLayoutCompat
+                      android:orientation="horizontal"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
 
-                        <ImageView
-                            android:id="@+id/iconAdd"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/page"
-                            android:src="@drawable/ic_user_square" />
+                      <RelativeLayout
+                          visibleView="@{viewModel.client == null}"
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/_40sdp"
+                          android:background="?android:attr/selectableItemBackground"
+                          android:onClick="@{() -> fragment.onAddClient()}">
 
-                        <TextView
-                            style="@style/titleHeaderMoreH2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="@dimen/_8sdp"
-                            android:layout_toEndOf="@+id/iconAdd"
-                            android:text="Add client" />
+                          <ImageView
+                              android:id="@+id/iconAdd"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_centerVertical="true"
+                              android:layout_marginStart="@dimen/page"
+                              android:src="@drawable/ic_user_square" />
 
-                    </RelativeLayout>
+                          <TextView
+                              style="@style/titleHeaderMoreH2"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_centerVertical="true"
+                              android:layout_marginStart="@dimen/_8sdp"
+                              android:layout_toEndOf="@+id/iconAdd"
+                              android:text="Add client" />
+
+                      </RelativeLayout>
+
+                      <androidx.constraintlayout.widget.ConstraintLayout
+                          visibleView="@{viewModel.client != null}"
+                          android:visibility="gone"
+                          android:layout_width="match_parent"
+                          android:layout_height="@dimen/_40sdp">
+
+                          <androidx.appcompat.widget.LinearLayoutCompat
+                              android:id="@+id/linearLayoutCompat6"
+                              android:layout_marginEnd="@dimen/_10sdp"
+                              android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:orientation="vertical"
+                              app:layout_constraintBottom_toBottomOf="parent"
+                              app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                              app:layout_constraintStart_toStartOf="parent"
+                              app:layout_constraintTop_toTopOf="parent">
+
+                              <TextView
+                                  android:id="@+id/tv_client_name"
+                                  android:text="@{viewModel.client.billingName}"
+                                  style="@style/primary_text"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginStart="@dimen/page"
+                                  tools:text="Messi" />
+
+                              <TextView
+                                  style="@style/more_info_text"
+                                  android:text="@{viewModel.client.email}"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:layout_marginStart="@dimen/page"
+                                  tools:text="uiwi@gmail.com" />
+                          </androidx.appcompat.widget.LinearLayoutCompat>
+
+                          <ImageView
+                              android:id="@+id/imageView2"
+                              android:onClick="@{() -> viewModel.removeClient()}"
+                              android:background="?android:attr/selectableItemBackground"
+                              android:layout_width="@dimen/_15sdp"
+                              android:layout_height="@dimen/_15sdp"
+                              android:layout_alignParentEnd="true"
+                              android:layout_centerVertical="true"
+                              android:layout_marginEnd="@dimen/page"
+                              android:src="@drawable/ic_close"
+                              app:layout_constraintBottom_toBottomOf="parent"
+                              app:layout_constraintEnd_toEndOf="parent"
+                              app:layout_constraintTop_toTopOf="parent"
+                              app:tint="@color/more_info" />
+                      </androidx.constraintlayout.widget.ConstraintLayout>
+                  </androidx.appcompat.widget.LinearLayoutCompat>
+
                 </com.google.android.material.card.MaterialCardView>
 
                 <TextView
@@ -172,7 +235,13 @@
                     android:layout_marginStart="@dimen/page"
                     android:layout_marginTop="@dimen/page"
                     android:text="ITEMS" />
-
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_items"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/items_item_in_invoice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cv_add_item"
                     android:onClick="@{() -> fragment.onAddItem()}"

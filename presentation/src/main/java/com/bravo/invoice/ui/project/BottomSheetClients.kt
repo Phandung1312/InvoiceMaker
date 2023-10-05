@@ -31,6 +31,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.uber.autodispose.android.lifecycle.scope
 import com.uber.autodispose.autoDispose
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class BottomSheetClients(
@@ -38,6 +39,7 @@ class BottomSheetClients(
 ) : BottomSheetDialogFragment() {
     private lateinit var binding: BottomSheetAllclientsBinding
     private val clientViewModel by viewModels<ClientViewModel>()
+    @Inject
     lateinit var clientAdapter: ClientAdapter
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
